@@ -100,28 +100,31 @@ const BottomHeader = () => {
 
   return (
     <div
-      className={`w-full font-philo transition-all z-[9999] py-3 xl:py-0 ease-in-out duration-500 shadow-lg ${
-        isSticky ? "fixed top-0 left-0 bg-white shadow-md z-50" : ""
+      className={`w-full font-philo transition-all z-[9999] py-3 ease-in-out duration-500 bg-[#FCFBF6] ${
+        isSticky ? "fixed top-0 left-0 bg-[#FCFBF6] shadow-md z-50" : ""
       }`}
     >
       <Containar>
         <div className="flex items-center justify-between flex-wrap">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 cursor-pointer group">
             <div className="w-12">
               <img
                 onClick={() => navigate("/")}
-                className="w-full cursor-pointer"
+                className="w-full cursor-pointer group-hover:scale-105 duration-200"
                 src={image}
                 alt="Logo"
               />
             </div>
-            <h3 onClick={() => navigate("/")} className="text-primary text-[16px] sm:text-[22px] font-semibold">
+            <h3
+              onClick={() => navigate("/")}
+              className="text-[#e9bf55] text-[16px] sm:text-[22px] font-semibold group-hover:translate-x-1 duration-200"
+            >
               BD Umrah Hajj Kafela
             </h3>
           </div>
           <div className="flex justify-end items-center ">
             <nav className="xl:flex justify-end items-center hidden">
-              <ul className="flex space-x-5 xl:space-x-4 flex-wrap text-gray-600 font-semibold items-center">
+              <ul className="flex space-x-5 xl:space-x-4 flex-wrap text-secondary font-semibold items-center">
                 {menuList.map((item, index) => (
                   <li
                     key={index}
@@ -135,7 +138,7 @@ const BottomHeader = () => {
                       to={item.Link}
                       className={({ isActive }) =>
                         isActive
-                          ? "text-primary"
+                          ? "text-primary underline uppercase"
                           : "hover:text-primary transition-colors ease-in-out duration-300"
                       }
                     >
@@ -156,7 +159,7 @@ const BottomHeader = () => {
                                 {category.packageType}
                               </Link>
                               {category?.packages.length > 0 && (
-                                <div className="absolute hidden group-hover/edit:block left-full top-0 min-w-48 py-2 px-4 shadow-sm bg-white">
+                                <div className="absolute hidden group-hover/edit:block left-full top-0 min-w-48 py-2 px-4 shadow-sm bg-[#FCFBF6]">
                                   {category?.packages.map((item, index) => (
                                     <Link
                                       key={index}
@@ -192,7 +195,7 @@ const BottomHeader = () => {
                       onClick={toggleDropdown}
                     />
                     <span
-                      className="text-gray-600 cursor-pointer capitalize"
+                      className="text-[#000000] cursor-pointer capitalize"
                       onClick={toggleDropdown}
                     >
                       {user.name.split(" ").slice(0, 2).join(" ")}
@@ -233,7 +236,7 @@ const BottomHeader = () => {
                 ) : (
                   <Link
                     to="/login"
-                    className="hover:text-primary bg-primary border border-primary text-white py-1 px-4 rounded-lg hover:bg-white transition-colors"
+                    className="hover:text-primary bg-primary border border-primary text-white py-1 px-4 rounded tracking-wide hover:bg-white transition-colors"
                   >
                     Login
                   </Link>
@@ -243,7 +246,7 @@ const BottomHeader = () => {
             <div className="xl:hidden ">
               <IoMenu
                 onClick={toggleDrawer}
-                className="text-2xl text-gray-600 cursor-pointer"
+                className="text-2xl text-[#000000] cursor-pointer"
               />
               <Drawer
                 open={isOpen}
@@ -253,7 +256,7 @@ const BottomHeader = () => {
               >
                 <div className="bg-white h-screen p-5 overflow-y-auto  flex flex-col justify-start items-start">
                   <div className="flex justify-between items-center w-full">
-                    <img className="w-[60px]" src={image}/>
+                    <img className="w-[60px]" src={image} />
                     <RxCross2
                       onClick={toggleDrawer}
                       className="text-2xl text-gray-700 cursor-pointer"
@@ -285,7 +288,7 @@ const BottomHeader = () => {
                             alt="User Avatar"
                             className="w-10 h-10 rounded-full"
                           />
-                          <span className="text-gray-600 capitalize">
+                          <span className="text-[#000000] capitalize">
                             {user.name.split(" ").slice(0, 2).join(" ")}
                           </span>
                         </li>

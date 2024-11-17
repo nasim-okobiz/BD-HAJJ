@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Containar from "../container/Containar";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import bgshape from "../../assets/pattern/pattern.jpg";
+import bgshape from "../../assets/pattern/Steps-Background.png";
+import bgshape1 from "../../assets/pattern/Lentera-YXYJTQF.png";
 import HajjButton from "./HajjButton";
 import api from "../axios/Axios";
 import { API_BASE_URL } from "../axios/config";
@@ -46,17 +47,18 @@ const UmrahPackage = () => {
   return (
     <>
       {lengthData > 0 && (
-        <div className="py-8 sm:py-2 font-philo relative">
-          <div className="absolute left-0 top-0 w-full h-full opacity-20 z-0">
+        <div className="py-8 sm:py-20 font-philo relative">
+          <div className="absolute left-0 top-0 w-full h-full z-0">
             <img
               className="w-full h-full"
               src={bgshape}
               alt="Background Pattern"
             />
           </div>
+
           <Containar>
             <div className="relative z-10 mb-12">
-              <div className="px-4 py-3.5 bg-primary flex flex-col sm:flex-row justify-between items-center shadow-md rounded-md">
+              {/* <div className="px-4 py-3.5 bg-primary flex flex-col sm:flex-row justify-between items-center shadow-md rounded-md">
                 <h3 className="text-[24px] sm:text-[30px] font-semibold text-center sm:text-left capitalize">
                   {packageHead?.name}
                 </h3>
@@ -68,23 +70,39 @@ const UmrahPackage = () => {
                     View All
                   </Link>
                 </div>
+              </div> */}
+              <div>
+                <p className="uppercase text-center tracking-wider text-base sm:text-xl">
+                  packages
+                </p>
+                <h3 className="uppercase text-center tracking-wider text-[24px] sm:text-[30px] sm:py-2">
+                  {packageHead?.name}
+                </h3>
+                <div className="w-40 sm:w-80 h-px mx-auto bg-gray-300"></div>
+              </div>
+              <div className="absolute left-0 top-0 sm:-top-20 w-full z-10 right-0 flex justify-center items-center">
+                <img
+                  className="w-full h-full object-cover"
+                  src={bgshape1}
+                  alt="Background Pattern"
+                />
               </div>
             </div>
 
             {/* Early Bird Package Section */}
             {earlyBirdPackage && (
-              <div className="flex flex-col sm:items-center text-center relative z-10 shadow-lg mb-16 p-6 rounded-[30px] bg-white">
+              <div className="flex flex-col sm:items-center text-center relative  mb-16 p-6">
                 <div className="w-full relative">
                   <img
-                    className="w-full opacity-30 h-[200px] sm:h-auto rounded-[30px]"
+                    className="w-full opacity-30 h-[200px] sm:h-auto"
                     src={bird}
                     alt="Early Bird Package"
                   />
                   <div className="absolute left-0 top-0 w-full h-full flex justify-center items-center">
                     <Link to={`package/${earlyBirdPackage?._id}`}>
                       <div>
-                        <h2 className="text-[16px] xl:text-[45px] font-semibold text-center text-secondary">
-                          {earlyBirdPackage.name}
+                        <h2 className="text-[16px] xl:text-[40px] font-semibold text-center text-secondary">
+                          {earlyBirdPackage.name} 
                         </h2>
                         <h2 className="text-[16px] xl:text-[55px] text-semisecondary text-center font-semibold text-secondary-color font-century textshadow">
                           TK {earlyBirdPackage.mrpPrice?.toLocaleString()}/-
@@ -94,8 +112,9 @@ const UmrahPackage = () => {
                         </h2>
 
                         {/* Enhanced Discount Badge */}
-                        <div className="absolute top-2 right-2 bg-gradient-to-r from-red-500 via-red-400 to-red-300 text-white py-1 px-3 xl:py-2 xl:px-4 rounded-full text-sm xl:text-xl font-extrabold shadow-lg transform xl:scale-105 transition-all duration-300">
-                          Save TK {earlyBirdPackage.discount?.toLocaleString()}/-
+                        <div className="absolute -top-5 right-0 left-0 flex justify-center mx-auto w-52 bg-gradient-to-r from-red-500 via-red-400 to-red-300 text-white py-1 px-3 xl:py-2 xl:px-4 text-sm xl:text-xl font-extrabold shadow-lg transform xl:scale-105 transition-all duration-300">
+                          Save TK {earlyBirdPackage.discount?.toLocaleString()}
+                          /-
                         </div>
 
                         <p className="text-[14px] xl:text-xl text-center">
@@ -113,10 +132,13 @@ const UmrahPackage = () => {
                 </div>
               </div>
             )}
-
           </Containar>
           {/* <Containar className={"mb-14 bg-slate-200 p-5 rounded-md"}> */}
-          <Containar className={`mb-14 ${packagesData?.length > 0  && "bg-slate-200"}  p-5 rounded-md`}>
+          <Containar
+            className={`mb-14 ${
+              packagesData?.length > 0 && "bg-slate-200"
+            }  p-5 rounded-md`}
+          >
             <Swiper
               spaceBetween={20}
               slidesPerView={1}

@@ -68,7 +68,7 @@ const Banner = () => {
                 </div>
               </Link>
               <img
-                className="xl:h-[80vh] w-full object-contain"
+                className="xl:h-[80vh] w-full object-cover"
                 src={API_BASE_URL + slide?.photo}
                 alt={`Banner ${index}`}
               />

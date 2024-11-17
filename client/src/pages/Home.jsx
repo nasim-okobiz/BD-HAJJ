@@ -16,14 +16,13 @@ const Home = () => {
   return (
     <>
       <Banner />
-
        <UmrahPackage/>
-      <HajjPackage />
+      {/* <HajjPackage />
       <TourPackage />
       <AboutHome />
       <HomeMember /> 
       <GallerySection />
-      <MembershipHome />
+      <MembershipHome /> */}
     </>
   );
 };
