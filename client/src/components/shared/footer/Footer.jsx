@@ -40,9 +40,9 @@ const Footer = () => {
           }}
         ></div>
 
-        <section className="text-white relative z-20 pt-[150px] pb-10">
+        <section className="text-white relative z-20 pt-[150px] py-10">
           <Containar>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 py-10">
               {/* Logo and About Section */}
               <div className="flex flex-col items-center md:items-start">
                 <img className="logo mb-3 w-24 md:w-32" src={logo} alt="Logo" />

@@ -10,7 +10,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules"; // Import modules from "swiper/modules"
 import "swiper/css";
 import "swiper/css/autoplay";
-import bird from "../../assets/add/sp-of-bg.jpg"
+import bird from "../../assets/add/sp-of-bg.jpg";
+import { FaLongArrowAltRight } from "react-icons/fa";
+
 const UmrahPackage = () => {
   const [packagesData, setPackagesData] = useState([]);
   const [earlyBirdPackage, setEarlyBirdPackage] = useState(null);
@@ -58,19 +60,6 @@ const UmrahPackage = () => {
 
           <Containar>
             <div className="relative z-10 mb-12">
-              {/* <div className="px-4 py-3.5 bg-primary flex flex-col sm:flex-row justify-between items-center shadow-md rounded-md">
-                <h3 className="text-[24px] sm:text-[30px] font-semibold text-center sm:text-left capitalize">
-                  {packageHead?.name}
-                </h3>
-                <div className="mt-4 sm:mt-0">
-                  <Link
-                    className="py-1.5 px-6 bg-semisecondary text-white text-[18px] sm:text-[20px] rounded-lg font-semibold hover:bg-white hover:text-semisecondary border border-semisecondary transition-all ease-linear duration-150"
-                    to={`/packages/category/${packageHead?._id}`}
-                  >
-                    View All
-                  </Link>
-                </div>
-              </div> */}
               <div>
                 <p className="uppercase text-center tracking-wider text-base sm:text-xl">
                   packages
@@ -102,7 +91,7 @@ const UmrahPackage = () => {
                     <Link to={`package/${earlyBirdPackage?._id}`}>
                       <div>
                         <h2 className="text-[16px] xl:text-[40px] font-semibold text-center text-secondary">
-                          {earlyBirdPackage.name} 
+                          {earlyBirdPackage.name}
                         </h2>
                         <h2 className="text-[16px] xl:text-[55px] text-semisecondary text-center font-semibold text-secondary-color font-century textshadow">
                           TK {earlyBirdPackage.mrpPrice?.toLocaleString()}/-
@@ -134,10 +123,35 @@ const UmrahPackage = () => {
             )}
           </Containar>
           {/* <Containar className={"mb-14 bg-slate-200 p-5 rounded-md"}> */}
+
+          <Containar>
+            {" "}
+            <div className="relative sm:flex items-end justify-between">
+              <div>
+                <p className="text-secondary sm:text-2xl uppercase font-thin">
+                  - {packageHead?.name}
+                </p>
+                <h3 className="text-secondary text-[30px] sm:text-[50px]">
+                  Choose Your Package
+                </h3>
+              </div>
+              <div>
+                <div className="mt-4 sm:mt-0">
+                  <Link
+                    className="py-1.5 px-6 text-[18px] sm:text-[20px] rounded font-semibold transition-all ease-linear duration-150 flex items-center gap-2 bg-[#AA8751] text-white group hover:bg-primary"
+                    to={`/packages/category/${packageHead?._id}`}
+                  >
+                    View All Packages{" "}
+                    <FaLongArrowAltRight className="group-hover:translate-x-2 duration-200" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </Containar>
           <Containar
             className={`mb-14 ${
               packagesData?.length > 0 && "bg-slate-200"
-            }  p-5 rounded-md`}
+            }  rounded-md`}
           >
             <Swiper
               spaceBetween={20}
@@ -146,7 +160,7 @@ const UmrahPackage = () => {
               speed={1000}
               breakpoints={{
                 640: { slidesPerView: 2 },
-                1024: { slidesPerView: 4 },
+                1024: { slidesPerView: 3 },
               }}
               autoplay={{
                 delay: 3000, // 3 seconds
@@ -164,17 +178,17 @@ const UmrahPackage = () => {
                   : false;
                 return (
                   <SwiperSlide key={pkg._id}>
-                    <div className="overflow-hidden group cursor-pointer h-full p-4 bg-white shadow-xl rounded-lg relative z-20">
-                      <div className="h-[160px] sm:h-[180px] w-full overflow-hidden">
+                    <div className="overflow-hidden group cursor-pointer h-full bg-white shadow-xl rounded-lg relative z-20">
+                      <div className="h-[250px] w-full overflow-hidden">
                         <img
                           onClick={() => navigate(`/package/${pkg._id}`)}
-                          className="h-full w-full object-contain group-hover:scale-105 transition-all ease-linear duration-300"
+                          className="h-full w-full object-fill group-hover:scale-105 transition-all ease-linear duration-300"
                           src={API_BASE_URL + pkg.photo}
                           alt={pkg.name}
                         />
                       </div>
 
-                      <div className="flex flex-col justify-between h-[270px]">
+                      <div className="flex flex-col justify-between h-[270px] p-5">
                         <div className="mt-3">
                           <h3
                             onClick={() => navigate(`/package/${pkg._id}`)}
@@ -182,7 +196,7 @@ const UmrahPackage = () => {
                           >
                             {pkg.name}
                           </h3>
-                          <h4 className="text-[14px] sm:text-[18px] font-semibold flex items-center gap-2">
+                          <h4 className="text-[14px] sm:text-[18px] font-semibold flex items-center gap-2 text-gray-700">
                             TK {pkg.mrpPrice?.toLocaleString()}
                             {pkg.price > pkg.mrpPrice && (
                               <span className="line-through font-normal text-sm">
@@ -190,7 +204,7 @@ const UmrahPackage = () => {
                               </span>
                             )}
                           </h4>
-                          <div className="flex flex-col gap-1 mt-2">
+                          <div className="flex flex-col gap-1 mt-2 text-gray-600 font-sans">
                             <p className="text-[13px] sm:text-[15px]">
                               {pkg.roomType.replace(/<[^>]*>?/gm, "")}
                             </p>
@@ -206,7 +220,7 @@ const UmrahPackage = () => {
                                 {" "}
                                 <Link
                                   to={`/package/${pkg._id}`}
-                                  className=" w-full block text-center bg-semisecondary hover:text-semisecondary border border-semisecondary text-white py-2 px-4 rounded hover:bg-white font-bold transition-all ease-linear duration-200"
+                                  className=" w-full block text-center bg-semisecondary hover:text-semisecondary border border-semisecondary text-white py-2 px-4 rounded hover:bg-white font-bold transition-all ease-linear duration-200 my-5"
                                 >
                                   Place Order
                                 </Link>
@@ -216,7 +230,7 @@ const UmrahPackage = () => {
                                 <button
                                   // to={`/package/${pkg._id}`}
                                   disabled={true}
-                                  className=" w-full block text-center b  border border-red-600 text-red-600 py-2 px-4 rounded  font-bold transition-all ease-linear duration-200"
+                                  className=" w-full block text-center b  border border-red-600 text-red-600 py-2 px-4 rounded  font-bold transition-all ease-linear duration-200 my-5"
                                 >
                                   Package Expired
                                 </button>
@@ -227,20 +241,12 @@ const UmrahPackage = () => {
                           <>
                             <Link
                               to={`/package/${pkg._id}`}
-                              className=" w-full block text-center bg-semisecondary hover:text-semisecondary border border-semisecondary text-white py-2 px-4 rounded hover:bg-white font-bold transition-all ease-linear duration-200"
+                              className=" w-full block text-center bg-semisecondary hover:text-semisecondary border border-semisecondary text-white py-2 px-4 rounded hover:bg-white font-bold transition-all ease-linear duration-200 my-5"
                             >
                               Place Order
                             </Link>
                           </>
                         )}
-                        {/* <div className="flex justify-center mt-3">
-                          <Link
-                            className="px-4 py-1.5 w-full text-center bg-semisecondary text-white rounded-lg font-bold hover:bg-white hover:text-semisecondary border border-semisecondary transition-all ease-linear duration-150"
-                            to={`/package/${pkg._id}`}
-                          >
-                            Book Now
-                          </Link>
-                        </div> */}
                       </div>
                     </div>
                   </SwiperSlide>

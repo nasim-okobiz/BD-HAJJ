@@ -29,7 +29,7 @@ const AboutHome = ({ page }) => {
   console.log(aboutUss);
   return (
     <div
-      className={`${page ? "sm:pt-0 " : "pt-10 sm:pt-2"} relative font-philo`}
+      className={`${page ? "sm:pt-0 " : "pt-10 sm:py-20"} relative font-philo`}
     >
       {!page && (
         <div className="absolute hidden md:block right-0 -top-10 -z-10">
@@ -58,13 +58,14 @@ const AboutHome = ({ page }) => {
             {/* BD HAJJ Bangladesh Umrah Hajj Kafela */}
             {aboutUss[0]?.title}
           </h3>
+          <div className="w-40 sm:w-80 h-px mx-auto bg-gray-300"></div>
         </Containar>
       )}
 
-      <section className=" mt-10 md:mt-10 pb-0 sm:pb-24">
+      {/* <section className=" mt-10 md:mt-10 pb-0 sm:pb-24">
         <Containar>
           <div className="flex flex-wrap justify-between">
-            {/* Left Image Section */}
+           
             <div className="w-full  md:w-[42%]  mb-6 md:mb-0">
               <div className="w-full sticky top-36 z-20">
                 <img
@@ -83,7 +84,7 @@ const AboutHome = ({ page }) => {
               </div>
             </div>
 
-            {/* Right Content Section */}
+   
             <div className="w-full md:w-[55%] mb-6 md:mb-0">
               <div className="flex items-center mb-4">
                 <div>
@@ -100,7 +101,7 @@ const AboutHome = ({ page }) => {
                       textShadow: "2px 2px 2px #0000002d",
                     }}
                   >
-                    {/* We are Bangladesh Umrah Hajj Kafela */}
+               
                     {aboutUss[0]?.header}
                   </p>
                 </div>
@@ -160,7 +161,104 @@ const AboutHome = ({ page }) => {
             </div>
           </div>
         </Containar>
-      </section>
+      </section> */}
+
+      <div className="container mx-auto px-4 py-16 grid md:grid-cols-2 gap-8 items-center">
+        {/* Left Section */}
+        <div className="space-y-6 relative">
+          <img
+            src={API_BASE_URL + aboutUss[0]?.photo}
+            alt="Kaaba"
+            className="rounded-lg shadow-lg w-[350px] h-auto mx-auto"
+          />
+
+          <div className="bg-gray-900 text-white p-2 xl:p-4 rounded-lg shadow-lg absolute top-0 xl:bottom-14 md:left-0 w-[150px] md:w-[200px] xl:w-[300px]">
+            <img
+              src={API_BASE_URL + aboutUss[0]?.bgPhoto}
+              alt="Kaaba"
+              className="rounded-lg shadow-lg w-[150px] sm:w-[350px] h-auto"
+            />
+            <p className="text-sm xl:text-lg font-medium mt-5">
+              BD Umrah Hajj Kafela operate their activities according to Quran
+              and Sunnah. !
+            </p>
+            <p className="inline-block mt-4 text-yellow-400 font-semibold hover:underline">
+              10 years Experience →
+            </p>
+          </div>
+        </div>
+
+        {/* Right Section */}
+        <div>
+          <p className="text-sm text-yellow-500 uppercase font-semibold tracking-wide">
+            About Us
+          </p>
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-snug mt-2">
+            {aboutUss[0]?.header}
+          </h2>
+          <p className="text-gray-600 mt-4 leading-relaxed font-sans">
+            {page ? (
+              <div className="text-[16px] sm:text-[22px]  mb-2  text-justify ">
+                {aboutUss[0]?.description}
+              </div>
+            ) : (
+              <p className="text-[16px] sm:text-[22px]  mb-2 text-justify line-clamp-6">
+                {aboutUss[0]?.description}
+              </p>
+            )}
+
+            {!page && (
+              <div className="text-center md:text-left mt-10 sm:mt-16">
+                <div className={`flex justify-start`}>
+                  <div className="relative group cursor-pointer ">
+                    <img
+                      className="w-[38px] sm:w-[45px] absolute group-hover:left-[70%] left-[10%] transition-all ease-in-out duration-300 -top-[80%]"
+                      src={btnshapeup}
+                    />
+                    <img
+                      className="w-[180px] sm:w-[230px] "
+                      src={btnshapedown}
+                    />
+
+                    <div className="absolute left-1/2 top-[60%] -translate-x-1/2 -translate-y-1/2 text-white text-[16px] sm:text-xl font-semibold">
+                      <Link to={"/about-us"} className="button block">
+                        Know More
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            {page && (
+              <div className="text-right mt-10">
+                <p className="text-[16px] sm:text-[22px]">Best wishes,</p>
+                <p className="text-[16px] sm:text-[22px]">
+                  ( {aboutUss[0]?.honorName})
+                </p>
+                <p className="font-bold text-[16px] sm:text-[26px]">
+                  {aboutUss[0]?.agencyName}
+                </p>
+                <p className="text-[16px] sm:text-[20px]">
+                  Contact: 24/7 | WhatsApp:{" "}
+                  <a
+                    href={`tel:+88${aboutUss[0]?.whatsApp}`}
+                    className="underline"
+                  >
+                    +88 {aboutUss[0]?.whatsApp}
+                  </a>{" "}
+                  | Email:{" "}
+                  <a
+                    href={`mailto:${aboutUss[0]?.email}`}
+                    className="underline"
+                  >
+                    {aboutUss[0]?.email}
+                  </a>
+                </p>
+              </div>
+            )}
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
