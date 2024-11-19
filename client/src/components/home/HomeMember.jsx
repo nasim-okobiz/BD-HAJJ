@@ -16,14 +16,13 @@ import { API_BASE_URL } from "../axios/config";
 import { useState } from "react";
 import { useEffect } from "react";
 import api from "../axios/Axios";
+import Loader from "../loader/Loader";
 
 const HomeMember = () => {
   const [memberships, setMemberships] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [copiedStates, setCopiedStates] = useState(Array(10).fill(false)); // Track copied states for each membership
-
-
 
   const fetchMemberships = async () => {
     try {
@@ -40,6 +39,18 @@ const HomeMember = () => {
   useEffect(() => {
     fetchMemberships();
   }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
   const handleCopy = (code, index) => {
     navigator.clipboard.writeText(code);
     // Update the specific copied state

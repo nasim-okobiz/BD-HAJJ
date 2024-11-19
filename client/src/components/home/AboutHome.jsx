@@ -9,6 +9,7 @@ import btnshapedown from "../../assets/add/masjidshape.png";
 import { API_BASE_URL } from "../axios/config";
 import { Link, useLocation } from "react-router-dom";
 import api from "../axios/Axios";
+import Loader from "../loader/Loader";
 const AboutHome = ({ page }) => {
   const [aboutUss, setAboutUss] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -26,6 +27,17 @@ const AboutHome = ({ page }) => {
   useEffect(() => {
     getAboutUss();
   }, []);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <Loader />;
+  }
   console.log(aboutUss);
   return (
     <div
@@ -163,13 +175,13 @@ const AboutHome = ({ page }) => {
         </Containar>
       </section> */}
 
-      <div className="container mx-auto px-4 py-16 grid md:grid-cols-2 gap-8 items-center">
+      <div className="container mx-auto px-4 py-16 grid md:grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         {/* Left Section */}
         <div className="space-y-6 relative">
           <img
             src={API_BASE_URL + aboutUss[0]?.photo}
             alt="Kaaba"
-            className="rounded-lg shadow-lg w-[350px] h-auto mx-auto"
+            className="rounded-lg shadow-lg w-[350px] md:w-[450px] lg:w-[350px] h-auto mx-auto"
           />
 
           <div className="bg-gray-900 text-white p-2 xl:p-4 rounded-lg shadow-lg absolute top-0 xl:bottom-14 md:left-0 w-[150px] md:w-[200px] xl:w-[300px]">

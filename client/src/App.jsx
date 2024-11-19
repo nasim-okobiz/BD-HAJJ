@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -50,10 +51,27 @@ import RegistrationCard from "./pages/RegistrationCard";
 import ViewEditPersonDetails from "./pages/profile/ViewEditPersonDetails.jsx";
 import TermsAndConditions from "./pages/footer/TermsAndConditions.jsx";
 import ForgetPasswordSetUpCard from "./pages/ForgetPasswordSetUp.jsx";
-
-
+import Loader from "./components/loader/Loader"; // Assuming this is the correct import
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Simulate a loading delay
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 2000);
+  //   return () => clearTimeout(timer); // Clean up the timer when component unmounts
+  // }, []);
+
+  // if (isLoading) {
+  //   return (
+  //     <div className="h-screen flex justify-center items-center">
+  //       <Loader />
+  //     </div>
+  //   );
+  // }
+
   // Define your routes
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -70,11 +88,17 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/profile/:id" element={<Profile />}>
           <Route index element={<NewBooking />} />
-          <Route path=":packageid/membership/:memberid" element={<GroupBooking />} />
+          <Route
+            path=":packageid/membership/:memberid"
+            element={<GroupBooking />}
+          />
         </Route>
         <Route path="/booking/:id" element={<BookConfirm />} />
         <Route path="/booking/person/:id" element={<PersonBookingUpdate />} />
-        <Route path="/booking/person/view-edit/:id" element={<ViewEditPersonDetails />} />
+        <Route
+          path="/booking/person/view-edit/:id"
+          element={<ViewEditPersonDetails />}
+        />
         <Route
           path="/dashboard/booking/:id"
           element={<BookingPackageDetails />}

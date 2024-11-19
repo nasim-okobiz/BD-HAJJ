@@ -12,6 +12,7 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import bird from "../../assets/add/sp-of-bg.jpg";
 import { FaLongArrowAltRight } from "react-icons/fa";
+import Loader from "../loader/Loader";
 
 const UmrahPackage = () => {
   const [packagesData, setPackagesData] = useState([]);
@@ -46,6 +47,19 @@ const UmrahPackage = () => {
 
     fetchPackages();
   }, []);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <>
       {lengthData > 0 && (
@@ -80,7 +94,7 @@ const UmrahPackage = () => {
 
             {/* Early Bird Package Section */}
             {earlyBirdPackage && (
-              <div className="flex flex-col sm:items-center text-center relative  mb-16 p-6">
+              <div className="flex flex-col sm:items-center text-center relative mb-16 p-6">
                 <div className="w-full relative">
                   <img
                     className="w-full opacity-30 h-[200px] sm:h-auto"
@@ -101,7 +115,7 @@ const UmrahPackage = () => {
                         </h2>
 
                         {/* Enhanced Discount Badge */}
-                        <div className="absolute -top-5 right-0 left-0 flex justify-center mx-auto w-52 bg-gradient-to-r from-red-500 via-red-400 to-red-300 text-white py-1 px-3 xl:py-2 xl:px-4 text-sm xl:text-xl font-extrabold shadow-lg transform xl:scale-105 transition-all duration-300">
+                        <div className="absolute -top-2 md:-top-10 2xl:-top-5 right-0 left-0 flex justify-center mx-auto w-52 bg-gradient-to-r from-red-500 via-red-400 to-red-300 text-white py-1 px-3 xl:py-2 xl:px-4 text-sm xl:text-xl font-extrabold shadow-lg transform xl:scale-105 transition-all duration-300">
                           Save TK {earlyBirdPackage.discount?.toLocaleString()}
                           /-
                         </div>

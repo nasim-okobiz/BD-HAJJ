@@ -8,7 +8,8 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import api from "../components/axios/Axios";
 import { useEffect } from "react";
-import membership_inner from "../assets/membership/membership-inner.jpg"
+import membership_inner from "../assets/membership/membership-inner.jpg";
+import Loader from "../components/loader/Loader";
 const MembershipPage = () => {
   const role = useSelector((store) => store?.auth?.user?.role);
   console.log(role);
@@ -27,7 +28,20 @@ const MembershipPage = () => {
   };
   useEffect(() => {
     getJoinuss();
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer); // Clean up the timer when component unmounts
   }, []);
+  useEffect(() => {}, []);
+
+  if (isLoading) {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <Loader />
+      </div>
+    );
+  }
   return (
     <div>
       <section className="membership-inner-header font-philo">

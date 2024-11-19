@@ -12,6 +12,7 @@ import "swiper/css/autoplay";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
 import bghajj from "../../assets/pattern/hajj.jpg";
+import Loader from "../loader/Loader";
 
 const HajjPackage = () => {
   const [packagesData, setPackagesData] = useState([]);
@@ -47,6 +48,20 @@ const HajjPackage = () => {
     fetchPackages();
   }, []);
 
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <>
       {lengthData > 0 && (
@@ -81,7 +96,7 @@ const HajjPackage = () => {
                   </h3>
                   <div className="w-40 sm:w-80 h-px mx-auto bg-gray-300"></div>
                 </div>
-                <div className="mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center pb-20">
+                <div className="mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 items-center pb-20">
                   {/* Left Section */}
                   <div className="text-white space-y-6 md:col-span-1">
                     {earlyBirdPackage && (
@@ -97,7 +112,7 @@ const HajjPackage = () => {
                             </span>
                           </h2>
 
-                          <div className="w-60 sm:w-full bg-gradient-to-r from-red-500 via-red-400 to-red-300 text-white py-1 px-3 xl:py-2 xl:px-4 rounded-full text-sm xl:text-xl font-extrabold shadow-lg transform xl:scale-105 transition-all duration-300">
+                          <div className="w-60 lg:w-full bg-gradient-to-r from-red-500 via-red-400 to-red-300 text-white py-1 px-3 xl:py-2 xl:px-4 rounded-full text-sm xl:text-xl font-extrabold shadow-lg transform xl:scale-105 transition-all duration-300">
                             Save TK{" "}
                             {earlyBirdPackage?.discount?.toLocaleString()}/-
                           </div>
@@ -125,7 +140,7 @@ const HajjPackage = () => {
                   </div>
 
                   {/* Right Section */}
-                  <div className="md:col-span-2 md:border-l p-5">
+                  <div className="md:col-span-2 lg:border-l p-5">
                     <Swiper
                       spaceBetween={20}
                       slidesPerView={1} // Default for small screens

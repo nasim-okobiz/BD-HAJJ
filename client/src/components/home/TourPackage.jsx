@@ -10,7 +10,8 @@ import { Autoplay, Pagination } from "swiper/modules"; // Import modules from "s
 import "swiper/css";
 import "swiper/css/autoplay";
 import { FaLongArrowAltRight } from "react-icons/fa";
-import bird from "../../assets/add/sp-of-bg.jpg"
+import bird from "../../assets/add/sp-of-bg.jpg";
+import Loader from "../loader/Loader";
 const TourPackage = () => {
   const [packagesData, setPackagesData] = useState([]);
   const [earlyBirdPackage, setEarlyBirdPackage] = useState(null);
@@ -45,91 +46,108 @@ const TourPackage = () => {
     fetchPackages();
   }, []);
 
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <>
       {lengthData > 0 && (
-        <div className="py-8 sm:py-20 font-philo relative">
+        <div className="py-8 lg:py-20 font-philo relative">
           <div className="absolute left-0 top-0 w-full h-full opacity-80 z-0">
             <img
-              className="w-full h-full md:h-auto mx-auto"
+              className="w-full h-full lg:h-auto mx-auto"
               src={bgshape}
               alt="Background Pattern"
             />
           </div>
-          <Containar>
-            <div className="relative z-10 mb-12">
-              <div className="sm:flex justify-between items-end rounded sm:border p-5 sm:bg-[#2A2A2A] sm:text-white">
-                <div>
-                  <p className="uppercase tracking-wider text-base sm:text-xl text-center md:text-start">
-                    - package
-                  </p>
-                  <h3 className="uppercase tracking-wider text-[24px] sm:text-[30px] sm:py-2 text-center md:text-start">
-                    {packageHead?.name}
-                  </h3>
-                </div>
-                <div className="mt-4 sm:mt-0">
-                  <Link
-                    className="py-1.5 px-6 text-[18px] sm:text-[20px] rounded font-semibold transition-all ease-linear duration-150 flex items-center gap-2 bg-[#AA8751] text-white group hover:bg-primary justify-center"
-                    to={`/packages/category/${packageHead?._id}`}
-                  >
-                    View All{" "}
-                    <FaLongArrowAltRight className="group-hover:translate-x-2 duration-200" />
-                  </Link>
-                </div>
-                {/* <div className="w-40 sm:w-80 h-px  bg-gray-300"></div> */}
-              </div>
-            </div>
-
-            {/* Early Bird Package Section */}
-            {earlyBirdPackage && (
-              <div className="flex flex-col sm:items-center text-center relative z-10  mb-16 bg-white">
-                <div className="w-full relative">
-                  <img
-                    className="w-full opacity-30 h-[200px] sm:h-auto hidden md:block"
-                    src={bird}
-                    alt="Early Bird Package"
-                  />
-                  <div className="absolute left-0 top-0 w-full h-full flex justify-center items-center pt-20 md:pt-0">
-                    <Link to={`package/${earlyBirdPackage?._id}`}>
-                      <div>
-                        <h2 className="text-[16px] xl:text-[45px] font-semibold text-center text-secondary">
-                          {earlyBirdPackage.name}
-                        </h2>
-                        <h2 className="text-[16px] xl:text-[55px] text-semisecondary text-center font-semibold text-secondary-color font-century textshadow">
-                          TK {earlyBirdPackage?.mrpPrice?.toLocaleString()}/-
-                          <span className="line-through font-normal text-sm">
-                            TK {earlyBirdPackage?.price?.toLocaleString()}
-                          </span>
-                        </h2>
-
-                        {/* Enhanced Discount Badge */}
-                        <div className="absolute top-2 right-2 bg-gradient-to-r from-red-500 via-red-400 to-red-300 text-white py-1 px-3 xl:py-2 xl:px-4 rounded-full text-sm xl:text-xl font-extrabold shadow-lg transform xl:scale-105 transition-all duration-300">
-                          Save TK {earlyBirdPackage?.discount?.toLocaleString()}
-                          /-
-                        </div>
-
-                        <p className="text-[14px] xl:text-xl text-center">
-                          {earlyBirdPackage?.roomType?.replace(
-                            /<[^>]*>?/gm,
-                            ""
-                          )}
-                        </p>
-                        <p className="text-[14px] xl:text-xl mt-2 px-2 sm:px-0 text-center mx-auto max-w-[360px]">
-                          {earlyBirdPackage?.hotalDistance?.join(", ")}
-                        </p>
-                        <div className="mt-12 hidden sm:block">
-                          <HajjButton align={earlyBirdPackage?._id} />
-                        </div>
-                      </div>
+          <div className="pt-20 xl:pt-0 2xl:pt-20 md:w-[80%] lg:w-auto mx-auto">
+            <Containar>
+              <div className="relative z-10 mb-12">
+                <div className="sm:flex justify-between items-end rounded sm:border p-5 sm:bg-[#2A2A2A] sm:text-white">
+                  <div>
+                    <p className="uppercase tracking-wider text-base sm:text-xl text-center md:text-start">
+                      - package
+                    </p>
+                    <h3 className="uppercase tracking-wider text-[24px] sm:text-[30px] sm:py-2 text-center md:text-start">
+                      {packageHead?.name}
+                    </h3>
+                  </div>
+                  <div className="mt-4 sm:mt-0">
+                    <Link
+                      className="py-1.5 px-6 text-[18px] sm:text-[20px] rounded font-semibold transition-all ease-linear duration-150 flex items-center gap-2 bg-[#AA8751] text-white group hover:bg-primary justify-center"
+                      to={`/packages/category/${packageHead?._id}`}
+                    >
+                      View All{" "}
+                      <FaLongArrowAltRight className="group-hover:translate-x-2 duration-200" />
                     </Link>
                   </div>
+                  {/* <div className="w-40 sm:w-80 h-px  bg-gray-300"></div> */}
                 </div>
               </div>
-            )}
-          </Containar>
+
+              {/* Early Bird Package Section */}
+              {earlyBirdPackage && (
+                <div className="flex flex-col sm:items-center text-center relative z-10  mb-16 bg-white">
+                  <div className="w-full relative">
+                    <img
+                      className="w-full opacity-30 h-[200px] sm:h-auto hidden md:block"
+                      src={bird}
+                      alt="Early Bird Package"
+                    />
+                    <div className="absolute left-0 top-0 w-full h-full flex justify-center items-center pt-20 md:pt-0">
+                      <Link to={`package/${earlyBirdPackage?._id}`}>
+                        <div>
+                          <h2 className="text-[16px] xl:text-[45px] font-semibold text-center text-secondary">
+                            {earlyBirdPackage.name}
+                          </h2>
+                          <h2 className="text-[16px] xl:text-[55px] text-semisecondary text-center font-semibold text-secondary-color font-century textshadow">
+                            TK {earlyBirdPackage?.mrpPrice?.toLocaleString()}/-
+                            <span className="line-through font-normal text-sm">
+                              TK {earlyBirdPackage?.price?.toLocaleString()}
+                            </span>
+                          </h2>
+
+                          {/* Enhanced Discount Badge */}
+                          <div className="absolute top-2 right-2 bg-gradient-to-r from-red-500 via-red-400 to-red-300 text-white py-1 px-3 xl:py-2 xl:px-4 rounded-full text-sm xl:text-xl font-extrabold shadow-lg transform xl:scale-105 transition-all duration-300">
+                            Save TK{" "}
+                            {earlyBirdPackage?.discount?.toLocaleString()}
+                            /-
+                          </div>
+
+                          <p className="text-[14px] xl:text-xl text-center">
+                            {earlyBirdPackage?.roomType?.replace(
+                              /<[^>]*>?/gm,
+                              ""
+                            )}
+                          </p>
+                          <p className="text-[14px] xl:text-xl mt-2 px-2 sm:px-0 text-center mx-auto max-w-[360px]">
+                            {earlyBirdPackage?.hotalDistance?.join(", ")}
+                          </p>
+                          <div className="mt-12 hidden sm:block">
+                            <HajjButton align={earlyBirdPackage?._id} />
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </Containar>
+          </div>
           {/* <Containar className={"mb-14 bg-slate-200 p-5 rounded-md"}> */}
           <Containar
-            className={`mb-14 ${
+            className={`mb-14 md:mb-0 lg:mb-28 ${
               packagesData?.length > 0 && "bg-slate-200"
             }  p-5 rounded-md`}
           >

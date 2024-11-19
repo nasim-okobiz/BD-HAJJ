@@ -4,14 +4,15 @@ import HajjButton from "./HajjButton";
 import btnshapeup from "../../assets/add/masjid.png";
 import btnshapedown from "../../assets/add/masjidshape.png";
 import tick from "../../assets/add/tick.png";
-import bgshape from "../../assets/pattern/pattern.jpg"
+import bgshape from "../../assets/pattern/pattern.jpg";
 import { Link, useLocation } from "react-router-dom";
 import { API_BASE_URL } from "../axios/config";
 import api from "../axios/Axios";
 import { useSelector } from "react-redux";
 import bghajj from "../../assets/pattern/member.jpg";
+import Loader from "../loader/Loader";
 const JoinusHome = () => {
-  const role = useSelector((store)=> store?.auth?.user?.role)
+  const role = useSelector((store) => store?.auth?.user?.role);
   const [joinuss, setJoinuss] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
@@ -30,6 +31,18 @@ const JoinusHome = () => {
   }, []);
   console.log(joinuss);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <div className="pt-12 sm:pt-28 font-philo relative">
       {/* <div className="absolute left-0 top-0 w-full h-full opacity-20">
@@ -45,9 +58,9 @@ const JoinusHome = () => {
       >
         <div className="absolute inset-0 bg-black/80"></div>
         <Containar>
-          <div className="flex flex-wrap justify-between py-20">
+          <div className="flex flex-col lg:flex-row justify-between space-y-5 lg:space-y-0 py-20">
             {/* Content Section */}
-            <div className="w-full z-10 md:w-[47.5%] ">
+            <div className="w-full z-10 lg:w-[47.5%] ">
               <div className="heading mb-4">
                 <h2 className="text-[24px] sm:text-[40px] font-semibold text-white">
                   Join Us
@@ -106,7 +119,7 @@ const JoinusHome = () => {
             </div>
 
             {/* Image Section */}
-            <div className="w-full md:w-[47.5%] z-10  mb-4 flex items-center">
+            <div className="w-full lg:w-[47.5%] z-10  mb-4 flex items-center">
               <img
                 src={API_BASE_URL + joinuss[0]?.photo}
                 alt="Joinus"

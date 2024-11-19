@@ -4,6 +4,7 @@ import Containar from "../components/container/Containar";
 import { AiOutlineRight } from "react-icons/ai";
 import { API_BASE_URL } from "../components/axios/config";
 import api from "../components/axios/Axios";
+import Loader from "../components/loader/Loader";
 const BlogPage = () => {
   const [blogs, setBlogs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -20,8 +21,17 @@ const BlogPage = () => {
   };
   useEffect(() => {
     getBlogs();
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
   }, []);
   console.log(blogs);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="col-span-3 grid md:grid-cols-2 lg:grid-cols-3 gap-5">

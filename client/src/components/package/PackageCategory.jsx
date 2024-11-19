@@ -3,6 +3,7 @@ import { FaCheck } from "react-icons/fa6";
 import api from "../axios/Axios";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { API_BASE_URL } from "../axios/config";
+import Loader from "../loader/Loader";
 
 const PackageCategory = () => {
   const [packages, setPackages] = useState([]);
@@ -24,6 +25,12 @@ const PackageCategory = () => {
   useEffect(() => {
     getPackages();
   }, [id]);
+
+  if (isLoading) {
+    return (
+      <Loader/>
+    );
+  }
 
   return (
     <>

@@ -7,6 +7,7 @@ import api from "../axios/Axios";
 import { API_BASE_URL } from "../axios/config";
 import btnshapeup from "../../assets/add/masjid.png";
 import btnshapedown from "../../assets/add/masjidshape.png";
+import Loader from "../loader/Loader";
 
 const Banner = () => {
   const [banners, setBanners] = useState([]);
@@ -27,6 +28,18 @@ const Banner = () => {
   useEffect(() => {
     getBanners();
   }, []);
+  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div>
@@ -68,7 +81,7 @@ const Banner = () => {
                 </div>
               </Link>
               <img
-                className="xl:h-[80vh] w-full object-cover"
+                className="xl:h-[80vh] w-full"
                 src={API_BASE_URL + slide?.photo}
                 alt={`Banner ${index}`}
               />

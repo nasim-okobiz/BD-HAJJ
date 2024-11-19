@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Banner from "../components/home/Banner";
 import AboutHome from "../components/home/AboutHome";
 import HomeMember from "../components/home/HomeMember";
@@ -11,16 +11,31 @@ import MembershipHome from "../components/home/MembershipHome";
 import HajjPackage from "../components/home/HajjPackage";
 import TourPackage from "../components/home/TourPackage";
 import GallerySection from "../components/home/GallerySection";
+import Loader from "../components/loader/Loader";
 
 const Home = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <>
       <Banner />
-      <UmrahPackage/>
+      <UmrahPackage />
       <HajjPackage />
       <TourPackage />
       <AboutHome />
-      <HomeMember /> 
+      <HomeMember />
       <GallerySection />
       <MembershipHome />
     </>

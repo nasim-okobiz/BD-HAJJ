@@ -5,6 +5,7 @@ import api from "../axios/Axios";
 import { API_BASE_URL } from "../axios/config";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { Link } from "react-router-dom";
+import Loader from "../loader/Loader";
 const GallerySection = () => {
   const [images, setImages] = useState([]);
   const [videos, setVideos] = useState([]);
@@ -42,8 +43,16 @@ const GallerySection = () => {
 
   // Swiper settings
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setloading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   if (loading) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   return (
