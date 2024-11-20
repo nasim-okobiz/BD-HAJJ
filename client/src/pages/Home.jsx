@@ -14,19 +14,6 @@ import GallerySection from "../components/home/GallerySection";
 import Loader from "../components/loader/Loader";
 
 const Home = () => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (isLoading) {
-    return <Loader />;
-  }
 
   return (
     <>

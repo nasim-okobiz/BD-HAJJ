@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Containar from "../container/Containar";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import bgshape from "../../assets/pattern/hajj.jpg";
 import HajjButton from "./HajjButton";
 import api from "../axios/Axios";
 import { API_BASE_URL } from "../axios/config";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules"; // Import modules from "swiper/modules"
+import { Autoplay, Pagination } from "swiper/modules"; 
 import "swiper/css";
 import "swiper/css/autoplay";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
 import bghajj from "../../assets/pattern/hajj.jpg";
-import Loader from "../loader/Loader";
+import Skeleton from "react-loading-skeleton";  // Import Skeleton
 
 const HajjPackage = () => {
   const [packagesData, setPackagesData] = useState([]);
@@ -48,37 +48,15 @@ const HajjPackage = () => {
     fetchPackages();
   }, []);
 
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (isLoading) {
-    return <Loader />;
-  }
-
   return (
     <>
-      {lengthData > 0 && (
+      {lengthData > 0 ? (
         <div className="font-philo relative">
-          {/* <div className="absolute left-0 top-0 w-full h-full opacity-20 z-0">
-            <img
-              className="w-full h-full"
-              src={bgshape}
-              alt="Background Pattern"
-            />
-          </div> */}
-
           <div
             className="bg-cover bg-fixed bg-no-repeat relative"
             style={{
               backgroundImage: `url(${bghajj})`,
-              height: "auto", // Adjust height for responsiveness
+              height: "auto", 
             }}
           >
             <div className="absolute inset-0 bg-black/80"></div>
@@ -89,17 +67,25 @@ const HajjPackage = () => {
                     packages
                   </p>
                   <h3 className="uppercase text-center tracking-wider text-[24px] sm:text-[30px] sm:py-2">
-                    {packageHead?.name}
+                    {packageHead ? (
+                      packageHead.name
+                    ) : (
+                      <Skeleton width={200} height={30} />
+                    )}
                   </h3>
                   <h3 className="text-white text-[30px] sm:text-[50px] text-center">
-                    Choose Your Package
+                    {packageHead ? (
+                      "Choose Your Package"
+                    ) : (
+                      <Skeleton width={300} height={50} />
+                    )}
                   </h3>
                   <div className="w-40 sm:w-80 h-px mx-auto bg-gray-300"></div>
                 </div>
                 <div className="mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 items-center pb-20">
                   {/* Left Section */}
                   <div className="text-white space-y-6 md:col-span-1">
-                    {earlyBirdPackage && (
+                    {earlyBirdPackage ? (
                       <Link to={`package/${earlyBirdPackage?._id}`}>
                         <div className="py-5">
                           <h2 className="text-xl sm:text-3xl font-semibold">
@@ -136,6 +122,8 @@ const HajjPackage = () => {
                           </button>
                         </div>
                       </Link>
+                    ) : (
+                      <Skeleton height={150} />
                     )}
                   </div>
 
@@ -143,12 +131,12 @@ const HajjPackage = () => {
                   <div className="md:col-span-2 lg:border-l p-5">
                     <Swiper
                       spaceBetween={20}
-                      slidesPerView={1} // Default for small screens
+                      slidesPerView={1} 
                       loop={true}
                       speed={1000}
                       breakpoints={{
-                        640: { slidesPerView: 2 }, // 2 items on medium screens
-                        1024: { slidesPerView: 2 }, // 4 items on large screens
+                        640: { slidesPerView: 2 }, 
+                        1024: { slidesPerView: 2 }, 
                       }}
                       autoplay={{
                         delay: 3000,
@@ -157,23 +145,15 @@ const HajjPackage = () => {
                       }}
                       pagination={{ clickable: true }}
                       modules={[Autoplay, Pagination]}
-                      className={`mt-8 ${
-                        packagesData?.length > 4 && "shadow-md"
-                      }`}
+                      className={`mt-8 ${packagesData?.length > 4 && "shadow-md"}`}
                     >
-                      {packagesData.map((pkg) => {
-                        const validDate = pkg?.validDate;
-                        const isValid = validDate
-                          ? new Date(validDate) > Date.now()
-                          : false;
-                        return (
+                      {packagesData.length > 0 ? (
+                        packagesData.map((pkg) => (
                           <SwiperSlide key={pkg._id}>
                             <div className="overflow-hidden group cursor-pointer h-full p-4 bg-white shadow-xl rounded-lg relative z-20">
                               <div className="h-[160px] sm:h-[280px] w-full overflow-hidden">
                                 <img
-                                  onClick={() =>
-                                    navigate(`/package/${pkg._id}`)
-                                  }
+                                  onClick={() => navigate(`/package/${pkg._id}`)}
                                   className="h-full w-full object-cover group-hover:scale-105 transition-all ease-linear duration-300"
                                   src={API_BASE_URL + pkg.photo}
                                   alt={pkg.name}
@@ -207,64 +187,31 @@ const HajjPackage = () => {
                                   </div>
                                 </div>
                                 {pkg?.discountPrice > 0 ? (
-                                  isValid ? (
-                                    <Link
-                                      to={`/package/${pkg._id}`}
-                                      className="w-full block bg-semisecondary hover:text-semisecondary border border-semisecondary text-white py-2 px-4 rounded hover:bg-white font-bold transition-all ease-linear duration-200 my-5"
-                                    >
-                                      Place Order
-                                    </Link>
-                                  ) : (
-                                    <button
-                                      disabled={true}
-                                      className="w-full block border border-red-600 text-red-600 py-2 px-4 rounded font-bold transition-all ease-linear duration-200 my-5"
-                                    >
-                                      Package Expired
-                                    </button>
-                                  )
-                                ) : (
                                   <Link
                                     to={`/package/${pkg._id}`}
                                     className="w-full block bg-semisecondary hover:text-semisecondary border border-semisecondary text-white py-2 px-4 rounded hover:bg-white font-bold transition-all ease-linear duration-200 my-5"
                                   >
                                     Place Order
                                   </Link>
+                                ) : (
+                                  <Skeleton height={40} />
                                 )}
                               </div>
                             </div>
                           </SwiperSlide>
-                        );
-                      })}
+                        ))
+                      ) : (
+                        <Skeleton count={3} height={200} />
+                      )}
                     </Swiper>
-                    <div className="mt-4 sm:mt-20 w-40 mx-auto">
-                      <Link
-                        className="py-1 bg-yellow-500 text-white text-[18px] sm:text-[20px] rounded font-semibold hover:bg-white hover:text-semisecondary transition-all ease-linear duration-150 flex items-center gap-3 justify-center group"
-                        to={`/packages/category/${packageHead?._id}`}
-                      >
-                        View All{" "}
-                        <FaLongArrowAltRight className="group-hover:translate-x-2 duration-200" />
-                      </Link>
-                    </div>
                   </div>
                 </div>
-
-                {/* <div className="px-4 py-3.5 bg-primary flex flex-col sm:flex-row justify-between items-center shadow-md rounded-md">
-                  <h3 className="text-[24px] sm:text-[30px] font-semibold  sm:text-left capitalize">
-                    {packageHead?.name}
-                  </h3>
-                  <div className="mt-4 sm:mt-0">
-                    <Link
-                      className="py-1.5 px-6 bg-semisecondary text-white text-[18px] sm:text-[20px] rounded-lg font-semibold hover:bg-white hover:text-semisecondary border border-semisecondary transition-all ease-linear duration-150"
-                      to={`/packages/category/${packageHead?._id}`}
-                    >
-                      View All
-                    </Link>
-                  </div>
-                </div> */}
               </div>
             </Containar>
           </div>
         </div>
+      ) : (
+        <Skeleton height="80vh" />
       )}
     </>
   );

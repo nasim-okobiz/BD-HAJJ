@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Containar from "../container/Containar";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import bgshape from "../../assets/pattern/visa.png";
 import HajjButton from "./HajjButton";
 import api from "../axios/Axios";
@@ -11,7 +11,9 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import bird from "../../assets/add/sp-of-bg.jpg";
-import Loader from "../loader/Loader";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 const TourPackage = () => {
   const [packagesData, setPackagesData] = useState([]);
   const [earlyBirdPackage, setEarlyBirdPackage] = useState(null);
@@ -46,18 +48,85 @@ const TourPackage = () => {
     fetchPackages();
   }, []);
 
-  const [isLoading, setIsLoading] = useState(true);
+  // Show skeleton loader until data is fetched
+  if (lengthData === 0) {
+    return (
+      <div className="py-8 lg:py-20 font-philo relative" style={{ height: "80vh" }}>
+        <div className="absolute left-0 top-0 w-full h-full opacity-80 z-0">
+          <img
+            className="w-full h-full lg:h-auto mx-auto"
+            src={bgshape}
+            alt="Background Pattern"
+          />
+        </div>
+        <div className="pt-20 xl:pt-0 2xl:pt-20 md:w-[80%] lg:w-auto mx-auto">
+          <Containar>
+            {/* Skeleton for package header */}
+            <div className="relative z-10 mb-12">
+              <div className="sm:flex justify-between items-end rounded sm:border p-5 sm:bg-[#2A2A2A] sm:text-white">
+                <div>
+                  <Skeleton width={150} height={30} />
+                  <Skeleton width={250} height={40} className="mt-2" />
+                </div>
+                <div className="mt-4 sm:mt-0">
+                  <Skeleton width={120} height={40} />
+                </div>
+              </div>
+            </div>
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+            {/* Skeleton for early bird package */}
+            <div className="flex flex-col sm:items-center text-center relative z-10 mb-16 bg-white">
+              <div className="w-full relative">
+                <Skeleton height={200} />
+                <div className="absolute left-0 top-0 w-full h-full flex justify-center items-center pt-20 md:pt-0">
+                  <Skeleton width={200} height={40} />
+                  <Skeleton width={100} height={40} className="mt-2" />
+                  <Skeleton width={200} height={20} className="mt-2" />
+                </div>
+              </div>
+            </div>
 
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (isLoading) {
-    return <Loader />;
+            {/* Skeleton for package cards */}
+            <Containar className="bg-slate-200 p-5 rounded-md mb-14 md:mb-0 lg:mb-28">
+              <Swiper
+                spaceBetween={20}
+                slidesPerView={1}
+                loop={true}
+                speed={1000}
+                breakpoints={{
+                  640: { slidesPerView: 2 },
+                  1024: { slidesPerView: 4 },
+                }}
+                autoplay={{
+                  delay: 3000,
+                  disableOnInteraction: true,
+                  pauseOnMouseEnter: true,
+                }}
+                pagination={{ clickable: true }}
+                modules={[Autoplay, Pagination]}
+                className="mt-8"
+              >
+                {Array(4)
+                  .fill()
+                  .map((_, index) => (
+                    <SwiperSlide key={index}>
+                      <div className="overflow-hidden group cursor-pointer h-full p-4 bg-white shadow-xl rounded-lg relative z-20">
+                        <Skeleton height={180} />
+                        <div className="flex flex-col justify-between h-[270px] mt-3">
+                          <Skeleton width={150} height={20} />
+                          <Skeleton width={100} height={15} className="mt-2" />
+                          <Skeleton width={200} height={15} className="mt-2" />
+                          <Skeleton width={120} height={40} className="mt-6" />
+                        </div>
+                      </div>
+                    </SwiperSlide>
+                  ))}
+              </Swiper>
+            </Containar>
+          </Containar>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -92,7 +161,6 @@ const TourPackage = () => {
                       <FaLongArrowAltRight className="group-hover:translate-x-2 duration-200" />
                     </Link>
                   </div>
-                  {/* <div className="w-40 sm:w-80 h-px  bg-gray-300"></div> */}
                 </div>
               </div>
 
@@ -127,16 +195,11 @@ const TourPackage = () => {
 
                           <p className="text-[14px] xl:text-xl text-center">
                             {earlyBirdPackage?.roomType?.replace(
-                              /<[^>]*>?/gm,
-                              ""
-                            )}
+                              /_/g,
+                              " "
+                            )}{" "}
+                            | {earlyBirdPackage?.person} Person
                           </p>
-                          <p className="text-[14px] xl:text-xl mt-2 px-2 sm:px-0 text-center mx-auto max-w-[360px]">
-                            {earlyBirdPackage?.hotalDistance?.join(", ")}
-                          </p>
-                          <div className="mt-12 hidden sm:block">
-                            <HajjButton align={earlyBirdPackage?._id} />
-                          </div>
                         </div>
                       </Link>
                     </div>
@@ -144,121 +207,61 @@ const TourPackage = () => {
                 </div>
               )}
             </Containar>
-          </div>
-          {/* <Containar className={"mb-14 bg-slate-200 p-5 rounded-md"}> */}
-          <Containar
-            className={`mb-14 md:mb-0 lg:mb-28 ${
-              packagesData?.length > 0 && "bg-slate-200"
-            }  p-5 rounded-md`}
-          >
-            <Swiper
-              spaceBetween={20}
-              slidesPerView={1}
-              loop={true}
-              speed={1000}
-              breakpoints={{
-                640: { slidesPerView: 2 },
-                1024: { slidesPerView: 4 },
-              }}
-              autoplay={{
-                delay: 3000, // 3 seconds
-                disableOnInteraction: true,
-                pauseOnMouseEnter: true,
-              }}
-              pagination={{ clickable: true }} // Add pagination if needed
-              modules={[Autoplay, Pagination]} // Include all required modules here
-              className={`mt-8 ${packagesData?.length > 4 && "shadow-md"}`}
-            >
-              {packagesData.map((pkg) => {
-                const validDate = pkg?.validDate;
-                const isValid = validDate
-                  ? new Date(validDate) > Date.now()
-                  : false;
-                return (
+
+            {/* Packages Section */}
+            <Containar className="bg-slate-200 p-5 rounded-md mb-14 md:mb-0 lg:mb-28">
+              <Swiper
+                spaceBetween={20}
+                slidesPerView={1}
+                loop={true}
+                speed={1000}
+                breakpoints={{
+                  640: { slidesPerView: 2 },
+                  1024: { slidesPerView: 4 },
+                }}
+                autoplay={{
+                  delay: 3000,
+                  disableOnInteraction: true,
+                  pauseOnMouseEnter: true,
+                }}
+                pagination={{ clickable: true }}
+                modules={[Autoplay, Pagination]}
+                className="mt-8"
+              >
+                {packagesData?.map((pkg) => (
                   <SwiperSlide key={pkg._id}>
-                    <div className="overflow-hidden group cursor-pointer h-full p-4 bg-white shadow-xl rounded-lg relative z-20">
-                      <div className="h-[160px] sm:h-[180px] w-full overflow-hidden">
-                        <img
-                          onClick={() => navigate(`/package/${pkg._id}`)}
-                          className="h-full w-full object-contain group-hover:scale-105 transition-all ease-linear duration-300"
-                          src={API_BASE_URL + pkg.photo}
-                          alt={pkg.name}
-                        />
-                      </div>
-                      <div className="flex flex-col justify-between h-[270px]">
-                        <div className="mt-3">
-                          <h3
-                            onClick={() => navigate(`/package/${pkg._id}`)}
-                            className="text-[16px] sm:text-[20px] font-semibold leading-7 mb-2"
-                          >
-                            {pkg.name}
-                          </h3>
-                          <h4 className="text-[14px] sm:text-[18px] font-semibold flex items-center gap-2">
-                            TK {pkg?.mrpPrice?.toLocaleString()}
-                            {pkg.price > pkg.mrpPrice && (
-                              <span className="line-through font-normal text-sm">
-                                TK {pkg?.price?.toLocaleString()}
-                              </span>
-                            )}
-                          </h4>
-                          <div className="flex flex-col gap-1 mt-2">
-                            <p className="text-[13px] sm:text-[15px]">
-                              {pkg?.roomType?.replace(/<[^>]*>?/gm, "")}
-                            </p>
-                            <p className="text-[13px] sm:text-[15px]">
-                              {pkg?.hotalDistance.join(", ")}
-                            </p>
+                    <div
+                      className="overflow-hidden group cursor-pointer h-full p-4 bg-white shadow-xl rounded-lg relative z-20"
+                    >
+                      <img
+                        className="w-full h-[200px] object-cover rounded"
+                        src={`${API_BASE_URL}/uploads/${pkg?.image}`}
+                        alt={pkg?.name}
+                      />
+                      <div className="flex flex-col justify-between h-[270px] mt-3">
+                        <h5 className="text-[16px] sm:text-[20px] text-[#4F5B69] font-semibold line-clamp-2">
+                          {pkg.name}
+                        </h5>
+                        <p className="text-[13px] sm:text-[16px] text-[#7D8B99] line-clamp-2">
+                          {pkg?.description}
+                        </p>
+                        <div className="flex items-center gap-4">
+                          <span className="text-[14px] font-semibold text-[#AA8751]">
+                            TK {pkg?.mrpPrice?.toLocaleString()}/-
+                          </span>
+                          <div>
+                            <span className="line-through text-[#6C7A84] text-[13px] font-medium">
+                              TK {pkg?.price?.toLocaleString()}
+                            </span>
                           </div>
                         </div>
-                        {pkg?.discountPrice > 0 ? (
-                          <>
-                            {isValid ? (
-                              <>
-                                {" "}
-                                <Link
-                                  to={`/package/${pkg?._id}`}
-                                  className=" w-full block text-center bg-semisecondary hover:text-semisecondary border border-semisecondary text-white py-2 px-4 rounded hover:bg-white font-bold transition-all ease-linear duration-200"
-                                >
-                                  Place Order
-                                </Link>
-                              </>
-                            ) : (
-                              <>
-                                <button
-                                  // to={`/package/${pkg._id}`}
-                                  disabled={true}
-                                  className=" w-full block text-center b  border border-red-600 text-red-600 py-2 px-4 rounded  font-bold transition-all ease-linear duration-200"
-                                >
-                                  Package Expired
-                                </button>
-                              </>
-                            )}
-                          </>
-                        ) : (
-                          <>
-                            <Link
-                              to={`/package/${pkg._id}`}
-                              className=" w-full block text-center bg-semisecondary hover:text-semisecondary border border-semisecondary text-white py-2 px-4 rounded hover:bg-white font-bold transition-all ease-linear duration-200"
-                            >
-                              Place Order
-                            </Link>
-                          </>
-                        )}
-                        {/* <div className="flex justify-center mt-3">
-                          <Link
-                            className="px-4 py-1.5 w-full text-center bg-semisecondary text-white rounded-lg font-bold hover:bg-white hover:text-semisecondary border border-semisecondary transition-all ease-linear duration-150"
-                            to={`/package/${pkg._id}`}
-                          >
-                            Book Now
-                          </Link>
-                        </div> */}
                       </div>
                     </div>
                   </SwiperSlide>
-                );
-              })}
-            </Swiper>
-          </Containar>
+                ))}
+              </Swiper>
+            </Containar>
+          </div>
         </div>
       )}
     </>
