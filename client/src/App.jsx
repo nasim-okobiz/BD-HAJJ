@@ -16,17 +16,11 @@ const FAQPage = lazy(() => import("./pages/FAQPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 const BlogPage = lazy(() => import("./pages/BlogPage"));
 const BlogLayout = lazy(() => import("./Layouts/BlogLayout"));
-// import NotFound from "";
-// import GalleryPage from "./pages/GalleryPage";
-// import AboutPage from "./pages/AboutPage";
-// import FAQPage from "./pages/FAQPage";
-// import ContactPage from "./pages/ContactPage";
-// import BlogPage from "./pages/BlogPage";
-// import BlogLayout from "./Layouts/BlogLayout";
 const BlogCategory = lazy(() => import("./components/category/BlogCategory"));
 const MembershipHome = lazy(() => import("./components/home/MembershipHome"));
 const MembershipPage = lazy(() => import("./pages/MembershipPage"));
 const MembershipForm = lazy(() => import("./pages/MembershipForm"));
+const VisaCenter = lazy(() => import("./pages/VisaCenter"));
 const SingeBlogPage = lazy(() => import("./pages/SingeBlogPage"));
 const PackageLayout = lazy(() => import("./Layouts/PackageLayout"));
 const AllPackage = lazy(() => import("./components/package/AllPackage"));
@@ -34,17 +28,6 @@ const PackageCategory = lazy(() => import("./components/package/PackageCategory"
 const PackageDetails = lazy(() => import("./pages/PackageDetails"));
 const LoginCard = lazy(() => import("./pages/LoginCard"));
 const c = lazy(() => import("./pages/RegistrationCard"));
-// import BlogCategory from "./components/category/BlogCategory";
-// import MembershipHome from "./components/home/MembershipHome";
-// import MembershipPage from "./pages/MembershipPage";
-// import MembershipForm from "./pages/MembershipForm";
-// import SingeBlogPage from "./pages/SingeBlogPage";
-// import PackageLayout from "./Layouts/PackageLayout";
-// import AllPackage from "./components/package/AllPackage";
-// import PackageCategory from "./components/package/PackageCategory";
-// import PackageDetails from "./pages/PackageDetails";
-// import LoginCard from "./pages/LoginCard";
-// import c from "./pages/RegistrationCard";
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const BookingPackageDetails = lazy(() => import("./pages/BookingPackageDetails"));
 const BookConfirm = lazy(() => import("./pages/BookConfirm"));
@@ -53,17 +36,6 @@ const FailurePage = lazy(() => import("./pages/membershipFailAndScucces/FailureP
 const SuccessPage = lazy(() => import("./pages/membershipFailAndScucces/SuccessPage"));
 const BookingPayment = lazy(() => import("./pages/BookingPayment"));
 const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
-// import Dashboard from "./pages/Dashboard";
-// import BookingPackageDetails from "./pages/BookingPackageDetails";
-// import BookConfirm from "./pages/BookConfirm";
-
-// import PersonBookingUpdate from "./pages/PersonBookingUpdate.jsx";
-
-// import FailurePage from "./pages/membershipFailAndScucces/FailurePage";
-// import SuccessPage from "./pages/membershipFailAndScucces/SuccessPage";
-
-// import BookingPayment from "./pages/BookingPayment";
-// import PaymentSuccess from "./pages/PaymentSuccess";
 const PaymentFailure = lazy(() => import("./pages/PaymentFailure"));
 const NewBooking = lazy(() => import("./agentProfile/NewBooking"));
 const MemberDetails = lazy(() => import("./pages/memberDetails.jsx"));
@@ -71,16 +43,6 @@ const GroupBooking = lazy(() => import("./agentProfile/GroupBooking.jsx"));
 const Profile = lazy(() => import("./pages/profile/Profile.jsx"));
 const PrivacyPolicy = lazy(() => import("./pages/footer/PrivacyPolicy.jsx"));
 const RefundPolicy = lazy(() => import("./pages/footer/RefundPolicy.jsx"));
-// import PaymentFailure from "./pages/PaymentFailure";
-// import NewBooking from "./agentProfile/NewBooking";
-
-// import MemberDetails from "./pages/memberDetails.jsx";
-// import GroupBooking from "./agentProfile/GroupBooking.jsx";
-// import Profile from "./pages/profile/Profile.jsx";
-
-// import PrivacyPolicy from "./pages/footer/PrivacyPolicy.jsx";
-// import RefundPolicy from "./pages/footer/RefundPolicy.jsx";
-
 const RegistrationCard = lazy(() => import("./pages/RegistrationCard"));
 const ViewEditPersonDetails = lazy(() => import("./pages/profile/ViewEditPersonDetails.jsx"));
 const TermsAndConditions = lazy(() => import("./pages/footer/TermsAndConditions.jsx"));
@@ -151,6 +113,15 @@ function App() {
           }
         />
         {/* <Route path="/about-us" element={<AboutPage />} /> */}
+        <Route
+          path="/visa-center"
+          element={
+            <Suspense fallback={<div></div>}>
+              <VisaCenter />
+            </Suspense>
+          }
+        />
+        {/* <Route path="/visa-center" element={<VisaCenter />} /> */}
         <Route
           path="/membership"
           element={

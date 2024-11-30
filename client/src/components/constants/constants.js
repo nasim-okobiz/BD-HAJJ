@@ -52,27 +52,31 @@ export const menuList = [
       ],
     },
     {
-      title: "Membership",
+      title: "Member",
       Link: "/membership",
     },
     {
-      title: "Blog",
-      Link: "/blog",
+      title: "Visa Center",
+      Link: "/visa-center",
     },
+    // {
+    //   title: "Blog",
+    //   Link: "/blog",
+    // },
+    // {
+    //   title: "Our Gallery",
+    //   Link: "/our-gallery",
+    // },
+    // {
+    //   title: "FAQ's",
+    //   Link: "/faq",
+    // },
+    // {
+    //   title: "About Us",
+    //   Link: "/about-us",
+    // },
     {
-      title: "Our Gallery",
-      Link: "/our-gallery",
-    },
-    {
-      title: "FAQ's",
-      Link: "/faq",
-    },
-    {
-      title: "About Us",
-      Link: "/about-us",
-    },
-    {
-      title: "Contact Us",
+      title: "Contact",
       Link: "/contact-us",
     },
   ];

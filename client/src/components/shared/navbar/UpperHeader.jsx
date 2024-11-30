@@ -33,7 +33,7 @@ function Header() {
   console.log("Announcements:", announcements);
 
   return (
-    <section className="bg-semisecondary py-1 flex items-center justify-between font-philo">
+    <section className="bg-primary py-1 flex items-center justify-between font-philo">
       <Containar>
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center text-white space-x-2 sm:mb-2 md:mb-0 md:w-[15%]">
@@ -45,35 +45,6 @@ function Header() {
             </span>
           </div>
 
-          <div
-            className="w-full md:w-[85%] overflow-hidden"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-            style={{ whiteSpace: "nowrap" }}
-          >
-            {/* {loading ? (
-              <span className="text-white text-xs sm:text-sm font-bold">
-                Loading announcements...
-              </span>
-            ) : announcements.length > 0 ? ( */}
-            {announcements && (
-              <Ticker speed={7} mode="smooth" move={!isPaused}>
-                {() => (
-                  <div className="flex space-x-8 text-white text-xs sm:text-sm font-bold">
-                    {announcements}
-                  </div>
-                )}
-              </Ticker>
-            )
-
-            }
-
-            {/* // ) : (
-            //   <span className="text-white text-xs sm:text-sm font-bold">
-            //     No announcements available.
-            //   </span>
-            // )} */}
-          </div>
           {/* social icon and link add  */}
           <div className="flex items-center sm:pl-4 space-x-3 text-white text-xl md:w-[15%]">
             <a href="https://www.facebook.com/bdumrahhajjkafela?mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer">

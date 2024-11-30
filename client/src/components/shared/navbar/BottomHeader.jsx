@@ -124,7 +124,7 @@ const BottomHeader = () => {
           </div>
           <div className="flex justify-end items-center ">
             <nav className="xl:flex justify-end items-center hidden">
-              <ul className="flex space-x-5 xl:space-x-4 flex-wrap text-secondary font-semibold items-center">
+              <ul className="flex space-x-5 xl:space-x-4 flex-wrap text-secondary font-semibold items-center uppercase">
                 {menuList.map((item, index) => (
                   <li
                     key={index}
@@ -138,8 +138,8 @@ const BottomHeader = () => {
                       to={item.Link}
                       className={({ isActive }) =>
                         isActive
-                          ? "text-primary underline uppercase"
-                          : "hover:text-primary transition-colors ease-in-out duration-300"
+                          ? "bg-primary text-white py-1 px-2 rounded-lg"
+                          : "hover:text-primary hover:bg-white hover:border-primary transition-colors ease-in-out duration-300"
                       }
                     >
                       {item.title}

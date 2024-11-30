@@ -8,8 +8,8 @@ import { API_BASE_URL } from "../axios/config";
 import btnshapeup from "../../assets/add/masjid.png";
 import btnshapedown from "../../assets/add/masjidshape.png";
 import Loader from "../loader/Loader";
-import Skeleton from "react-loading-skeleton";  // Import the skeleton loader
-import "react-loading-skeleton/dist/skeleton.css";  // Import the skeleton styles
+import Skeleton from "react-loading-skeleton"; // Import the skeleton loader
+import "react-loading-skeleton/dist/skeleton.css"; // Import the skeleton styles
 
 const Banner = () => {
   const [banners, setBanners] = useState([]);
@@ -49,7 +49,8 @@ const Banner = () => {
           {/* Skeleton loader for each slide */}
           <SwiperSlide>
             <div className="relative w-full">
-              <Skeleton className="xl:h-[80vh] w-full"/> {/* Skeleton for image */}
+              <Skeleton className="xl:h-[80vh] w-full" />{" "}
+              {/* Skeleton for image */}
               <div className="absolute ml-20 top-2/3 left-2/4 hidden md:block transform -translate-x-3/4 text-white px-6 py-2 rounded-full z-10">
                 <Skeleton width={200} height={40} /> {/* Skeleton for button */}
               </div>
@@ -74,7 +75,7 @@ const Banner = () => {
             <SwiperSlide key={index}>
               <div className="relative w-full">
                 <Link to={"/packages"}>
-                  <div className="absolute ml-20 top-2/3 left-2/4 hidden md:block transform -translate-x-3/4 text-white px-6 py-2 rounded-full z-10">
+                  {/* <div className="absolute ml-20 top-2/3 left-2/4 hidden md:block transform -translate-x-3/4 text-white px-6 py-2 rounded-full z-10">
                     <div className="relative group cursor-pointer ">
                       <img
                         className="w-[38px] sm:w-[45px] absolute group-hover:left-[70%] left-[10%] transition-all ease-in-out duration-300 -top-[80%]"
@@ -84,17 +85,25 @@ const Banner = () => {
                         className="w-[180px] sm:w-[230px] "
                         src={btnshapedown}
                       />
-
                       <div className="absolute left-1/2 top-[60%] -translate-x-1/2 -translate-y-1/2 text-white text-[16px] sm:text-xl font-semibold">
                         <Link to={"/packages"} className="button block">
                           Know More
                         </Link>
                       </div>
                     </div>
+                  </div> */}
+
+                  {/* Updated button */}
+                  <div className="absolute top-2/3 left-1/2 hidden md:block transform -translate-x-1/2 text-white px-6 py-2 rounded-full z-10">
+                    <Link to="/packages">
+                      <button className="bg-primary text-white font-bold py-2 px-6 rounded transition-all duration-300 transform hover:scale-105 hover:shadow-md uppercase">
+                        Book Now
+                      </button>
+                    </Link>
                   </div>
                 </Link>
                 <img
-                  className="xl:h-[80vh] w-full"
+                  className="xl:h-[50vh] w-full object-cover"
                   src={API_BASE_URL + slide?.photo}
                   alt={`Banner ${index}`}
                 />
