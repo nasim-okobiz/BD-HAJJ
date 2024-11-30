@@ -13,6 +13,7 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 import bird from "../../assets/add/sp-of-bg.jpg";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import headingLine from "../../assets/pattern/heading-line.png";
 
 const TourPackage = () => {
   const [packagesData, setPackagesData] = useState([]);
@@ -24,7 +25,8 @@ const TourPackage = () => {
   useEffect(() => {
     const fetchPackages = async () => {
       try {
-        const response = await api.get("/package?priority=3");
+        // const response = await api.get("/package?priority=3");
+        const response = await api.get("/package");
         if (response.data.statusCode === 200) {
           const fetchedPackages = response.data.data;
           setLengthData(fetchedPackages?.length);
@@ -51,15 +53,18 @@ const TourPackage = () => {
   // Show skeleton loader until data is fetched
   if (lengthData === 0) {
     return (
-      <div className="py-8 lg:py-20 font-philo relative" style={{ height: "80vh" }}>
-        <div className="absolute left-0 top-0 w-full h-full opacity-80 z-0">
+      <div
+        className="py-8 lg:py-16 font-merriweather relative"
+        style={{ height: "80vh" }}
+      >
+        {/* <div className="absolute left-0 top-0 w-full h-full opacity-80 z-0">
           <img
             className="w-full h-full lg:h-auto mx-auto"
             src={bgshape}
             alt="Background Pattern"
           />
-        </div>
-        <div className="pt-20 xl:pt-0 2xl:pt-20 md:w-[80%] lg:w-auto mx-auto">
+        </div> */}
+        <div className="pt-20 xl:pt-0 2xl:pt-10 md:w-[80%] lg:w-auto mx-auto">
           <Containar>
             {/* Skeleton for package header */}
             <div className="relative z-10 mb-12">
@@ -132,16 +137,16 @@ const TourPackage = () => {
   return (
     <>
       {lengthData > 0 && (
-        <div className="py-8 lg:py-20 font-philo relative">
-          <div className="absolute left-0 top-0 w-full h-full opacity-80 z-0">
+        <div className="py-8 lg:py-16 font-merriweather relative">
+          {/* <div className="absolute left-0 top-0 w-full h-full opacity-80 z-0">
             <img
               className="w-full h-full lg:h-auto mx-auto"
               src={bgshape}
               alt="Background Pattern"
             />
-          </div>
-          <div className="pt-20 xl:pt-0 2xl:pt-20 md:w-[80%] lg:w-auto mx-auto">
-            <Containar>
+          </div> */}
+          <div className="pt-20 xl:pt-0 2xl:pt-10 md:w-[80%] lg:w-auto mx-auto">
+            {/* <Containar>
               <div className="relative z-10 mb-12">
                 <div className="sm:flex justify-between items-end rounded sm:border p-5 sm:bg-[#2A2A2A] sm:text-white">
                   <div>
@@ -164,7 +169,6 @@ const TourPackage = () => {
                 </div>
               </div>
 
-              {/* Early Bird Package Section */}
               {earlyBirdPackage && (
                 <div className="flex flex-col sm:items-center text-center relative z-10  mb-16 bg-white">
                   <div className="w-full relative">
@@ -186,7 +190,6 @@ const TourPackage = () => {
                             </span>
                           </h2>
 
-                          {/* Enhanced Discount Badge */}
                           <div className="absolute top-2 right-2 bg-gradient-to-r from-red-500 via-red-400 to-red-300 text-white py-1 px-3 xl:py-2 xl:px-4 rounded-full text-sm xl:text-xl font-extrabold shadow-lg transform xl:scale-105 transition-all duration-300">
                             Save TK{" "}
                             {earlyBirdPackage?.discount?.toLocaleString()}
@@ -206,10 +209,31 @@ const TourPackage = () => {
                   </div>
                 </div>
               )}
-            </Containar>
+            </Containar> */}
 
             {/* Packages Section */}
-            <Containar className="bg-slate-200 p-5 rounded-md mb-14 md:mb-0 lg:mb-28">
+            <Containar className="p-5 mb-14 md:mb-0 lg:mb-28">
+              <div className="relative z-10 mb-12">
+                <div className="sm:flex justify-between items-center rounded p-5">
+                  <div>
+                    <p className="uppercase tracking-wider text-base sm:text-xl text-center md:text-start">
+                      Visa/ Visa Processing
+                    </p>
+                    <div className="relative w-full flex justify-center mt-2">
+                      <img
+                        src={headingLine}
+                        alt="Heading Line"
+                        className="w-3/4 sm:w-2/3 md:w-auto"
+                      />
+                    </div>
+                  </div>
+                  <div className="mt-4 sm:mt-0">
+                    <button className="bg-primary text-white font-bold py-1 sm:py-2 px-4 sm:px-6 rounded transition-all duration-300 transform hover:scale-105 hover:shadow-md uppercase">
+                      View All
+                    </button>
+                  </div>
+                </div>
+              </div>
               <Swiper
                 spaceBetween={20}
                 slidesPerView={1}
@@ -217,7 +241,7 @@ const TourPackage = () => {
                 speed={1000}
                 breakpoints={{
                   640: { slidesPerView: 2 },
-                  1024: { slidesPerView: 4 },
+                  1024: { slidesPerView: 5 },
                 }}
                 autoplay={{
                   delay: 3000,
@@ -230,9 +254,7 @@ const TourPackage = () => {
               >
                 {packagesData?.map((pkg) => (
                   <SwiperSlide key={pkg._id}>
-                    <div
-                      className="overflow-hidden group cursor-pointer h-full p-4 bg-white shadow-xl rounded-lg relative z-20"
-                    >
+                    <div className="overflow-hidden group cursor-pointer h-full p-4 bg-white shadow-xl rounded-lg relative z-20">
                       <img
                         className="w-full h-[200px] object-cover rounded"
                         src={`${API_BASE_URL}/uploads/${pkg?.image}`}
@@ -243,7 +265,7 @@ const TourPackage = () => {
                           {pkg.name}
                         </h5>
                         <p className="text-[13px] sm:text-[16px] text-[#7D8B99] line-clamp-2">
-                          {pkg?.description}
+                          {pkg?.title}
                         </p>
                         <div className="flex items-center gap-4">
                           <span className="text-[14px] font-semibold text-[#AA8751]">

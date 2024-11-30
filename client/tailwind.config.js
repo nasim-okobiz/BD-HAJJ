@@ -20,6 +20,7 @@ export default {
       },
       fontFamily: {
         philo: ["Philosopher", "sans-serif"],
+        merriweather: ['Merriweather', 'serif'],
       },
       textShadow: {
         custom: "1px 0px 5px #fff",

@@ -73,7 +73,7 @@ const MemberDetails = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="relative font-philo pt-2 sm:pt-28">
+    <div className="relative font-merriweather pt-2 sm:pt-28">
       <div className="absolute left-0 top-0 w-full h-full opacity-10 z-0">
         <img className="w-full h-full" src={bgshape} alt="Background" />
       </div>

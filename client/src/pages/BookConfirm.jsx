@@ -113,7 +113,7 @@ const BookConfirm = () => {
   };
 
   return (
-    <section className="booking-section bg-gray-100 font-philo">
+    <section className="booking-section bg-gray-100 font-merriweather">
       <div className="py-5 px-4 md:px-[140px] bg-gray-50 z-10">
         <Containar>
           <nav className="flex flex-wrap items-center space-x-2 text-gray-600 text-xs sm:text-lg">

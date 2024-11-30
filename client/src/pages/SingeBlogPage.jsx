@@ -30,7 +30,7 @@ const SingeBlogPage = () => {
 
   return (
     <>
-      <section className="bg-white py-16 border-b-2 border-semisecondary font-philo">
+      <section className="bg-white py-16 border-b-2 border-semisecondary font-merriweather">
         <Containar>
           <div className="flex flex-wrap">
             <div className="w-full md:w-[47%] my-auto pr-10">
@@ -74,7 +74,7 @@ const SingeBlogPage = () => {
           </div>
         </Containar>
       </div>
-      <section className="mb-4 pb-16 font-philo border-b-2 border-semisecondary">
+      <section className="mb-4 pb-16 font-merriweather border-b-2 border-semisecondary">
         <p
           className="container mx-auto"
           dangerouslySetInnerHTML={{ __html: blogs?.textEditor }}

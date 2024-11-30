@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Containar from "../container/Containar";
-import pattern from "../../assets/pattern/pattern.jpg";
+import pattern from "../../assets/pattern/bg-white-parallax.jpg";
 import decoration from "../../assets/pattern/decoration.png";
 import about from "../../assets/about/about.jpg";
 import HajjButton from "./HajjButton";
@@ -9,6 +9,7 @@ import btnshapedown from "../../assets/add/masjidshape.png";
 import { API_BASE_URL } from "../axios/config";
 import { Link, useLocation } from "react-router-dom";
 import api from "../axios/Axios";
+import headingLine from "../../assets/pattern/heading-line.png";
 
 const AboutHome = ({ page }) => {
   const [aboutUss, setAboutUss] = useState([]);
@@ -32,7 +33,9 @@ const AboutHome = ({ page }) => {
 
   return (
     <div
-      className={`${page ? "sm:pt-0 " : "pt-10 sm:py-20"} relative font-philo`}
+      className={`${
+        page ? "sm:pt-0 " : "pt-10 sm:py-20"
+      } relative font-merriweather`}
     >
       {!page && (
         <div className="absolute hidden md:block right-0 -top-10 -z-10">
@@ -44,7 +47,7 @@ const AboutHome = ({ page }) => {
       )}
       {!page && (
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 bg-cover bg-fixed bg-no-repeat"
           style={{
             backgroundImage: `url(${pattern})`,
             backgroundSize: "cover",
@@ -57,7 +60,7 @@ const AboutHome = ({ page }) => {
 
       {!page && (
         <Containar>
-          <h3 className="text text-[24px] sm:text-[45px] text-center font-philo">
+          <h3 className=" text-[24px] sm:text-[45px] text-center font-merriweather">
             {/* BD HAJJ Bangladesh Umrah Hajj Kafela */}
             {isLoading ? (
               <div className="w-40 sm:w-80 h-8 bg-gray-300 animate-pulse mx-auto"></div>
@@ -65,7 +68,14 @@ const AboutHome = ({ page }) => {
               aboutUss[0]?.title
             )}
           </h3>
-          <div className="w-40 sm:w-80 h-px mx-auto bg-gray-300"></div>
+          {/* <div className="w-40 sm:w-80 h-px mx-auto bg-gray-300"></div> */}
+          <div className="relative w-full flex justify-center mt-2">
+            <img
+              src={headingLine}
+              alt="Heading Line"
+              className="w-3/4 sm:w-2/3 md:w-auto"
+            />
+          </div>
         </Containar>
       )}
 
@@ -93,8 +103,8 @@ const AboutHome = ({ page }) => {
                   className="rounded-lg shadow-lg w-[150px] sm:w-[350px] h-auto"
                 />
                 <p className="text-sm xl:text-lg font-medium mt-5">
-                  BD Umrah Hajj Kafela operate their activities according to Quran
-                  and Sunnah. !
+                  BD Umrah Hajj Kafela operate their activities according to
+                  Quran and Sunnah. !
                 </p>
                 <p className="inline-block mt-4 text-yellow-400 font-semibold hover:underline">
                   10 years Experience →
@@ -130,21 +140,31 @@ const AboutHome = ({ page }) => {
             )}
 
             {!page && (
-              <div className="text-center md:text-left mt-10 sm:mt-16">
-                <div className={`flex justify-start`}>
-                  <div className="relative group cursor-pointer">
-                    <img
-                      className="w-[38px] sm:w-[45px] absolute group-hover:left-[70%] left-[10%] transition-all ease-in-out duration-300 -top-[80%]"
-                      src={btnshapeup}
-                    />
-                    <img className="w-[180px] sm:w-[230px]" src={btnshapedown} />
-                    <div className="absolute left-1/2 top-[60%] -translate-x-1/2 -translate-y-1/2 text-white text-[16px] sm:text-xl font-semibold">
-                      <Link to={"/about-us"} className="button block">
-                        Know More
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+              // <div className="text-center md:text-left mt-10 sm:mt-16">
+              //   <div className={`flex justify-start`}>
+              //     <div className="relative group cursor-pointer">
+              //       <img
+              //         className="w-[38px] sm:w-[45px] absolute group-hover:left-[70%] left-[10%] transition-all ease-in-out duration-300 -top-[80%]"
+              //         src={btnshapeup}
+              //       />
+              //       <img
+              //         className="w-[180px] sm:w-[230px]"
+              //         src={btnshapedown}
+              //       />
+              //       <div className="absolute left-1/2 top-[60%] -translate-x-1/2 -translate-y-1/2 text-white text-[16px] sm:text-xl font-semibold">
+              //         <Link to={"/about-us"} className="button block">
+              //           Know More
+              //         </Link>
+              //       </div>
+              //     </div>
+              //   </div>
+              // </div>
+              <div className="mt-10 sm:mt-16">
+                <Link to={"/about-us"}>
+                  <button className="bg-primary text-white font-bold py-2 px-6 rounded transition-all duration-300 transform hover:scale-105 hover:shadow-md uppercase">
+                    Know More
+                  </button>
+                </Link>
               </div>
             )}
 
@@ -166,7 +186,10 @@ const AboutHome = ({ page }) => {
                     +88 {aboutUss[0]?.whatsApp}
                   </a>{" "}
                   | Email:{" "}
-                  <a href={`mailto:${aboutUss[0]?.email}`} className="underline">
+                  <a
+                    href={`mailto:${aboutUss[0]?.email}`}
+                    className="underline"
+                  >
                     {aboutUss[0]?.email}
                   </a>
                 </p>

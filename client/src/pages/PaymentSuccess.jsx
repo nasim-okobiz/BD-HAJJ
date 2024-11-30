@@ -12,7 +12,7 @@ const PaymentSuccess = () => {
 
   return (
     <div className=" bg-gray-100  flex items-center justify-center sm:h-screen">
-      <div className="flex  flex-col items-center shadow-md rounded-md justify-center border-b-[4px] border-b-green-600  px-40 py-16 bg-white font-philo">
+      <div className="flex  flex-col items-center shadow-md rounded-md justify-center border-b-[4px] border-b-green-600  px-40 py-16 bg-white font-merriweather">
         <svg width="200" height="200" className="mb-4">
           {/* Circle Animation */}
           <circle

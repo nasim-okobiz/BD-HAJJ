@@ -5,7 +5,7 @@ import { MdErrorOutline } from "react-icons/md";
 
 const PaymentFailure = () => {
   return (
-    <div className="flex justify-center sm:h-screen items-center bg-gray-100 font-philo">
+    <div className="flex justify-center sm:h-screen items-center bg-gray-100 font-merriweather">
       <div className="col-md-5 w-full max-w-lg rounded-md px-6 py-10 bg-white shadow-lg text-center border-b-4 border-red-500 mt-10">
         <div className="text-red-500 mb-4 flex justify-center animate-fadeInDown delay-150">
           <MdErrorOutline className="text-[180px]" />

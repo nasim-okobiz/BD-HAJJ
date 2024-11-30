@@ -44,7 +44,7 @@ const MembershipPage = () => {
   }
   return (
     <div>
-      <section className="membership-inner-header font-philo">
+      <section className="membership-inner-header font-merriweather">
         <div className="py-5 pl-4 sm:pl-[140px] bg-gray-100 z-10">
           <Containar>
             <div>
@@ -74,7 +74,7 @@ const MembershipPage = () => {
           />
         </Containar>
       </section>
-      <section className="mt-4 membership-questions font-philo pb-16 md:pb-36">
+      <section className="mt-4 membership-questions font-merriweather pb-16 md:pb-36">
         <Containar>
           <div>
             <h2 className="text-[22px] sm:text-[36px] font-bold mb-4">

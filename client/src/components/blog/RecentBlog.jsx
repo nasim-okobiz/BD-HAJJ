@@ -25,7 +25,7 @@ const RecentBlog = (blogCategoryRef) => {
   console.log(blogs);
 
   return (
-    <section className="pt-16 pb-32 font-philo">
+    <section className="pt-16 pb-32 font-merriweather">
       <div className="container mx-auto">
         <h3 className="mb-3 text-2xl font-semibold">Recent Blogs</h3>
         <Swiper

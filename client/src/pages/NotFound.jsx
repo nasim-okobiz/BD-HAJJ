@@ -49,7 +49,7 @@ const NotFound = () => {
   }, [currentIndex, isComplete]); // Dependency includes isComplete
 
   return (
-    <div className="py-10 md:py-20 h-screen relative overflow-hidden font-philo">
+    <div className="py-10 md:py-20 h-screen relative overflow-hidden font-merriweather">
       <Containar>
         <div className="text-center relative">
           <div className="relative w-full md:w-[40%] mx-auto mb-5">

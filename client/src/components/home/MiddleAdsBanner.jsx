@@ -5,7 +5,7 @@ import HajjButton from "./HajjButton";
 
 const MiddleAdsBanner = () => {
   return (
-    <div className="relative pt-10 sm:pt-24 sm:pb-20 font-philo">
+    <div className="relative pt-10 sm:pt-24 sm:pb-20 font-merriweather">
       {/* Background Layer */}
       <div
         className="absolute inset-0 bg-cover bg-center"

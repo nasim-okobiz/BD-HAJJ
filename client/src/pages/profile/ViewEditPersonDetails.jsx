@@ -90,7 +90,7 @@ const ViewEditPersonDetails = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <section className="membership-form py-16 bg-gray-100 font-philo">
+    <section className="membership-form py-16 bg-gray-100 font-merriweather">
       <Containar>
         <div className="bg-white px-8 pt-10 pb-8 shadow-md">
           <div className="mb-10">

@@ -35,7 +35,7 @@ const JoinusHome = () => {
   }, []);
 
   return (
-    <div className="pt-12 sm:pt-28 font-philo relative">
+    <div className="pt-12 sm:pt-28 font-merriweather relative">
       {/* Background Image */}
       <div
         className="bg-cover bg-fixed bg-no-repeat relative"

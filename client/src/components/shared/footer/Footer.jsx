@@ -21,7 +21,7 @@ const Footer = () => {
   console.log("first, location =========================", data)
 
   return (
-    <div className={`${flag ? "bg-gray-100" : ""} font-philo`}>
+    <div className={`${flag ? "bg-gray-100" : ""} font-merriweather`}>
       <footer
         className="footer relative bg-cover bg-fixed bg-no-repeat"
         style={{

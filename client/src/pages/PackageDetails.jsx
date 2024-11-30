@@ -50,7 +50,7 @@ const PackageDetails = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="font-philo">
+    <div className="font-merriweather">
       <div className="py-5 sm:pl-[140px] bg-gray-100 z-10">
         <Containar>
           <nav className="flex items-center space-x-2 text-gray-600 text-lg">

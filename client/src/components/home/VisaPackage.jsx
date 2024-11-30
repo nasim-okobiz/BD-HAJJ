@@ -7,7 +7,7 @@ import bird from "../../assets/add/sp-of-bg.jpg"
 
 const VisaPackage = () => {
   return (
-    <div className="font-philo relative">
+    <div className="font-merriweather relative">
       <div className="absolute left-0 top-0 w-full h-full opacity-20">
         <img className="w-full h-full" src={bgshape} />
       </div>

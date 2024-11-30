@@ -63,7 +63,7 @@ const Features = () => {
   ];
 
   return (
-    <div className="relative font-philo">
+    <div className="relative font-merriweather">
       <div className="absolute left-0 top-0 w-full h-full opacity-20">
         <img className="w-full h-full" src={bgshape} />
       </div>

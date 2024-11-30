@@ -90,7 +90,7 @@ const BlogLayout = () => {
   console.log(blogTypes);
 
   return (
-    <section className="all-blog-section relative font-philo bg-gray-50 pb-0 sm:pb-32">
+    <section className="all-blog-section relative font-merriweather bg-gray-50 pb-0 sm:pb-32">
       {/* Breadcrumb */}
       <div className="py-5 pl-4 xl:pl-[160px] bg-gray-100">
         <Containar>

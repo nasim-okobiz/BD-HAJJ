@@ -87,7 +87,7 @@ const FAQPage = () => {
   console.log("faqs", faqs);
 
   return (
-    <section className="faq-section relative bg-gray-50 font-philo">
+    <section className="faq-section relative bg-gray-50 font-merriweather">
 
       <div className="py-5 pl-4 sm:pl-[140px] bg-gray-100 z-10">
         <Containar>

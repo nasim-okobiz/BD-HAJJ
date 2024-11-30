@@ -100,7 +100,7 @@ const BottomHeader = () => {
 
   return (
     <div
-      className={`w-full font-philo transition-all z-[9999] py-3 ease-in-out duration-500 bg-[#FCFBF6] ${
+      className={`w-full font-merriweather transition-all z-[9999] py-2 ease-in-out duration-500 bg-[#FCFBF6] ${
         isSticky ? "fixed top-0 left-0 bg-[#FCFBF6] shadow-md z-50" : ""
       }`}
     >

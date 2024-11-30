@@ -76,7 +76,7 @@ const BookingPackageDetails = () => {
         </Containar>
       </div>
 
-      <div className="pt-10 sm:pt-16 pb-20 bg-gray-100 font-philo">
+      <div className="pt-10 sm:pt-16 pb-20 bg-gray-100 font-merriweather">
         <Containar className="">
           <div className="flex flex-col md:flex-row mb-10 gap-4">
             {/* Package Details */}

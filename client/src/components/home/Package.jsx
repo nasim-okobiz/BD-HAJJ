@@ -48,7 +48,7 @@ const packagesData = [
 
 const Package = ({ bgImage }) => {
   return (
-    <div className="py-10 sm:py-32 font-philo relative bg-gray-100">
+    <div className="py-10 sm:py-32 font-merriweather relative bg-gray-100">
       <div className="absolute left-0 top-0 w-full h-full opacity-20">
         <img className="w-full h-full" src={bgshape} />
       </div>

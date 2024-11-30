@@ -123,7 +123,7 @@ const ContactPage = () => {
           </nav>
         </Containar>
       </div>
-      <div className="pb-32 pt-16 font-philo">
+      <div className="pb-32 pt-16 font-merriweather">
         <Containar>
           <h1 className="text-left text text-[36px] md:text-[44px] font-bold mb-4">
             BD Umrah Hajj Kafela

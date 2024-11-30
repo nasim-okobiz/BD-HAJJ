@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 const HajjButton = ({align}) => {
   console.log("first", align);
   return (
-    // <div className={`${align ? align : " justify-center"} flex`}   >
     <div className={`justify-center flex`}   >
       <div className="relative group cursor-pointer ">
         <img

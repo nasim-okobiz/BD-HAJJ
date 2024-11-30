@@ -37,7 +37,7 @@ const GalleryPage = () => {
   console.log("imageGallerys", imageGallerys);
 
   return (
-    <div className="images-gallery-section font-philo relative ">
+    <div className="images-gallery-section font-merriweather relative ">
       <div className="absolute -z-10 left-0 top-0 w-full h-full opacity-20">
         <img className="w-full h-full" src={bgshape} />
       </div>

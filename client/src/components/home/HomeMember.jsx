@@ -52,7 +52,7 @@ const HomeMember = () => {
   };
 
   return (
-    <div className="relative font-philo pt-2 sm:pt-28">
+    <div className="relative font-merriweather pt-2 sm:pt-28">
       <div
         className="bg-cover bg-fixed bg-no-repeat relative"
         style={{

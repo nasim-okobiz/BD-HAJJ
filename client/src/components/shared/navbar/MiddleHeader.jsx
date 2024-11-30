@@ -33,7 +33,7 @@ function Header() {
   console.log("Announcements:", announcements);
 
   return (
-    <section className="bg-semisecondary py-3 flex items-center justify-between font-philo">
+    <section className="bg-semisecondary py-2 flex items-center justify-between font-merriweather">
       <Containar>
         <div className="flex flex-col md:flex-row justify-between items-center">
 

@@ -10,8 +10,9 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
 import { FaLongArrowAltRight } from "react-icons/fa";
+import headingLine from "../../assets/pattern/heading-line.png";
 
-import bghajj from "../../assets/pattern/hajj.jpg";
+import bghajj from "../../assets/pattern/bg-white-parallax.jpg";
 import Skeleton from "react-loading-skeleton";  // Import Skeleton
 
 const HajjPackage = () => {
@@ -51,7 +52,7 @@ const HajjPackage = () => {
   return (
     <>
       {lengthData > 0 ? (
-        <div className="font-philo relative">
+        <div className="font-merriweather relative">
           <div
             className="bg-cover bg-fixed bg-no-repeat relative"
             style={{
@@ -59,13 +60,13 @@ const HajjPackage = () => {
               height: "auto", 
             }}
           >
-            <div className="absolute inset-0 bg-black/80"></div>
+            <div className="absolute inset-0 bg-white/80"/>
             <Containar>
               <div className="relative z-10">
-                <div className="text-white py-10 sm:py-20">
-                  <p className="uppercase text-center tracking-wider text-base sm:text-xl text-[#FACC15]">
+                <div className="text-gray-700 py-10 sm:py-20">
+                  {/* <p className="uppercase text-center tracking-wider text-base sm:text-xl text-[#FACC15]">
                     packages
-                  </p>
+                  </p> */}
                   <h3 className="uppercase text-center tracking-wider text-[24px] sm:text-[30px] sm:py-2">
                     {packageHead ? (
                       packageHead.name
@@ -73,37 +74,44 @@ const HajjPackage = () => {
                       <Skeleton width={200} height={30} />
                     )}
                   </h3>
-                  <h3 className="text-white text-[30px] sm:text-[50px] text-center">
+                  <h3 className="text-gray-700 text-[30px] sm:text-[50px] text-center">
                     {packageHead ? (
                       "Choose Your Package"
                     ) : (
                       <Skeleton width={300} height={50} />
                     )}
+                    <div className="relative w-full flex justify-center mt-2">
+                    <img
+                      src={headingLine}
+                      alt="Heading Line"
+                      className="w-3/4 sm:w-2/3 md:w-auto"
+                    />
+                  </div>
                   </h3>
-                  <div className="w-40 sm:w-80 h-px mx-auto bg-gray-300"></div>
+
                 </div>
-                <div className="mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 items-center pb-20">
+                <div className="mx-auto grid grid-cols-1 lg:grid-cols-4 gap-4 items-center pb-20">
                   {/* Left Section */}
-                  <div className="text-white space-y-6 md:col-span-1">
+                  <div className="text-gray-700 space-y-6">
                     {earlyBirdPackage ? (
                       <Link to={`package/${earlyBirdPackage?._id}`}>
                         <div className="py-5">
-                          <h2 className="text-xl sm:text-3xl font-semibold">
+                          <h2 className="text-lg sm:text-xl font-semibold">
                             {earlyBirdPackage.name}
                           </h2>
-                          <h2 className="text-[16px] xl:text-[55px] text-semisecondary font-semibold text-secondary-color font-century textshadow">
+                          <h2 className="text-[16px] xl:text-[30px] text-semisecondary font-semibold text-secondary-color font-century textshadow">
                             TK {earlyBirdPackage?.mrpPrice?.toLocaleString()}/-
                             <span className="line-through font-normal text-sm">
                               TK {earlyBirdPackage?.price?.toLocaleString()}
                             </span>
                           </h2>
 
-                          <div className="w-60 lg:w-full bg-gradient-to-r from-red-500 via-red-400 to-red-300 text-white py-1 px-3 xl:py-2 xl:px-4 rounded-full text-sm xl:text-xl font-extrabold shadow-lg transform xl:scale-105 transition-all duration-300">
+                          <div className="w-60 lg:w-full bg-gradient-to-r from-red-500 via-red-400 to-red-300 text-gray-700 py-1 px-3 xl:py-2 xl:px-4 rounded-full text-sm xl:text-xl font-extrabold shadow-lg transform xl:scale-105 transition-all duration-300 mt-5">
                             Save TK{" "}
                             {earlyBirdPackage?.discount?.toLocaleString()}/-
                           </div>
 
-                          <ul className="text-[14px] xl:text-xl mt-5 list-disc pl-5">
+                          <ul className="text-[14px] xl:text-[16px] mt-5 list-disc pl-5">
                             <li>
                               {earlyBirdPackage?.roomType?.replace(
                                 /<[^>]*>?/gm,
@@ -128,7 +136,7 @@ const HajjPackage = () => {
                   </div>
 
                   {/* Right Section */}
-                  <div className="md:col-span-2 lg:border-l p-5">
+                  <div className="md:col-span-3 lg:border-l-2 p-5">
                     <Swiper
                       spaceBetween={20}
                       slidesPerView={1} 
@@ -136,7 +144,7 @@ const HajjPackage = () => {
                       speed={1000}
                       breakpoints={{
                         640: { slidesPerView: 2 }, 
-                        1024: { slidesPerView: 2 }, 
+                        1024: { slidesPerView: 3 }, 
                       }}
                       autoplay={{
                         delay: 3000,
@@ -145,7 +153,7 @@ const HajjPackage = () => {
                       }}
                       pagination={{ clickable: true }}
                       modules={[Autoplay, Pagination]}
-                      className={`mt-8 ${packagesData?.length > 4 && "shadow-md"}`}
+                      className={`${packagesData?.length > 4 && "shadow-md"}`}
                     >
                       {packagesData.length > 0 ? (
                         packagesData.map((pkg) => (
@@ -165,11 +173,11 @@ const HajjPackage = () => {
                                     onClick={() =>
                                       navigate(`/package/${pkg._id}`)
                                     }
-                                    className="text-[16px] sm:text-[20px] font-semibold leading-7 mb-2"
+                                    className="text-[10px] sm:text-[16px] font-semibold leading-7 mb-2"
                                   >
                                     {pkg.name}
                                   </h3>
-                                  <h4 className="text-[14px] sm:text-[18px] font-semibold flex items-center gap-2">
+                                  <h4 className="text-[14px] sm:text-[14px] font-semibold flex items-center gap-2">
                                     TK {pkg?.mrpPrice?.toLocaleString()}
                                     {pkg.price > pkg.mrpPrice && (
                                       <span className="line-through font-normal text-sm">
@@ -178,10 +186,10 @@ const HajjPackage = () => {
                                     )}
                                   </h4>
                                   <div className="flex flex-col gap-1 mt-2">
-                                    <p className="text-[13px] sm:text-[15px]">
+                                    <p className="text-[13px] sm:text-[12px]">
                                       {pkg.roomType.replace(/<[^>]*>?/gm, "")}
                                     </p>
-                                    <p className="text-[13px] sm:text-[15px]">
+                                    <p className="text-[13px] sm:text-[12px]">
                                       {pkg.hotalDistance.join(", ")}
                                     </p>
                                   </div>
@@ -189,7 +197,7 @@ const HajjPackage = () => {
                                 {pkg?.discountPrice > 0 ? (
                                   <Link
                                     to={`/package/${pkg._id}`}
-                                    className="w-full block bg-semisecondary hover:text-semisecondary border border-semisecondary text-white py-2 px-4 rounded hover:bg-white font-bold transition-all ease-linear duration-200 my-5"
+                                    className="w-full block bg-semisecondary hover:text-semisecondary border border-semisecondary py-2 px-4 rounded text-white hover:bg-white font-bold transition-all ease-linear duration-200 text-center"
                                   >
                                     Place Order
                                   </Link>

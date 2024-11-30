@@ -55,7 +55,7 @@ const Profile = () => {
   const toggleDrawer = () => setIsDrawerOpen((prev) => !prev);
 
   return (
-    <div className="font-philo bg-gray-100 min-h-screen">
+    <div className="font-merriweather bg-gray-100 min-h-screen">
       <AgentProfile userId={user?.id} />
       <Containar className="pb-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
