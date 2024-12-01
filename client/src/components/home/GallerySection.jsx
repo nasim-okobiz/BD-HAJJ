@@ -79,7 +79,7 @@ const GallerySection = () => {
                   1024: { slidesPerView: 2 },
                 }}
                 modules={[Autoplay, Navigation]}
-                className="custom-swiper-button py-10"
+                className="custom-swiper-button mt-5"
               >
                 {images.map((img, index) => (
                   <SwiperSlide key={index}>
@@ -124,11 +124,10 @@ const GallerySection = () => {
         </div>
 
         <div className="text-center mt-4 flex justify-center">
-          <Link
-            to="/our-gallery"
-            className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition"
-          >
-            View All
+          <Link to="/our-gallery">
+            <button className="bg-primary text-white font-bold py-2 px-6 rounded transition-all duration-300 transform hover:scale-105 hover:shadow-md uppercase">
+              View All
+            </button>
           </Link>
         </div>
       </div>

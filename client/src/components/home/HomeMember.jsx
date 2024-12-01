@@ -6,6 +6,7 @@ import { FaCopy, FaCheck } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import bghajj from "../../assets/pattern/hajj.jpg";
+import bgshape from "../../assets/pattern/bg-vector-3-1.png";
 import "swiper/css";
 import "swiper/css/autoplay";
 import { API_BASE_URL } from "../axios/config";
@@ -52,23 +53,30 @@ const HomeMember = () => {
   };
 
   return (
-    <div className="relative font-merriweather pt-2 sm:pt-28">
+    <div className="relative font-merriweather">
       <div
-        className="bg-cover bg-fixed bg-no-repeat relative"
-        style={{
-          backgroundImage: `url(${bghajj})`,
-          height: "auto",
-        }}
+        className="bg-cover bg-fixed bg-no-repeat relative py-3"
+        // style={{
+        //   backgroundImage: `url(${bghajj})`,
+        //   height: "auto",
+        // }}
       >
-        <div className="absolute inset-0 bg-black/80"></div>
+        {/* <div className="absolute inset-0 bg-black/80"></div> */}
+        <div className="absolute bottom-0 left-0 rotate-90 w-1/2 md:w-1/4 lg:w-1/5 xl:w-1/6 h-auto opacity-50 lg:opacity-70">
+          <img
+            className="w-full h-auto"
+            src={bgshape}
+            alt="Background Pattern"
+          />
+        </div>
         <Containar>
-          <h2 className="pt-20 text-[24px] sm:text-[40px] font-semibold text-left sm:text-center text-white drop-shadow-lg">
+          <h2 className="pt-20 text-[24px] sm:text-[40px] font-semibold text-left sm:text-center drop-shadow-lg">
             Our Members
           </h2>
-          <p className="text-[22px] sm:text-[30px] text-gray-300 pb-5 text-left sm:text-center font-semibold text-secondary-color font-century drop-shadow-md">
+          <p className="text-[22px] sm:text-[30px] pb-5 text-left sm:text-center font-semibold text-secondary-color font-century drop-shadow-md">
             Approvals &amp; Certification Of BD Umrah Hajj Kafela
           </p>
-          <div className="relative z-10 mb-12">
+          {/* <div className="relative z-10 mb-12">
             <div className="px-4 py-3.5 bg-primary flex flex-col sm:flex-row justify-between items-center shadow-md rounded-md">
               <h3 className="text-[24px] sm:text-[30px] font-semibold text-center sm:text-left capitalize">
                 Membership Details
@@ -82,7 +90,7 @@ const HomeMember = () => {
                 </Link>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Membership Section with Skeleton Loader */}
           <div className="memberships sm:mt-10 p-5 mb-10 rounded-md">
@@ -129,53 +137,119 @@ const HomeMember = () => {
                 ) : (
                   memberships?.map((membership, index) => (
                     <SwiperSlide key={index}>
-                      <div className="section__card max-h-[550px] max-w-[300px]">
+                      <div className="section__card h-[400px] max-w-[300px] uppercase">
                         <div className="absolute left-4 top-4 text-white text-[28px]">
                           <RiDoubleQuotesL />
                         </div>
-                        {loading ? (
-                          <Skeleton circle={true} height={112} width={112} className="mb-4" />
-                        ) : (
-                          <img
-                            src={API_BASE_URL + membership?.photo}
-                            alt={membership?.name}
-                            className="h-28 w-28 mb-4 rounded-full"
-                          />
-                        )}
-                        <h5>{loading ? <Skeleton width="80%" /> : membership?.name}</h5>
-
-                        <div className="flex items-center space-x-2 mb-2">
-                          <p className="line-clamp-4 m-0 text-gray-800 ">
+                        <p className="mb-5">
+                          {loading ? (
+                            <Skeleton width="60%" />
+                          ) : (
+                            `${membership?.agentType} member`
+                          )}
+                        </p>
+                        <div className="flex justify-between items-center">
+                          {/* Photo Section */}
+                          <div>
                             {loading ? (
-                              <Skeleton width="50%" />
+                              <Skeleton
+                                circle={true}
+                                height={112}
+                                width={112}
+                                className="mb-4"
+                              />
                             ) : (
-                              `MemberShip ID: ${membership?.referCode}`
+                              <img
+                                src={API_BASE_URL + membership?.photo}
+                                alt={membership?.name}
+                                className="h-28 w-28 mb-4 rounded-full"
+                              />
                             )}
-                          </p>
-                          <button
-                            onClick={() => handleCopy(membership?.referCode, index)}
-                            className="text-blue-500 hover:text-blue-700 focus:outline-none"
-                          >
-                            {copiedStates[index] ? (
-                              <FaCheck className="text-green-500" />
-                            ) : (
-                              <FaCopy />
-                            )}
-                          </button>
+                          </div>
+
+                          {/* Location Pin Section */}
+                          <div className="flex flex-col items-center">
+                            <div className="bg-primary text-white p-3 rounded-full shadow-lg">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth="2"
+                                stroke="currentColor"
+                                className="h-8 w-8"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M12 2C8.134 2 5 5.134 5 9c0 4.8 7 13 7 13s7-8.2 7-13c0-3.866-3.134-7-7-7zM12 11a2 2 0 100-4 2 2 0 000 4z"
+                                />
+                              </svg>
+                            </div>
+                            <p className="mt-2 text-sm font-semibold text-gray-700">
+                              Dhaka
+                            </p>
+                          </div>
                         </div>
 
-                        <div className="text-left">
+                        <div className="text-left mt-5">
+                          <div className="flex items-center justify-between">
+                            <p className="line-clamp-4 m-0 text-gray-800 ">
+                              {loading ? (
+                                <Skeleton width="50%" />
+                              ) : (
+                                <>
+                                  <strong>Id no:</strong>{" "}
+                                  {membership?.referCode}
+                                </>
+                              )}
+                            </p>
+                            <div className="relative group">
+                              <button
+                                onClick={() =>
+                                  handleCopy(membership?.referCode, index)
+                                }
+                                className="text-blue-500 hover:text-blue-700 focus:outline-none"
+                              >
+                                {copiedStates[index] ? (
+                                  <FaCheck className="text-green-500" />
+                                ) : (
+                                  <FaCopy />
+                                )}
+                              </button>
+                              {/* Tooltip */}
+                              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-700 text-white text-xs font-medium py-1 px-2 rounded shadow-lg">
+                                Copy
+                              </div>
+                            </div>
+                          </div>
                           <p className="m-0 font-medium ">
-                            {loading ? <Skeleton width="60%" /> : `Phone: ${membership?.phone}`}
+                            {loading ? (
+                              <Skeleton width="60%" />
+                            ) : (
+                              <>
+                                <strong>Name:</strong> {membership?.name}
+                              </>
+                            )}
                           </p>
                           <p className="m-0 font-medium ">
-                            {loading ? <Skeleton width="60%" /> : `Agent Type: ${membership?.agentType}`}
+                            {loading ? (
+                              <Skeleton width="60%" />
+                            ) : (
+                              <>
+                                <strong>Address:</strong>{" "}
+                                {membership?.postOffice}, {membership?.district}
+                                , {membership?.division}
+                              </>
+                            )}
                           </p>
                           <p className="m-0 font-medium ">
-                            {loading ? <Skeleton width="60%" /> : `Occupation: ${membership?.occupation}`}
-                          </p>
-                          <p className="m-0 font-medium ">
-                            {loading ? <Skeleton width="60%" /> : `Person: ${membership?.personCategory}`}
+                            {loading ? (
+                              <Skeleton width="60%" />
+                            ) : (
+                              <>
+                                <strong>Hotline:</strong> +880 1605959999
+                              </>
+                            )}
                           </p>
                         </div>
                       </div>

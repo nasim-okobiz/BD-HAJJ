@@ -82,7 +82,7 @@
 
 
 :root {
-  --primary-color: #D5AF50;
+  --primary-color: #DB9E30;
   --secondary-color: #e8e8e8;
   --text-dark: #0f172a;
   --text-light: #292929;
@@ -133,7 +133,7 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding: 3rem 2rem 0 2rem;
+  padding: 2rem 2rem 3rem 2rem;
   background-color: var(--white);
   border-radius: 5px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
@@ -221,6 +221,13 @@
 .section__card:hover img {
   border-color: var(--white);
 }
+
+.section__card:hover .bg-primary {
+  background-color: white;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
 .textshadow{
   text-shadow: 2px 2px 2px #0000007d;
 }

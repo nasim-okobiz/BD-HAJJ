@@ -38,9 +38,9 @@ const AboutHome = ({ page }) => {
       } relative font-merriweather`}
     >
       {!page && (
-        <div className="absolute hidden md:block right-0 -top-10 -z-10">
+        <div className="absolute hidden md:block right-0 top-0 -z-10">
           <img
-            className=" w-[300px] lg:w-[400px] xl:w-[600px]"
+            className=" w-[100px] lg:w-[400px] xl:w-[600px]"
             src={decoration}
           />
         </div>

@@ -53,7 +53,7 @@ const UmrahPackage = () => {
     <>
       <div className="relative w-full">
         {lengthData > 0 && (
-          <div className="py-8 sm:py-20 font-merriweather relative">
+          <div className="py-10 md:py-10 lg:py-20 font-merriweather relative">
             {/* Background Shape 1 */}
             <div className="absolute top-0 left-0 w-1/2 md:w-1/4 lg:w-1/5 xl:w-1/6 h-auto opacity-50 lg:opacity-70">
               <img
@@ -156,7 +156,7 @@ const UmrahPackage = () => {
               <div
                 className={`mb-14 ${
                   packagesData?.length > 0 && "bg-slate-200"
-                }  p-5 rounded-md`}
+                }  lg:p-5 rounded-md`}
               >
                 <Swiper
                   spaceBetween={20}
@@ -174,7 +174,7 @@ const UmrahPackage = () => {
                   }}
                   pagination={{ clickable: true }} // Add pagination if needed
                   modules={[Autoplay, Pagination]} // Include all required modules here
-                  className={`mt-8 ${packagesData?.length > 4 && "shadow-md"}`}
+                  className={`${packagesData?.length > 4 && "shadow-md"}`}
                 >
                   {packagesData.map((pkg) => {
                     const validDate = pkg?.validDate;
@@ -193,7 +193,7 @@ const UmrahPackage = () => {
                             />
                           </div>
 
-                          <div className="flex flex-col justify-between h-[270px]">
+                          <div className="flex flex-col justify-between min-h-[220px]">
                             <div className="mt-3">
                               <h3
                                 onClick={() => navigate(`/package/${pkg._id}`)}

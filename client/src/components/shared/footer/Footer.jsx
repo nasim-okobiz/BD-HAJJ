@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import logo from "../../../assets/logo/logo.png"; // Adjust this path as needed
 import Containar from "../../container/Containar";
 import api from "../../axios/Axios";
-
+import borderImage from "../../../assets/footer/footer-border.png";
 
 const Footer = () => {
   const location = useLocation();
@@ -18,7 +18,7 @@ const Footer = () => {
       .then((response) => setData(response.data.data))
       .catch((err) => setError(err));
   }, []);
-  console.log("first, location =========================", data)
+  console.log("first, location =========================", data);
 
   return (
     <div className={`${flag ? "bg-gray-100" : ""} font-merriweather`}>
@@ -31,12 +31,15 @@ const Footer = () => {
         }}
       >
         <div className="absolute inset-0 w-full bg-black bg-opacity-90 z-0"></div>
+
+        {/* Responsive Border Image */}
         <div
-          className="absolute inset-0 top-0 left-0 w-full h-full z-10 hidden md:block"
+          className="absolute inset-0 -top-32 left-0 w-full h-full z-10 hidden md:block"
           style={{
             borderTop: "130px solid transparent",
-            borderImage:
-              "url(https://www.hijazhajjnumrah.com/images/background/footer-border.png) 170 stretch",
+            borderImage: `url(${borderImage}) 170 stretch`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "contain", // Controls the size of the background
           }}
         ></div>
 
@@ -47,8 +50,8 @@ const Footer = () => {
               <div className="flex flex-col items-center md:items-start">
                 <img className="logo mb-3 w-24 md:w-32" src={logo} alt="Logo" />
                 <h3 className="text-center md:text-left mb-3">
-                  At BD Umrah Hajj Kafela, we understand the significance of travel and strive
-                  to make it accessible to all.
+                  At BD Umrah Hajj Kafela, we understand the significance of
+                  travel and strive to make it accessible to all.
                 </h3>
                 <div className="social-icon flex space-x-3">
                   <a
@@ -117,18 +120,16 @@ const Footer = () => {
                   More Important Links
                 </h3>
                 <ul className="space-y-2 text-center md:text-left">
-                  {data?.length > 0 && (
-                    data.flatMap(category =>
-                      category?.packages.slice(0, 5).map(item => (
-                        <li key={item.id}>
-                          <Link to={`/package/${item.id}`}>
-                            {item?.name}
-                          </Link>
-                        </li>
-                      ))
-                    ).slice(0, 9)
-                  )}
-
+                  {data?.length > 0 &&
+                    data
+                      .flatMap((category) =>
+                        category?.packages.slice(0, 5).map((item) => (
+                          <li key={item.id}>
+                            <Link to={`/package/${item.id}`}>{item?.name}</Link>
+                          </li>
+                        ))
+                      )
+                      .slice(0, 9)}
                 </ul>
               </div>
 
@@ -137,7 +138,10 @@ const Footer = () => {
                 <h3 className="text-xl mb-3">Contact Details</h3>
                 <p>
                   <i className="fa fa-envelope"></i>
-                  <a href="mailto:umrahhajjbd@gmail.com" className="text-blue-500">
+                  <a
+                    href="mailto:umrahhajjbd@gmail.com"
+                    className="text-blue-500"
+                  >
                     {" "}
                     umrahhajjbd@gmail.com
                   </a>
@@ -163,7 +167,9 @@ const Footer = () => {
                 <div className="  shadow-md rounded-lg">
                   {/* Permanent Office */}
                   <div className="mb-6">
-                    <h3 className="text-lg font-semibold mb-2">Permanent Office</h3>
+                    <h3 className="text-lg font-semibold mb-2">
+                      Permanent Office
+                    </h3>
                     <p className="text-sm">
                       House # 1550 (5th Floor), Anwar Jong Road <br />
                       Ashulia Bazar, Ashulia, Dhaka-1341
@@ -174,8 +180,10 @@ const Footer = () => {
                   <div>
                     <h3 className="text-lg font-semibold mb-2">Dhaka Office</h3>
                     <p className="text-sm">
-                      Nur Islam Mollah Market, 5 No. (MINA Bazar, 2nd Floor) <br />
-                      Sujatnagar Pallabi, (Pallabi Metro Station West Side) <br />
+                      Nur Islam Mollah Market, 5 No. (MINA Bazar, 2nd Floor){" "}
+                      <br />
+                      Sujatnagar Pallabi, (Pallabi Metro Station West Side){" "}
+                      <br />
                       Mirpur-12, Dhaka-1216
                     </p>
                   </div>
@@ -190,26 +198,24 @@ const Footer = () => {
                   referrerPolicy="no-referrer-when-downgrade"
                   title="Location at 23°49'41.4'N, 90°21'48.1'E"
                 />
-
               </div>
             </div>
           </Containar>
         </section>
-
-
       </footer>
       <section className="py-10 bg-black text-white">
         <div class="group text-center">
           ©2024 BD Umrah Hajj Kafela, All rights reserved. Developed by
-          <a href="https://okobiz.com/"
+          <a
+            href="https://okobiz.com/"
             target="_blank"
             rel="noopener noreferrer"
-            class="pl-2 font-bold tracking-wider inline-block text-base transition duration-200 ">
+            class="pl-2 font-bold tracking-wider inline-block text-base transition duration-200 "
+          >
             okobiz
           </a>
         </div>
       </section>
-
     </div>
   );
 };

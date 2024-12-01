@@ -23,7 +23,7 @@ const Home = () => {
       <TourPackage />
       <AboutHome />
       <HomeMember />
-      <GallerySection />
+      {/* <GallerySection /> */}
       <MembershipHome />
     </>
   );
