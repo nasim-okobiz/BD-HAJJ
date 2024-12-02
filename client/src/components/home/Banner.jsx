@@ -63,7 +63,7 @@ const Banner = () => {
           spaceBetween={0}
           slidesPerView={1}
           navigation
-          pagination={{ clickable: true }}
+          pagination={false}
           autoplay={{ delay: 5000 }}
           loop={true}
           speed={1500}

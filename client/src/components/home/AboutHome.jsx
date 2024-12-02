@@ -34,13 +34,13 @@ const AboutHome = ({ page }) => {
   return (
     <div
       className={`${
-        page ? "sm:pt-0 " : "pt-10 sm:py-20"
+        page ? "sm:pt-0 " : "pt-10 sm:py-16"
       } relative font-merriweather`}
     >
       {!page && (
         <div className="absolute hidden md:block right-0 top-0 -z-10">
           <img
-            className=" w-[100px] lg:w-[400px] xl:w-[600px]"
+            className=" w-[100px] lg:w-[400px]"
             src={decoration}
           />
         </div>
@@ -60,13 +60,17 @@ const AboutHome = ({ page }) => {
 
       {!page && (
         <Containar>
-          <h3 className=" text-[24px] sm:text-[45px] text-center font-merriweather">
+          <h3 className="text-[24px] lg:text-[36px] text-center font-merriweather">
             {/* BD HAJJ Bangladesh Umrah Hajj Kafela */}
             {isLoading ? (
               <div className="w-40 sm:w-80 h-8 bg-gray-300 animate-pulse mx-auto"></div>
             ) : (
               aboutUss[0]?.title
             )}
+          </h3>
+          <h3 className="text-[16px] lg:text-[20px] text-center font-merriweather mt-3">
+            {/* BD HAJJ Bangladesh Umrah Hajj Kafela */}
+            Why Choose Us
           </h3>
           {/* <div className="w-40 sm:w-80 h-px mx-auto bg-gray-300"></div> */}
           <div className="relative w-full flex justify-center mt-2">
@@ -79,7 +83,7 @@ const AboutHome = ({ page }) => {
         </Containar>
       )}
 
-      <div className="container mx-auto px-4 py-16 grid md:grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+      <div className="container mx-auto px-4 pt-12 grid md:grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         {/* Left Section */}
         <div className="space-y-6 relative">
           {isLoading ? (
@@ -88,19 +92,19 @@ const AboutHome = ({ page }) => {
             <img
               src={API_BASE_URL + aboutUss[0]?.photo}
               alt="Kaaba"
-              className="rounded-lg shadow-lg w-[350px] md:w-[450px] lg:w-[350px] h-auto mx-auto"
+              className="rounded-lg shadow-lg w-[350px] md:w-[450px] lg:w-[350px] h-[450px] lg:h-auto mx-auto"
             />
           )}
 
           <div className="bg-gray-900 text-white p-2 xl:p-4 rounded-lg shadow-lg absolute top-0 xl:bottom-14 md:left-0 w-[150px] md:w-[200px] xl:w-[300px]">
             {isLoading ? (
-              <div className="w-[150px] h-[150px] bg-gray-300 animate-pulse rounded-lg mx-auto"></div>
+              <div className="w-[150px] lg:h-[150px] bg-gray-300 animate-pulse rounded-lg mx-auto"></div>
             ) : (
               <>
                 <img
                   src={API_BASE_URL + aboutUss[0]?.bgPhoto}
                   alt="Kaaba"
-                  className="rounded-lg shadow-lg w-[150px] sm:w-[350px] h-auto"
+                  className="rounded-lg shadow-lg w-[150px] sm:w-[350px] h-[100px] lg:h-auto"
                 />
                 <p className="text-sm xl:text-lg font-medium mt-5">
                   BD Umrah Hajj Kafela operate their activities according to
@@ -115,11 +119,11 @@ const AboutHome = ({ page }) => {
         </div>
 
         {/* Right Section */}
-        <div>
-          <p className="text-sm text-yellow-500 uppercase font-semibold tracking-wide">
+        <div className="space-y-3">
+          <p className="text-sm uppercase font-semibold tracking-wide">
             About Us
           </p>
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-snug mt-2">
+          <h2 className="text-xl md:text-3xl font-bold text-gray-900 leading-snug">
             {isLoading ? (
               <div className="w-1/2 h-8 bg-gray-300 animate-pulse"></div>
             ) : (
@@ -130,11 +134,11 @@ const AboutHome = ({ page }) => {
             {isLoading ? (
               <div className="w-full h-6 bg-gray-300 animate-pulse mt-4"></div>
             ) : page ? (
-              <div className="text-[16px] sm:text-[22px] mb-2 text-justify">
+              <div className="text-[12px] sm:text-[18px] mb-2 text-justify">
                 {aboutUss[0]?.description}
               </div>
             ) : (
-              <p className="text-[16px] sm:text-[22px] mb-2 text-justify line-clamp-6">
+              <p className="text-[12px] sm:text-[18px] mb-2 text-justify line-clamp-6">
                 {aboutUss[0]?.description}
               </p>
             )}
@@ -159,7 +163,7 @@ const AboutHome = ({ page }) => {
               //     </div>
               //   </div>
               // </div>
-              <div className="mt-10 sm:mt-16">
+              <div className="mt-10">
                 <Link to={"/about-us"}>
                   <button className="bg-primary text-white font-bold py-2 px-6 rounded transition-all duration-300 transform hover:scale-105 hover:shadow-md uppercase">
                     Know More

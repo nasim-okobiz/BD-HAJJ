@@ -34,18 +34,18 @@ const Footer = () => {
 
         {/* Responsive Border Image */}
         <div
-          className="absolute inset-0 -top-32 left-0 w-full h-full z-10 hidden md:block"
+          className="absolute inset-0 -top-24 left-0 w-full h-full z-10 hidden md:block"
           style={{
             borderTop: "130px solid transparent",
             borderImage: `url(${borderImage}) 170 stretch`,
             backgroundRepeat: "no-repeat",
-            backgroundSize: "contain", // Controls the size of the background
+            backgroundSize: "contain",
           }}
         ></div>
 
-        <section className="text-white relative z-20 pt-[150px] py-10">
+        <section className="text-white relative z-20 py-10">
           <Containar>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 py-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 py-10">
               {/* Logo and About Section */}
               <div className="flex flex-col items-center md:items-start">
                 <img className="logo mb-3 w-24 md:w-32" src={logo} alt="Logo" />
@@ -164,9 +164,9 @@ const Footer = () => {
                     Dhanmondi, Dhaka
                   </a>
                 </p> */}
-                <div className="  shadow-md rounded-lg">
+                <div className="shadow-md rounded-lg pt-2">
                   {/* Permanent Office */}
-                  <div className="mb-6">
+                  <div className="mb-4">
                     <h3 className="text-lg font-semibold mb-2">
                       Permanent Office
                     </h3>
@@ -188,7 +188,8 @@ const Footer = () => {
                     </p>
                   </div>
                 </div>
-
+              </div>
+              <div className="flex items-center">
                 <iframe
                   className="mt-3 w-full h-40"
                   src="https://www.google.com/maps?q=23°49'41.4%22N+90°21'48.1%22E&hl=en&output=embed"

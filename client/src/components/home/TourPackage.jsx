@@ -25,18 +25,18 @@ const TourPackage = () => {
   useEffect(() => {
     const fetchPackages = async () => {
       try {
-        // const response = await api.get("/package?priority=3");
-        const response = await api.get("/package");
+        const response = await api.get("/package?priority=3");
+        console.log("This are products", response.data);
         if (response.data.statusCode === 200) {
           const fetchedPackages = response.data.data;
           setLengthData(fetchedPackages?.length);
           setPackageHead(fetchedPackages[0]?.packageRef);
 
           // Filter out packages that are not early bird
-          const filteredPackages = fetchedPackages.filter(
-            (pkg) => pkg.earlyBird === false
-          );
-          setPackagesData(filteredPackages);
+          // const filteredPackages = fetchedPackages.filter(
+          //   (pkg) => pkg.earlyBird === false
+          // );
+          setPackagesData(fetchedPackages);
 
           // Find the first early bird package if needed
           const earlyBird = fetchedPackages.find((pkg) => pkg.earlyBird);
@@ -49,6 +49,8 @@ const TourPackage = () => {
 
     fetchPackages();
   }, []);
+
+  console.log("This is all visa", packagesData);
 
   // Show skeleton loader until data is fetched
   if (lengthData === 0) {
@@ -145,7 +147,7 @@ const TourPackage = () => {
               alt="Background Pattern"
             />
           </div> */}
-          <div className="pt-20 xl:pt-0 2xl:pt-10 md:w-[80%] lg:w-auto mx-auto">
+          <div className="md:w-[80%] lg:w-auto mx-auto">
             {/* <Containar>
               <div className="relative z-10 mb-12">
                 <div className="sm:flex justify-between items-end rounded sm:border p-5 sm:bg-[#2A2A2A] sm:text-white">
@@ -212,8 +214,8 @@ const TourPackage = () => {
             </Containar> */}
 
             {/* Packages Section */}
-            <Containar className="p-5 mb-14 md:mb-0 lg:mb-28">
-              <div className="relative z-10 mb-12">
+            <Containar>
+              <div className="relative z-10 mb-2">
                 <div className="sm:flex justify-between items-center rounded p-5">
                   <div>
                     <p className="uppercase tracking-wider text-base sm:text-xl text-center md:text-start">
@@ -250,22 +252,23 @@ const TourPackage = () => {
                 }}
                 pagination={{ clickable: true }}
                 modules={[Autoplay, Pagination]}
-                className="mt-8"
+                className=""
               >
                 {packagesData?.map((pkg) => (
                   <SwiperSlide key={pkg._id}>
                     <div className="overflow-hidden group cursor-pointer h-full p-4 bg-white shadow-xl rounded-lg relative z-20">
                       <img
                         className="w-full h-[200px] object-cover rounded"
-                        src={`${API_BASE_URL}/uploads/${pkg?.image}`}
+                        src={`${API_BASE_URL}${pkg?.photo}`}
                         alt={pkg?.name}
                       />
-                      <div className="flex flex-col justify-between h-[270px] mt-3">
-                        <h5 className="text-[16px] sm:text-[20px] text-[#4F5B69] font-semibold line-clamp-2">
-                          {pkg.name}
+                      <div className="flex flex-col justify-between mt-3 space-y-5">
+                        <h5 className="text-[16px] sm:text-[16px] text-[#4F5B69] font-semibold line-clamp-2">
+                          {pkg.name.slice(0, 20).replace(/\s\S*$/, "") + " ..."}
                         </h5>
-                        <p className="text-[13px] sm:text-[16px] text-[#7D8B99] line-clamp-2">
-                          {pkg?.title}
+                        <p className="text-[13px] sm:text-[12px] text-[#7D8B99] line-clamp-2">
+                          {pkg?.title.slice(0, 20).replace(/\s\S*$/, "") +
+                            " . . ."}
                         </p>
                         <div className="flex items-center gap-4">
                           <span className="text-[14px] font-semibold text-[#AA8751]">
@@ -277,6 +280,12 @@ const TourPackage = () => {
                             </span>
                           </div>
                         </div>
+                        <Link
+                          to={`/package/${pkg._id}`}
+                          className="w-full block bg-semisecondary hover:text-semisecondary border border-semisecondary py-2 px-4 rounded text-white hover:bg-white font-bold transition-all ease-linear duration-200 text-center mt-5"
+                        >
+                          View
+                        </Link>
                       </div>
                     </div>
                   </SwiperSlide>

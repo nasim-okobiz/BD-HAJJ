@@ -38,11 +38,19 @@
     transition: 0.3s ease-in-out all;
 }
 .custom-swiper-button {
-  --swiper-navigation-size: 30px; /* Default size for larger screens */
+  --swiper-navigation-size: 30px;
 }
 
+.swiper-button-prev {
+  left: 0px !important;
+}
+
+.swiper-button-next {
+  right: 0px !important;
+}
+
+
 @media (max-width: 640px) {
-  /* Smaller size for mobile screens */
   .custom-swiper-button {
     --swiper-navigation-size: 16px;
   }
@@ -226,6 +234,10 @@
   background-color: white;
   color: var(--primary-color);
   border-color: var(--primary-color);
+}
+
+.section__card:hover .text-primary {
+  color: white;
 }
 
 .textshadow{

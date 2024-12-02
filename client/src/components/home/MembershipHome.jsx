@@ -37,7 +37,7 @@ const JoinusHome = ({ page }) => {
   }, []);
 
   return (
-    <div className="pt-12 sm:pt-0 font-merriweather relative">
+    <div className="font-merriweather relative">
       {/* Background Image */}
       <div
         className="bg-cover bg-fixed bg-no-repeat relative"
@@ -47,24 +47,24 @@ const JoinusHome = ({ page }) => {
         }}
       >
         <div className="absolute inset-0 bg-white/80"></div>
-        {!page && (
+        {/* {!page && (
           <div className="absolute hidden md:block left-0 top-0 z-10">
             <img
-              className=" w-[100px] lg:w-[400px] xl:w-[600px]"
+              className=" w-[100px] lg:w-[400px]"
               src={decoration2}
             />
           </div>
-        )}
+        )} */}
         {!page && (
           <div className="absolute hidden md:block right-0 top-0 z-10">
             <img
-              className=" w-[100px] lg:w-[400px] xl:w-[600px]"
+              className=" w-[100px] lg:w-[400px]"
               src={decoration1}
             />
           </div>
         )}
         <Containar>
-          <div className="flex flex-col lg:flex-row justify-between space-y-5 lg:space-y-0 py-40">
+          <div className="flex flex-col lg:flex-row justify-between space-y-5 lg:space-y-0 pt-16 pb-28">
             {/* Content Section */}
             <div className="w-full z-10 lg:w-[47.5%]">
               <div className="heading mb-4">

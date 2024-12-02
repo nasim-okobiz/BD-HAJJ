@@ -13,6 +13,7 @@ import { API_BASE_URL } from "../axios/config";
 import api from "../axios/Axios";
 import Skeleton from "react-loading-skeleton"; // Make sure you import the Skeleton component
 import "react-loading-skeleton/dist/skeleton.css"; // Import Skeleton styles
+import headingLine from "../../assets/pattern/heading-line.png";
 
 const HomeMember = () => {
   const [memberships, setMemberships] = useState([]);
@@ -55,7 +56,7 @@ const HomeMember = () => {
   return (
     <div className="relative font-merriweather">
       <div
-        className="bg-cover bg-fixed bg-no-repeat relative py-3"
+        className="bg-cover bg-fixed bg-no-repeat relative"
         // style={{
         //   backgroundImage: `url(${bghajj})`,
         //   height: "auto",
@@ -70,12 +71,21 @@ const HomeMember = () => {
           />
         </div>
         <Containar>
-          <h2 className="pt-20 text-[24px] sm:text-[40px] font-semibold text-left sm:text-center drop-shadow-lg">
-            Our Members
-          </h2>
-          <p className="text-[22px] sm:text-[30px] pb-5 text-left sm:text-center font-semibold text-secondary-color font-century drop-shadow-md">
-            Approvals &amp; Certification Of BD Umrah Hajj Kafela
-          </p>
+          <div>
+            <h2 className="pt-16 text-[24px] sm:text-[40px] font-semibold text-left sm:text-center drop-shadow-lg">
+              Our Members
+            </h2>
+            <p className="text-[22px] sm:text-[30px]  text-left sm:text-center font-semibold text-secondary-color font-century drop-shadow-md">
+              Approvals &amp; Certification Of BD Umrah Hajj Kafela
+            </p>
+            <div className="relative w-full flex justify-center mt-2">
+            <img
+              src={headingLine}
+              alt="Heading Line"
+              className="w-3/4 sm:w-2/3 md:w-auto"
+            />
+          </div>
+          </div>
           {/* <div className="relative z-10 mb-12">
             <div className="px-4 py-3.5 bg-primary flex flex-col sm:flex-row justify-between items-center shadow-md rounded-md">
               <h3 className="text-[24px] sm:text-[30px] font-semibold text-center sm:text-left capitalize">
@@ -93,7 +103,7 @@ const HomeMember = () => {
           </div> */}
 
           {/* Membership Section with Skeleton Loader */}
-          <div className="memberships sm:mt-10 p-5 mb-10 rounded-md">
+          <div className="memberships p-5 rounded-md">
             <section className="section__container relative">
               <Swiper
                 modules={[Navigation, Pagination, Autoplay]}
@@ -106,7 +116,7 @@ const HomeMember = () => {
                   disableOnInteraction: true,
                 }}
                 navigation
-                pagination={{ clickable: true }}
+                pagination={false}
                 className="py-3 custom-swiper-button"
                 breakpoints={{
                   640: {
@@ -162,21 +172,21 @@ const HomeMember = () => {
                               <img
                                 src={API_BASE_URL + membership?.photo}
                                 alt={membership?.name}
-                                className="h-28 w-28 mb-4 rounded-full"
+                                className="h-24 w-24 mb-4 rounded-full"
                               />
                             )}
                           </div>
 
                           {/* Location Pin Section */}
                           <div className="flex flex-col items-center">
-                            <div className="bg-primary text-white p-3 rounded-full shadow-lg">
+                            <div className="bg-primary text-white p-2 rounded-full shadow-lg">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 strokeWidth="2"
                                 stroke="currentColor"
-                                className="h-8 w-8"
+                                className="h-6 w-6"
                               >
                                 <path
                                   strokeLinecap="round"
@@ -208,7 +218,7 @@ const HomeMember = () => {
                                 onClick={() =>
                                   handleCopy(membership?.referCode, index)
                                 }
-                                className="text-blue-500 hover:text-blue-700 focus:outline-none"
+                                className="text-primary focus:outline-none"
                               >
                                 {copiedStates[index] ? (
                                   <FaCheck className="text-green-500" />

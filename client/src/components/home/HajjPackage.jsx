@@ -3,7 +3,7 @@ import Containar from "../container/Containar";
 import { Link, useNavigate } from "react-router-dom";
 import bgshape from "../../assets/pattern/hajj.jpg";
 import HajjButton from "./HajjButton";
-import decoration from "../../assets/pattern/decoration-2.png";
+import decoration from "../../assets/pattern/decoration.png";
 import api from "../axios/Axios";
 import { API_BASE_URL } from "../axios/config";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -16,7 +16,7 @@ import headingLine from "../../assets/pattern/heading-line.png";
 import bghajj from "../../assets/pattern/bg-white-parallax.jpg";
 import Skeleton from "react-loading-skeleton"; // Import Skeleton
 
-const HajjPackage = ({page}) => {
+const HajjPackage = ({ page }) => {
   const [packagesData, setPackagesData] = useState([]);
   const [earlyBirdPackage, setEarlyBirdPackage] = useState(null);
   const [packageHead, setPackageHead] = useState(null);
@@ -55,18 +55,15 @@ const HajjPackage = ({page}) => {
       {lengthData > 0 ? (
         <div className="font-merriweather relative">
           <div
-            className="bg-cover bg-fixed bg-no-repeat relative py-10 lg:py-16"
+            className="bg-cover bg-fixed bg-no-repeat relative py-10 lg:py-10"
             style={{
               backgroundImage: `url(${bghajj})`,
               height: "auto",
             }}
           >
             {!page && (
-              <div className="absolute hidden md:block left-0 top-0 z-10">
-                <img
-                  className=" w-[100px] lg:w-[400px] xl:w-[600px]"
-                  src={decoration}
-                />
+              <div className="absolute hidden md:block right-0 top-0 z-10">
+                <img className="w-[100px] lg:w-[400px]" src={decoration} />
               </div>
             )}
             <div className="absolute inset-0 bg-white/80" />
@@ -76,14 +73,14 @@ const HajjPackage = ({page}) => {
                   {/* <p className="uppercase text-center tracking-wider text-base sm:text-xl text-[#FACC15]">
                     packages
                   </p> */}
-                  <h3 className="uppercase text-center tracking-wider text-[24px] sm:text-[30px] sm:py-2">
+                  <h3 className="uppercase text-center tracking-wider text-[24px] lg:text-[30px] sm:py-2">
                     {packageHead ? (
                       packageHead.name
                     ) : (
                       <Skeleton width={200} height={30} />
                     )}
                   </h3>
-                  <h3 className="text-gray-700 text-[30px] md:text-[30px] lg:text-[50px] text-center">
+                  <h3 className="text-gray-700 text-[30px] md:text-[30px] lg:text-[40px] text-center">
                     {packageHead ? (
                       "Choose Your Package"
                     ) : (
@@ -134,7 +131,7 @@ const HajjPackage = ({page}) => {
                             </ul>
                             <button
                               align={earlyBirdPackage?._id}
-                              className="bg-primary text-white font-bold py-2 px-6 rounded transition-all duration-300 transform hover:scale-105 hover:shadow-md uppercase mt-10"
+                              className="bg-primary text-white font-bold py-2 px-6 rounded transition-all duration-300 transform hover:scale-105 hover:shadow-md uppercase mt-5 lg:mt-10"
                             >
                               Book Now
                             </button>
@@ -162,7 +159,7 @@ const HajjPackage = ({page}) => {
                         disableOnInteraction: true,
                         pauseOnMouseEnter: true,
                       }}
-                      pagination={{ clickable: true }}
+                      pagination={false}
                       modules={[Autoplay, Pagination]}
                       className={`${packagesData?.length > 4 && "shadow-md"}`}
                     >
@@ -170,12 +167,12 @@ const HajjPackage = ({page}) => {
                         packagesData.map((pkg) => (
                           <SwiperSlide key={pkg._id}>
                             <div className="overflow-hidden group cursor-pointer p-4 h-full shadow-xl rounded-lg relative z-20">
-                              <div className="h-[160px] md:h-[100px] lg:h-[200px] w-full overflow-hidden flex justify-center">
+                              <div className="h-[160px] md:h-[100px] w-full overflow-hidden">
                                 <img
                                   onClick={() =>
                                     navigate(`/package/${pkg._id}`)
                                   }
-                                  className="h-full w-3/4 object-cover group-hover:scale-105 transition-all ease-linear duration-300"
+                                  className="h-full w-full object-contain group-hover:scale-105 transition-all ease-linear duration-300"
                                   src={API_BASE_URL + pkg.photo}
                                   alt={pkg.name}
                                 />
@@ -203,7 +200,10 @@ const HajjPackage = ({page}) => {
                                       {pkg.roomType.replace(/<[^>]*>?/gm, "")}
                                     </p>
                                     <p className="text-[13px] sm:text-[12px]">
-                                      {pkg.hotalDistance.join(", ")}
+                                      {pkg.hotalDistance
+                                        .join(", ")
+                                        .slice(0, 50)
+                                        .replace(/\s\S*$/, "") + " . . ."}
                                     </p>
                                   </div>
                                 </div>
