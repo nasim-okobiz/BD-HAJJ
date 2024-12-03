@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import bghajj from "../../assets/pattern/bg-white-parallax.jpg";
 import Skeleton from "react-loading-skeleton"; // Import Skeleton loader
 import "react-loading-skeleton/dist/skeleton.css"; // Import styles
+import headingLine from "../../assets/pattern/heading-line.png";
 
 const JoinusHome = ({ page }) => {
   const role = useSelector((store) => store?.auth?.user?.role);
@@ -57,10 +58,7 @@ const JoinusHome = ({ page }) => {
         )} */}
         {!page && (
           <div className="absolute hidden md:block right-0 top-0 z-10">
-            <img
-              className=" w-[100px] lg:w-[400px]"
-              src={decoration1}
-            />
+            <img className=" w-[100px] lg:w-[400px]" src={decoration1} />
           </div>
         )}
         <Containar>
@@ -68,20 +66,18 @@ const JoinusHome = ({ page }) => {
             {/* Content Section */}
             <div className="w-full z-10 lg:w-[47.5%]">
               <div className="heading mb-4">
-                {/* Skeleton Loader for Title */}
                 {isLoading ? (
                   <Skeleton width={200} height={40} />
                 ) : (
-                  <h2 className="text-[24px] sm:text-[40px] font-semibold ">
+                  <h2 className="text-[24px] sm:text-[40px]">
                     Join Us
                   </h2>
                 )}
-                {/* Skeleton Loader for Subtitle */}
                 {isLoading ? (
                   <Skeleton width={300} height={30} />
                 ) : (
                   <p
-                    className="font-semibold text-[22px] sm:text-[30px]"
+                    className="text-[22px] sm:text-[30px]"
                     style={{
                       textShadow: "2px 2px 2px #0000002d",
                     }}
@@ -89,6 +85,13 @@ const JoinusHome = ({ page }) => {
                     {joinuss[0]?.title}
                   </p>
                 )}
+                <div className="relative w-full flex justify-start mt-2">
+                  <img
+                    src={headingLine}
+                    alt="Heading Line"
+                    className="w-[40%] md:w-2/3 lg:w-auto"
+                  />
+                </div>
               </div>
               <div className="joinus mb-4">
                 {/* Skeleton Loader for Description */}
@@ -132,7 +135,7 @@ const JoinusHome = ({ page }) => {
                 {isLoading ? (
                   <Skeleton width={200} height={50} />
                 ) : (
-                  <div className="mt-12">
+                  <div className="mt-8">
                     <div className={`flex flex-start`}>
                       {role !== "agent" && (
                         // <div className="relative group cursor-pointer">
@@ -150,7 +153,7 @@ const JoinusHome = ({ page }) => {
                         //     </Link>
                         //   </div>
                         // </div>
-                        <Link>
+                        <Link to="/membership/membership-details-form">
                           <button className="bg-primary text-white font-bold py-3 px-6 rounded transition-all duration-300 transform hover:scale-105 hover:shadow-md uppercase">
                             Know More
                           </button>

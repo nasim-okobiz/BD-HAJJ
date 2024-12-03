@@ -67,7 +67,7 @@ const PackageDetails = () => {
         {/* Main Package Details Section */}
         <section className="pb-5">
           <Containar className="">
-            <div className="flex flex-wrap justify-between gap-6">
+            <div className="flex flex-wrap justify-between items-center gap-6">
               <div className="w-full md:w-[48%]">
                 <img
                   className="h-[250px] sm:h-[420px] object-cover"
@@ -76,25 +76,25 @@ const PackageDetails = () => {
                 />
               </div>
               <div className="w-full md:w-[48%] flex flex-col justify-start text-center md:text-left">
-                <h1 className="text-2xl sm:text-[35px] font-bold mb-4">
+                <h1 className="text-2xl lg:text-[30px] font-bold mb-4">
                   {packages?.name}
                 </h1>
-                <h2 className="text-xl sm:text-[24px] font-semibold mt-1">
+                <h2 className="text-xl lg:text-[20px] font-semibold mt-1">
                   {packages?.title}
                 </h2>
-                <div className="flex justify-center sm:justify-start gap-3.5 mt-10 mb-5">
-                  <p className="text-3xl sm:text-[60px] font-semibold tex  text-semisecondary">
+                <div className="flex justify-center sm:justify-start gap-3.5 mt-7 mb-5">
+                  <p className="text-3xl lg:text-[40px] font-semibold tex  text-semisecondary">
                     Tk. {packages?.mrpPrice}/-
                   </p>
                   {packages.discountPrice > 0 && (
-                    <p className="text-[20px] self-end sm:text-[30px] font-semibold line-through text-red-500">
+                    <p className="text-[20px] self-end lg:text-[20px] font-semibold line-through text-red-500">
                       Tk. {packages?.price}/-
                     </p>
                   )}
                 </div>
 
                 <p
-                  className="text-lg sm:text-[18px] mt-5"
+                  className="text-lg lg:text-[15px] mt-3"
                   dangerouslySetInnerHTML={{ __html: packages?.roomType }}
                 ></p>
                 <p className="font-semibold text-lg sm:text-[18px] mt-2">
@@ -105,11 +105,16 @@ const PackageDetails = () => {
                     {distance}
                   </p>
                 ))}
-                {(isValid && packages?.discountPrice > 0) && (
+                {isValid && packages?.discountPrice > 0 && (
                   <div className="">
                     <h3 className=" py-3 bg-white  mt-2 inline-block text-gray-700 font-medium text-[20px]">
-                      Discount End: {packages?.validDate ? new Date(packages.validDate).toLocaleDateString("en-GB", { day: "2-digit", month: "long", year: "numeric" }) : "N/A"}
-
+                      Discount End:{" "}
+                      {packages?.validDate
+                        ? new Date(packages.validDate).toLocaleDateString(
+                            "en-GB",
+                            { day: "2-digit", month: "long", year: "numeric" }
+                          )
+                        : "N/A"}
                     </h3>
                   </div>
                 )}
@@ -119,12 +124,12 @@ const PackageDetails = () => {
         </section>
 
         {/* Package Sub-Details Section */}
-        <section className="mt-5">
+        <section className="mt-10">
           <Containar className="">
-            <div className="flex flex-wrap gap-6">
+            <div className="flex flex-wrap gap-6 items-center">
               {/* Package Includes */}
               <div className="w-full md:w-1/2">
-                <h2 className="text-2xl sm:text-[32px] font-bold">
+                <h2 className="text-2xl lg:text-[28px] font-bold">
                   Package Includes
                 </h2>
                 <ul className="list-disc pl-5 mt-3">
@@ -137,7 +142,7 @@ const PackageDetails = () => {
               </div>
               <div>
                 {/* Package Excludes */}
-                <div className="w-full ">
+                <div className="w-full">
                   <h2 className="text-2xl sm:text-[32px] font-bold">
                     Package Excludes
                   </h2>
@@ -211,7 +216,7 @@ const PackageDetails = () => {
                     </label>
                   </div>
 
-                  <div className="text-center md:text-left mt-10 sm:mt-28">
+                  {/* <div className="text-center md:text-left mt-10 sm:mt-28">
                     <div className="flex justify-center">
                       <div className="relative group cursor-pointer">
                         <img
@@ -235,6 +240,18 @@ const PackageDetails = () => {
                         </div>
                       </div>
                     </div>
+                  </div> */}
+                  <div className="mt-10 lg:mt-10">
+                    <Link
+                      to={isAgreed ? `/booking/${id}` : "#"}
+                      className={`button ${
+                        isAgreed ? "" : "opacity-50 cursor-not-allowed"
+                      }`}
+                    >
+                      <button className="bg-primary text-white font-bold py-2 px-6 rounded transition-all duration-300 transform hover:scale-105 hover:shadow-md uppercase">
+                        Book Now
+                      </button>
+                    </Link>
                   </div>
                 </section>
               </>
@@ -307,8 +324,9 @@ const PackageDetails = () => {
                     <div className="absolute left-1/2 top-[60%] -translate-x-1/2 -translate-y-1/2 text-white text-sm sm:text-2xl font-semibold">
                       <Link
                         to={isAgreed ? `/booking/${id}` : "#"}
-                        className={`button ${isAgreed ? "" : "opacity-50 cursor-not-allowed"
-                          }`}
+                        className={`button ${
+                          isAgreed ? "" : "opacity-50 cursor-not-allowed"
+                        }`}
                       >
                         Book Now
                       </Link>

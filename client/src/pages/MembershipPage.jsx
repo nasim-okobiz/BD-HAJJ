@@ -222,8 +222,8 @@ const MembershipPage = () => {
               be a medium for their Umrah pilgrimages, with your humble support.
             </p>
           </div>
-          <div className="text-center md:text-left mt-10 sm:mt-28">
-            <div className="flex justify-center">
+          <div className="text-center md:text-left mt-10 sm:mt-20">
+            {/* <div className="flex justify-center">
               {role !== "agent" && (
                 <div className="relative group cursor-pointer ">
                   <img
@@ -247,6 +247,13 @@ const MembershipPage = () => {
                   </div>
                 </div>
               )}
+            </div> */}
+            <div className="flex justify-center">
+              <Link to="/membership/membership-details-form">
+                <button className="bg-primary text-white font-bold py-3 px-6 rounded transition-all duration-300 transform hover:scale-105 hover:shadow-md uppercase">
+                  Apply Now
+                </button>
+              </Link>
             </div>
           </div>
         </Containar>

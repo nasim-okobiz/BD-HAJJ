@@ -53,7 +53,7 @@ const UmrahPackage = () => {
     <>
       <div className="relative w-full">
         {lengthData > 0 && (
-          <div className="py-10 md:py-10 lg:py-10 font-merriweather relative">
+          <div className="py-10 lg:py-16 font-merriweather relative">
             {/* Background Shape 1 */}
             <div className="absolute top-0 left-0 w-1/2 md:w-1/4 lg:w-1/5 xl:w-1/6 h-auto opacity-50 lg:opacity-70">
               <img
@@ -89,7 +89,7 @@ const UmrahPackage = () => {
                     <img
                       src={headingLine}
                       alt="Heading Line"
-                      className="w-3/4 sm:w-2/3 md:w-auto"
+                      className="w-[40%] md:w-2/3 lg:w-auto"
                     />
                   </div>
                 </div>
@@ -104,7 +104,7 @@ const UmrahPackage = () => {
 
               {/* Other Elements */}
               {earlyBirdPackage && (
-                <div className="flex flex-col sm:items-center text-center relative py-6">
+                <div className="flex flex-col sm:items-center text-center relative py-6 mt-5 lg:mt-0">
                   <div className="w-full relative">
                     <img
                       className="w-full opacity-30 max-h-[250px] sm:h-auto object-cover"
@@ -125,7 +125,7 @@ const UmrahPackage = () => {
                           </h2>
 
                           {/* Discount Badge */}
-                          <div className="absolute -top-4 right-4 bg-gradient-to-r from-red-500 via-red-400 to-red-300 text-white py-1 lg:py-2 px-2 lg:px-3 text-[10px] lg:text-sm font-bold rounded-md shadow-md transition-all duration-300">
+                          <div className="absolute -top-6 lg:-top-4 right-4 bg-gradient-to-r from-red-500 via-red-400 to-red-300 text-white py-1 lg:py-2 px-2 lg:px-3 text-[10px] lg:text-sm font-bold rounded-md shadow-md transition-all duration-300">
                             Save TK{" "}
                             {earlyBirdPackage.discount?.toLocaleString()}/-
                           </div>
@@ -187,7 +187,7 @@ const UmrahPackage = () => {
                           <div className="h-[160px] md:h-[100px] w-full overflow-hidden">
                             <img
                               onClick={() => navigate(`/package/${pkg._id}`)}
-                              className="h-full w-full object-contain group-hover:scale-105 transition-all ease-linear duration-300"
+                              className="h-full w-full object-cover group-hover:scale-105 transition-all ease-linear duration-300"
                               src={API_BASE_URL + pkg.photo}
                               alt={pkg.name}
                             />

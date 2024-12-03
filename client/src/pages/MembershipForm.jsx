@@ -215,7 +215,7 @@ const MembershipForm = () => {
                   />
                 </div>
                 <div className="mb-4">
-                  <label className="block text-lg mb-2">Photo</label>
+                  <label className="block text-lg mb-2">Self Photo</label>
                   <div className="flex items-center">
                     <input
                       type="file"
@@ -236,7 +236,7 @@ const MembershipForm = () => {
                   </div>
                 </div>
                 <div className="mb-4">
-                  <label className="block text-lg mb-2">Photo</label>
+                  <label className="block text-lg mb-2">NID Front Photo</label>
                   <div className="flex items-center">
                     <input
                       type="file"
@@ -257,7 +257,7 @@ const MembershipForm = () => {
                   </div>
                 </div>
                 <div className="mb-4">
-                  <label className="block text-lg mb-2">Photo</label>
+                  <label className="block text-lg mb-2">NID Back Photo</label>
                   <div className="flex items-center">
                     <input
                       type="file"
@@ -389,7 +389,7 @@ const MembershipForm = () => {
                 Your Account Status Is <span className="text-gray-500">Silver</span>
               </h3>
               <p className="text-xl font-bold mb-6">
-                Total Payable Amount: <span className="text-green-600">₹ ${joinUs?.amount}/-</span>
+                Total Payable Amount: <span className="text-green-600">৳ {joinUs?.amount}/-</span>
               </p>
 
             </div>

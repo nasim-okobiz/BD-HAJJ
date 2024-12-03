@@ -240,6 +240,10 @@
   color: white;
 }
 
+.section__card:hover .text-gray-400 {
+  color: white;
+}
+
 .textshadow{
   text-shadow: 2px 2px 2px #0000007d;
 }

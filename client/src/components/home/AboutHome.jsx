@@ -39,10 +39,7 @@ const AboutHome = ({ page }) => {
     >
       {!page && (
         <div className="absolute hidden md:block right-0 top-0 -z-10">
-          <img
-            className=" w-[100px] lg:w-[400px]"
-            src={decoration}
-          />
+          <img className=" w-[100px] lg:w-[400px]" src={decoration} />
         </div>
       )}
       {!page && (
@@ -60,7 +57,7 @@ const AboutHome = ({ page }) => {
 
       {!page && (
         <Containar>
-          <h3 className="text-[24px] lg:text-[36px] text-center font-merriweather">
+          <h3 className="text-[24px] lg:text-[36px] text-center font-merriweather uppercase">
             {/* BD HAJJ Bangladesh Umrah Hajj Kafela */}
             {isLoading ? (
               <div className="w-40 sm:w-80 h-8 bg-gray-300 animate-pulse mx-auto"></div>
@@ -77,7 +74,7 @@ const AboutHome = ({ page }) => {
             <img
               src={headingLine}
               alt="Heading Line"
-              className="w-3/4 sm:w-2/3 md:w-auto"
+              className="w-[40%] md:w-2/3 lg:w-auto"
             />
           </div>
         </Containar>

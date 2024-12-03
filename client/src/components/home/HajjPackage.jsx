@@ -55,7 +55,7 @@ const HajjPackage = ({ page }) => {
       {lengthData > 0 ? (
         <div className="font-merriweather relative">
           <div
-            className="bg-cover bg-fixed bg-no-repeat relative py-10 lg:py-10"
+            className="bg-cover bg-fixed bg-no-repeat relative py-10 lg:py-16"
             style={{
               backgroundImage: `url(${bghajj})`,
               height: "auto",
@@ -69,10 +69,7 @@ const HajjPackage = ({ page }) => {
             <div className="absolute inset-0 bg-white/80" />
             <Containar>
               <div className="relative z-10">
-                <div className="text-gray-700 pb-10 sm:pb-5">
-                  {/* <p className="uppercase text-center tracking-wider text-base sm:text-xl text-[#FACC15]">
-                    packages
-                  </p> */}
+                {/* <div className="text-gray-700 pb-10 sm:pb-5">
                   <h3 className="uppercase text-center tracking-wider text-[24px] lg:text-[30px] sm:py-2">
                     {packageHead ? (
                       packageHead.name
@@ -90,10 +87,35 @@ const HajjPackage = ({ page }) => {
                       <img
                         src={headingLine}
                         alt="Heading Line"
-                        className="w-3/4 sm:w-2/3 md:w-auto"
+                        className="w-[40%] md:w-2/3 lg:w-auto"
                       />
                     </div>
                   </h3>
+                </div> */}
+                <div className="flex flex-col sm:flex-row items-center justify-between space-y-3 sm:space-y-0 z-10 mb-4">
+                  {/* Heading Section */}
+                  <div className="flex flex-col items-center lg:text-xl">
+                    {/* Heading and Text */}
+                    <div className="uppercase flex items-center space-x-2">
+                      <p className="text-center tracking-wider">hajj / হজ্জ  package /</p>
+                    </div>
+
+                    {/* Underline Image */}
+                    <div className="relative w-full flex justify-center mt-2">
+                      <img
+                        src={headingLine}
+                        alt="Heading Line"
+                        className="w-[40%] md:w-2/3 lg:w-auto"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Button Section */}
+                  <Link to="/packages">
+                    <button className="bg-primary text-white font-bold py-1 lg:py-2 px-4 lg:px-4 rounded transition-all duration-300 transform hover:scale-105 hover:shadow-md uppercase lg:text-sm">
+                      View All Package
+                    </button>
+                  </Link>
                 </div>
                 <div className="mx-auto grid grid-cols-1 lg:grid-cols-4 gap-4 items-center">
                   {/* Left Section */}
@@ -172,7 +194,7 @@ const HajjPackage = ({ page }) => {
                                   onClick={() =>
                                     navigate(`/package/${pkg._id}`)
                                   }
-                                  className="h-full w-full object-contain group-hover:scale-105 transition-all ease-linear duration-300"
+                                  className="h-full w-full object-cover group-hover:scale-105 transition-all ease-linear duration-300"
                                   src={API_BASE_URL + pkg.photo}
                                   alt={pkg.name}
                                 />

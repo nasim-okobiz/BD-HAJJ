@@ -45,7 +45,7 @@ const Footer = () => {
 
         <section className="text-white relative z-20 py-10">
           <Containar>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 py-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 py-10">
               {/* Logo and About Section */}
               <div className="flex flex-col items-center md:items-start">
                 <img className="logo mb-3 w-24 md:w-32" src={logo} alt="Logo" />
@@ -115,7 +115,7 @@ const Footer = () => {
               </div>
 
               {/* More Important Links */}
-              <div>
+              {/* <div>
                 <h3 className="text-xl mb-3 text-center md:text-left">
                   More Important Links
                 </h3>
@@ -131,7 +131,7 @@ const Footer = () => {
                       )
                       .slice(0, 9)}
                 </ul>
-              </div>
+              </div> */}
 
               {/* Contact Details */}
               <div className="text-center md:text-left">
@@ -204,7 +204,7 @@ const Footer = () => {
           </Containar>
         </section>
       </footer>
-      <section className="py-10 bg-black text-white">
+      <section className="py-5 bg-black text-white">
         <div class="group text-center">
           ©2024 BD Umrah Hajj Kafela, All rights reserved. Developed by
           <a

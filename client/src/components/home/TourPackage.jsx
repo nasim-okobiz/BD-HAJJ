@@ -109,7 +109,7 @@ const TourPackage = () => {
                   disableOnInteraction: true,
                   pauseOnMouseEnter: true,
                 }}
-                pagination={{ clickable: true }}
+                pagination={false}
                 modules={[Autoplay, Pagination]}
                 className="mt-8"
               >
@@ -219,20 +219,22 @@ const TourPackage = () => {
                 <div className="sm:flex justify-between items-center rounded p-5">
                   <div>
                     <p className="uppercase tracking-wider text-base sm:text-xl text-center md:text-start">
-                      Visa/ Visa Processing
+                      Visa/ ভিসা Processing
                     </p>
                     <div className="relative w-full flex justify-center mt-2">
                       <img
                         src={headingLine}
                         alt="Heading Line"
-                        className="w-3/4 sm:w-2/3 md:w-auto"
+                        className="w-[40%] md:w-2/3 lg:w-auto"
                       />
                     </div>
                   </div>
                   <div className="mt-4 sm:mt-0">
-                    <button className="bg-primary text-white font-bold py-1 sm:py-2 px-4 sm:px-6 rounded transition-all duration-300 transform hover:scale-105 hover:shadow-md uppercase">
-                      View All
-                    </button>
+                    <Link to={`/packages/category/${packageHead?._id}`}>
+                      <button className="bg-primary text-white font-bold py-1 sm:py-2 px-4 sm:px-6 rounded transition-all duration-300 transform hover:scale-105 hover:shadow-md uppercase">
+                        View All
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -250,7 +252,7 @@ const TourPackage = () => {
                   disableOnInteraction: true,
                   pauseOnMouseEnter: true,
                 }}
-                pagination={{ clickable: true }}
+                pagination={false}
                 modules={[Autoplay, Pagination]}
                 className=""
               >
