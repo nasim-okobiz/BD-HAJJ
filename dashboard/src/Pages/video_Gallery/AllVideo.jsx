@@ -29,7 +29,6 @@ const VideoComponent = () => {
       message.error( error?.response?.data?.message);
     }
   };
-console.log(videos)
 
 
   const handleDelete = async (id) => {

@@ -14,7 +14,7 @@ class PaymentService extends BaseService {
   }
   async createUserPayment(payload, session) {
     const { userIdPayRef, amount } = payload;
-    console.log(payload)
+
     if (!userIdPayRef || !amount) {
       throw new Error("Missing required fields");
     }
@@ -28,9 +28,9 @@ class PaymentService extends BaseService {
     }
     const userAgentPayment = await this.#repository.getUserIdByPayment(userPayload, session);
     const userInfo = await this.#authRepository.getUserById(userIdPayRef)
-    if (userInfo){
+    if (userInfo) {
       const stockAlertEmail = new Email({ email: userInfo?.email, name: userInfo?.name }, null);
-      console.log("userInfo", stockAlertEmail)
+
       await stockAlertEmail.sendAgentPaymentInvoice(userAgentPayment);
     }
 

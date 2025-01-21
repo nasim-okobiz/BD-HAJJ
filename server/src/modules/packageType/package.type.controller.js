@@ -7,7 +7,7 @@ const PackageTypeService = require("./package.type.service.js");
 class PackageTypeController {
   //
   createPackageType = withTransaction(async (req, res, next, session) => {
-    console.log(req.body);
+
     const payload = {
       name: req.body.name,
       priority: req.body.priority
@@ -31,11 +31,11 @@ class PackageTypeController {
   })
 
   getAllPackageTypeWithPagination = catchError(async (req, res, next) => {
-    let payload={
-			page: req.query.page,
-			limit: req.query.limit,
-			order: req.query.order,
-		}
+    let payload = {
+      page: req.query.page,
+      limit: req.query.limit,
+      order: req.query.order,
+    }
     const packageType = await PackageTypeService.getAllPackageTypeWithPagination(payload);
     const resDoc = responseHandler(200, 'PackageTypes get successfully', packageType);
     res.status(resDoc.statusCode).json(resDoc);
@@ -43,7 +43,7 @@ class PackageTypeController {
 
   updatePackageType = catchError(async (req, res, next) => {
     const id = req.params.id;
-    console.log("id", id);
+
     const payload = {
       name: req?.body?.name,
       priority: req.body.priority

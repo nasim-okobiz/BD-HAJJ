@@ -15,7 +15,7 @@ const joinUsschema = new Schema({
     condition: { 
         type: [String], 
     },
-    photo: {
+    videoUrl: {
         type: String,
     },
     amount: {

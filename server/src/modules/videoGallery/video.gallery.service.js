@@ -19,7 +19,7 @@ class VideoGalleryService extends BaseService {
   }
 
   async getAllVideoGallery() {
-    return await this.#repository.findAll({status: true});
+    return await this.#repository.findAll({ status: true });
   }
 
   async getAllVideoGalleryWithPagination(payload) {
@@ -29,13 +29,13 @@ class VideoGalleryService extends BaseService {
 
   async updateVideoGallery(id, payload) {
     const { video } = payload;
-    console.log("video", video);
+
 
     if (!video || !video?.length) throw new Error("Video link is required");
     //update by id 
     const videoGalleryData = await this.#repository.updateVideoGallery(id, payload);
     if (!videoGalleryData) throw new NotFoundError("Video Gallery Not Found");
-    
+
     return videoGalleryData;
 
   }
@@ -44,7 +44,7 @@ class VideoGalleryService extends BaseService {
     if (!status) throw new NotFoundError("Status is required");
     status = (status === "true");
     const videoGallery = await this.#repository.updateStatus(id, { status: status });
-    console.log("videoGallery", videoGallery);
+
     if (!videoGallery) throw new NotFoundError("VideoGallery not found");
     return videoGallery;
   }

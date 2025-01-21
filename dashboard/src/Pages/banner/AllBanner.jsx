@@ -11,13 +11,11 @@ import { MdOutlineViewInAr } from "react-icons/md";
 import { AiOutlineDelete } from "react-icons/ai";
 const BannersComponent = () => {
   const [banners, setBanners] = useState([]);
-  // const [bannerCategories, setBannerCategories] = useState([]);
   const [visible, setVisible] = useState(false);
   const [editingBanner, setEditingBanner] = useState(null); // State for the banner being edited
 
   useEffect(() => {
     fetchBanners();
-    // fetchBannerCategories();
   }, []);
 
   const fetchBanners = async () => {
@@ -29,14 +27,6 @@ const BannersComponent = () => {
     }
   };
 
-  // const fetchBannerCategories = async () => {
-  //   try {
-  //     const response = await axiosInstance.get("/banner-category");
-  //     setBannerCategories(response?.data?.data);
-  //   } catch (error) {
-  //     message.error("Failed to fetch categories.");
-  //   }
-  // };
 
   const handleDelete = async (id) => {
     try {
@@ -44,7 +34,7 @@ const BannersComponent = () => {
       message.success("Banner deleted successfully.");
       fetchBanners();
     } catch (error) {
-      message.error( error?.response?.data?.message);
+      message.error(error?.response?.data?.message);
     }
   };
 
@@ -54,7 +44,6 @@ const BannersComponent = () => {
   };
 
   const columns = [
-
     {
       title: "Photos",
       dataIndex: "photo",
@@ -68,11 +57,18 @@ const BannersComponent = () => {
       ),
     },
     {
+      title: "package",
+      dataIndex: "packageRef",
+      key: "packageRef",
+      render: (packageRef) => packageRef?.name || "-",
+
+    },
+    {
       title: "Action",
       key: "action",
       render: (text, record) => (
         <div>
-          <Button  icon={<CiEdit  style={{ fontSize: '22px' }}/>} type="link" onClick={() => showModal(record)}>
+          <Button icon={<CiEdit style={{ fontSize: '22px' }} />} type="link" onClick={() => showModal(record)}>
             {/* Edit */}
           </Button>
           <Popconfirm
@@ -81,7 +77,7 @@ const BannersComponent = () => {
             okText="Yes"
             cancelText="No"
           >
-            <Button icon={<AiOutlineDelete  style={{ fontSize: '22px' }}/>} type="link" danger>
+            <Button icon={<AiOutlineDelete style={{ fontSize: '22px' }} />} type="link" danger>
               {/* Delete */}
             </Button>
           </Popconfirm>
@@ -106,13 +102,12 @@ const BannersComponent = () => {
         </Button>
       </div>
 
-      <Table columns={columns} dataSource={banners} rowKey="_id"  scroll={{ x: 800 }}/>
+      <Table columns={columns} dataSource={banners} rowKey="_id" scroll={{ x: 800 }} />
 
       <CreateAndEditBanner
         visible={visible}
         setVisible={setVisible}
         fetchBanners={fetchBanners}
-        // bannerCategories={bannerCategories}
         editingBanner={editingBanner} // Pass the editing banner
       />
     </div>

@@ -46,7 +46,6 @@ const ContactPage = () => {
     try {
       setIsLoading(true);
       const response = await api.post(`/contact-us`, dataToSend);
-      console.log("Form submitted successfully:", response.data);
       toast.success("Form submitted successfully", {
         position: "top-right",
         autoClose: 1000,

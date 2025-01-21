@@ -4,6 +4,7 @@ import logo from "../../../assets/logo/logo.png"; // Adjust this path as needed
 import Containar from "../../container/Containar";
 import api from "../../axios/Axios";
 import borderImage from "../../../assets/footer/footer-border.png";
+import SSL from "../../../assets/SSL/SSL.png";
 
 const Footer = () => {
   const location = useLocation();
@@ -18,7 +19,6 @@ const Footer = () => {
       .then((response) => setData(response.data.data))
       .catch((err) => setError(err));
   }, []);
-  console.log("first, location =========================", data);
 
   return (
     <div className={`${flag ? "bg-gray-100" : ""} font-merriweather`}>
@@ -53,6 +53,8 @@ const Footer = () => {
                   At BD Umrah Hajj Kafela, we understand the significance of
                   travel and strive to make it accessible to all.
                 </h3>
+                  <span className=" text-12 text-blue-500">Trade license Number : 010273</span>
+
                 <div className="social-icon flex space-x-3">
                   <a
                     href="https://www.facebook.com/mynilnod?mibextid=ZbWKwL"
@@ -76,6 +78,7 @@ const Footer = () => {
                     <i className="fa-brands fa-instagram"></i>
                   </a>
                 </div>
+
               </div>
 
               {/* Important Links */}
@@ -201,6 +204,9 @@ const Footer = () => {
                 />
               </div>
             </div>
+            <div className="text-center md:text-left">
+                  <img className="h-40" src={SSL} />
+                </div>
           </Containar>
         </section>
       </footer>

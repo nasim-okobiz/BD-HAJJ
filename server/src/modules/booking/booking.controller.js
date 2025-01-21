@@ -8,7 +8,7 @@ const config = require("../../config/config.js");
 class BookingController {
   //
   createBooking = withTransaction(async (req, res, next, session) => {
-    console.log(req.body);
+
     const userId = req.user.user_info_encrypted.id;
     const payload = {
       userRef: userId,
@@ -61,7 +61,7 @@ class BookingController {
 
   updateBooking = catchError(async (req, res, next) => {
     const id = req.params.id;
-    console.log("id", id);
+
     const payloadFiles = {
       files: req?.files,
     };
@@ -98,8 +98,8 @@ class BookingController {
     res.status(resDoc.statusCode).json(resDoc);
   });
   bankPaymentBooking = withTransaction(async (req, res, next, session) => {
-    console.log('req.params --', req.params);
-    console.log('req.body --', req.body);
+
+
     const { amount, bookingRef, accountNumber, bankName } = req.body;
     const payload = { amount, bookingRef, accountNumber, bankName };
     const amountResult = await BookingService.bankPaymentBooking(payload, session);
@@ -117,18 +117,18 @@ class BookingController {
       userId
     };
     const amountResult = await BookingService.paymentBooking(payload, session);
-    console.log('amountResult', amountResult);
+
     const resDoc = responseHandler(201, 'Amount Created successfully', amountResult);
     res.status(resDoc.statusCode).json(resDoc);
   });
   addAmountSuccess = withTransaction(async (req, res, next, session) => {
-    console.log('req.params --', req.params);
-    console.log('req.body --', req.body);
+
+
     const { amount, tran_id, currency, status } = req.body;
     const { id } = req.params;
     const payload = { amount, tran_id, currency, status };
     const amountResult = await BookingService.addAmountSuccess(id, payload, session);
-    console.log('title---');
+
     if (amountResult) {
       res.redirect(`${config.clientBaseURL}/user/success`)
     } else {

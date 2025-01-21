@@ -21,7 +21,6 @@ const CreateAndEditFaq = ({ visible, setVisible, fetchNotices,  editingNotice })
   }, [editingNotice, form, visible]);
 
   const handleCreateOrEdit = async (values) => {
-    console.log("Form Values:", values);
 
     try {
       if (editingNotice) {

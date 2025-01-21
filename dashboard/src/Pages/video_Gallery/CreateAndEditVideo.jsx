@@ -23,7 +23,6 @@ const CreateAndEditFaq = ({ visible, setVisible, fetchVideos,  editingVideo }) =
   }, [editingVideo, form, visible]);
 
   const handleCreateOrEdit = async (values) => {
-    console.log("Form Values:", values);
 
     try {
       if (editingVideo) {

@@ -29,7 +29,6 @@ const CreateAndEditBooking = ({ visible, setVisible, fetchBookings, editingBooki
   }, [editingBooking, form, visible]);
 
   const handleCreateOrEdit = async (values) => {
-    console.log("Form Values:", values);
 
     try {
       const formData = new FormData();

@@ -2,7 +2,7 @@
 // const path = require('path');
 
 // exports.uploadWorker = (file) => {
-//  console.log('uploadWorker', file);
+
 //   return new Promise((resolve, reject) => {
 //     const worker = new Worker(
 //       path.join(process.cwd(), '/src/middleware/upload/imgUploadProcessWorker.js'),
@@ -13,7 +13,7 @@
 //       }
 //     );
 //     worker.on('message', (message) => {
-//       console.log('message', message);
+
 //       resolve(message);
 //     });
 //     worker.on('error', (err) => {
@@ -32,8 +32,8 @@ const config = require('../../config/config.js');  // Ensure the path is correct
 const uploadSingleImg = async (file) => {
   try {
     // Debugging: Check the value of config.uploadFolder and file.originalname
-    console.log('Upload folder:', config.uploadFolder);
-    console.log('Original filename:', file.originalname);
+
+
 
     if (!config.uploadFolder || typeof config.uploadFolder !== 'string') {
       throw new Error('The upload folder is not defined or is not a valid string');
@@ -52,11 +52,11 @@ const uploadSingleImg = async (file) => {
     const filePath = path.join(config.uploadFolder, originalname); // Ensure correct path format
 
     // Debugging: Log the file path to be used
-    console.log('File path to save:', filePath);
+
 
     // Save the file to disk
     fs.writeFileSync(filePath, buffer);
-    console.log(`File saved to: ${filePath}`);
+
 
     return { success: true, message: 'File uploaded successfully' };
   } catch (err) {
@@ -78,14 +78,14 @@ if (!isMainThread) {
 
 // Main thread function to create the worker and handle file upload
 exports.uploadWorker = (file) => {
-  console.log('uploadWorker', file);
+
   return new Promise((resolve, reject) => {
     const worker = new Worker(__filename, {  // Use current file as the worker script
       workerData: { file }
     });
 
     worker.on('message', (message) => {
-      console.log('Worker result:', message);
+
       resolve(message);  // Resolve the Promise with the worker's result
     });
 

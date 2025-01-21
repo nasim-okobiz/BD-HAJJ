@@ -22,7 +22,7 @@ const RecentBlog = (blogCategoryRef) => {
   useEffect(() => {
     getBlogs();
   }, []);
-  console.log(blogs);
+
 
   return (
     <section className="pt-16 pb-32 font-merriweather">

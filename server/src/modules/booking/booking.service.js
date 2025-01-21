@@ -32,7 +32,10 @@ class BookingService extends BaseService {
     this.#membershipRepository = membershipRepository;
   }
 
-  generateBookingId() {
+  generateBookingId(existBookingId) {
+
+    let bokkingEndNumber = existBookingId ? Number(existBookingId.slice(9)) + 1 : 101;
+
     const date = new Date();
 
     // Extract day, month, and year
@@ -40,11 +43,9 @@ class BookingService extends BaseService {
     const month = String(date.getMonth() + 1).padStart(2, '0'); // e.g., "10" (October)
     const year = String(date.getFullYear()).slice(-2); // e.g., "24" (2024)
 
-    // Generate a random 5-digit number
-    const randomNumber = Math.floor(10000 + Math.random() * 90000); // Ensures 5 digits
 
     // Combine to form the booking ID with "bok" prefix
-    const bookingId = `BOK${day}${month}${year}${randomNumber}`;
+    const bookingId = `BOK${day}${month}${year}${bokkingEndNumber}`;
 
     return bookingId;
   }
@@ -52,7 +53,7 @@ class BookingService extends BaseService {
   async createBooking(payload, session) {
 
     const { userRef, packageRef, totalPerson, memberId } = payload;
-    console.log(userRef, packageRef, totalPerson, memberId);
+
 
     if (!packageRef || !totalPerson) {
       throw new Error("Please fill up all required fields.");
@@ -70,7 +71,7 @@ class BookingService extends BaseService {
     }
 
     const packageData = await this.#packageRepository.findById(packageRef);
-    // console.log(packageData);
+
 
     if (!packageData) {
       throw new Error("Package not found");
@@ -81,20 +82,25 @@ class BookingService extends BaseService {
     if (packageData.validDate) {
       payload.dicountValidDate = packageData.validDate;
     }
-    payload.bookingId = this.generateBookingId()
+    // find last booking
+    const lastBooking = await this.#repository.findLastOneBooking()
+
+
+    payload.bookingId = this.generateBookingId(lastBooking?.bookingId)
+
     const memberIdValidate = await this.#membershipRepository.findMembershipByReferCode(memberId)
-    console.log("memberIdValidate", memberIdValidate);
+
 
     if (memberIdValidate) {
       const memberData = await this.#authRepository.findOne({ _id: memberIdValidate?.userRef, role: 'agent' });
-      console.log("memberData", memberData);
+
 
       if (memberData) {
         payload.referenceSuccess = true
         payload.membershipRef = memberIdValidate?._id
       }
     }
-    console.log("payload", payload);
+
 
     const bookingData = await this.#repository.createBooking(payload);
     return bookingData;
@@ -138,7 +144,7 @@ class BookingService extends BaseService {
     if (!status) throw new NotFoundError("Status is required");
     status = (status === "true");
     const booking = await this.#repository.updateStatus(id, { status: status });
-    console.log("booking", booking);
+
     if (!booking) throw new NotFoundError("Booking not found");
     return booking;
   }
@@ -177,7 +183,7 @@ class BookingService extends BaseService {
     const { amount, bookingRef, userId } = payload;
 
     // Validate payload
-    console.log('userId', userId);
+
 
     if (!amount) {
       throw new NotFoundError('fill up required fields');
@@ -191,7 +197,7 @@ class BookingService extends BaseService {
     // const createTransaction = await this.#repository.createTransaction(transactionPlayload, session);
     // const objectId = createTransaction[0]?._id;
     // const idString = objectId?.toString(); // Convert ObjectId to string
-    // console.log('tran_id', idString);
+
     const data = {
       total_amount: amount,
       currency: 'BDT',
@@ -229,7 +235,7 @@ class BookingService extends BaseService {
     try {
       const apiResponse = await sslcz.init(data);
       const GatewayPageURL = apiResponse.GatewayPageURL;
-      console.log('Redirecting to: ', GatewayPageURL);
+
       return { url: GatewayPageURL };
     } catch (error) {
       console.error('Error initializing payment:', error);
@@ -242,7 +248,7 @@ class BookingService extends BaseService {
     try {
       const status = "Success";
       const result = await this.#repository.bookingPayment(tran_id, amount, session)
-      console.log("result ==============", result);
+
       if (result) {
         const stockAlertEmail = new Email({ email: "nasim.okobiz@gmail.com", name: result?.userRef?.name }, null);
         await stockAlertEmail.sendbookingPaymnetOnlineInvoice(result);
@@ -255,7 +261,7 @@ class BookingService extends BaseService {
     }
   }
   // async addAmountFail(id, session) {
-  //   console.log('Amount:', id);
+
   //   try {
   //     const status = "Fail";
   //     const transactionUpdate = await this.#repository.transactionUpdate(id, status, session);
@@ -268,7 +274,7 @@ class BookingService extends BaseService {
   // }
 
   // async addAmountCancel(id, session) {
-  //   console.log('Amount:', id);
+
   //   try {
   //     const status = "Cancel";
   //     const transactionUpdate = await this.#repository.transactionUpdate(id, status, session);

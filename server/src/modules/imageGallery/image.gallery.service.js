@@ -36,16 +36,16 @@ class ImageGalleryService extends BaseService {
       // Map over the files and prepare them for upload
       const imgFile = files.map(({ buffer, originalname, fieldname, mimetype }) => ({
         buffer,
-        originalname: 
+        originalname:
           mimetype === "application/pdf"
             ? convertFileNameWithPdfExt(originalname)
             : convertFileNameWithWebpExt(originalname),
         fieldname,
         mimetype,
       }));
-    
-      console.log("imgFile", imgFile);
-    
+
+
+
       // Handle the upload of each file
       for (let file of imgFile) {
         try {
@@ -55,7 +55,7 @@ class ImageGalleryService extends BaseService {
           throw new Error('File upload failed');
         }
       }
-    
+
       // After upload, convert imgFile array to object format
       images = convertImgArrayToObject(imgFile);
     } else {
@@ -81,10 +81,6 @@ class ImageGalleryService extends BaseService {
 
   async updateImageGallery(id, payloadFiles, payload) {
     const { files } = payloadFiles;
-    console.log(payload);
-    console.log(!files , !files?.length);
-    console.log(!files || !files?.length);
-
     const { galleryType } = payload;
     if (!galleryType) throw new Error("Gallery type is required");
     let images;
@@ -93,16 +89,16 @@ class ImageGalleryService extends BaseService {
         // Map over the files and prepare them for upload
         const imgFile = files.map(({ buffer, originalname, fieldname, mimetype }) => ({
           buffer,
-          originalname: 
+          originalname:
             mimetype === "application/pdf"
               ? convertFileNameWithPdfExt(originalname)
               : convertFileNameWithWebpExt(originalname),
           fieldname,
           mimetype,
         }));
-      
-        console.log("imgFile", imgFile);
-      
+
+
+
         // Handle the upload of each file
         for (let file of imgFile) {
           try {
@@ -112,7 +108,7 @@ class ImageGalleryService extends BaseService {
             throw new Error('File upload failed');
           }
         }
-      
+
         // After upload, convert imgFile array to object format
         images = convertImgArrayToObject(imgFile);
       } else {
@@ -123,11 +119,10 @@ class ImageGalleryService extends BaseService {
         payload[key] = images[key];
       }
     }
-    console.log("payload", payload);
+
     //update by id 
     const imageGalleryData = await this.#repository.updateImageGallery(id, payload);
     if (!imageGalleryData) throw new Error("Image Gallery not found");
-    console.log("imageGalleryData", imageGalleryData);
     if (imageGalleryData && (files && files?.length)) {
       await removeUploadFile(imageGalleryData?.photo)
     }
@@ -139,7 +134,7 @@ class ImageGalleryService extends BaseService {
     if (!status) throw new NotFoundError("Status is required");
     status = (status === "true");
     const imageGallery = await this.#repository.updateStatus(id, { status: status });
-    console.log("imageGallery", imageGallery);
+
     if (!imageGallery) throw new NotFoundError("ImageGallery not found");
     return imageGallery;
   }

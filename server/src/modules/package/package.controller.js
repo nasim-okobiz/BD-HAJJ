@@ -7,7 +7,7 @@ const PackageService = require("./package.service.js");
 class PackageController {
   //
   createPackage = withTransaction(async (req, res, next, session) => {
-    // console.log(req.body);
+
 
     const payloadFiles = {
       files: req.files,
@@ -45,7 +45,7 @@ class PackageController {
   });
 
   getAllPackage = catchError(async (req, res, next) => {
-    const payload ={
+    const payload = {
       priority: req.query.priority,
     }
     const packageResult = await PackageService.getAllPackage(payload);
@@ -80,7 +80,7 @@ class PackageController {
 
   updatePackage = catchError(async (req, res, next) => {
     const id = req.params.id;
-    console.log("id", id);
+
     const payloadFiles = {
       files: req.files,
     };

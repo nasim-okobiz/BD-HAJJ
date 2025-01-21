@@ -27,7 +27,7 @@ class BlogCategoryService extends BaseService {
 
   async updateBlogCategory(id, payload) {
     const { name } = payload;
-    // console.log("files", files);
+
 
     if (!name) throw new Error("Blog Category Name is required");
 
@@ -41,7 +41,7 @@ class BlogCategoryService extends BaseService {
     if (!status) throw new NotFoundError("Status is required");
     status = (status === "true");
     const blogCategory = await this.#repository.updateStatus(id, { status: status });
-    console.log("blogCategory", blogCategory);
+
     if (!blogCategory) throw new NotFoundError("BlogCategory not found");
     return blogCategory;
   }

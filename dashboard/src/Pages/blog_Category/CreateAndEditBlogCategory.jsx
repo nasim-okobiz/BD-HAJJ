@@ -25,7 +25,6 @@ const CreateAndEditBlogCategory = ({ visible, setVisible, fetchBlogCategorys,  e
   }, [editingBlogCategory, form, visible]);
 
   const handleCreateOrEdit = async (values) => {
-    console.log("Form Values:", values);
 
     try {
       if (editingBlogCategory) {

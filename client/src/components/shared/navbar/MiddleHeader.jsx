@@ -15,10 +15,8 @@ function Header() {
 
   const fetchData = async () => {
     try {
-      const response = await api.get("/notice");
-      console.log("API Response:", response);
-      console.log("API Response:", response.data.data[0]);
-      setAnnouncements(response?.data?.data[0]?.notice);
+      const response = await api.get("/notice");;
+      setAnnouncements(response?.data?.data);
     } catch (error) {
       console.error("Error fetching announcements:", error);
     } finally {
@@ -30,7 +28,6 @@ function Header() {
     fetchData();
   }, []);
 
-  console.log("Announcements:", announcements);
 
   return (
     <section className="bg-semisecondary py-2 flex items-center justify-between font-merriweather">
@@ -47,7 +44,15 @@ function Header() {
               <Ticker speed={10} mode="smooth" move={!isPaused}>
                 {() => (
                   <div className="flex space-x-8 text-white text-lg font-semibold">
-                    {announcements}
+                    {announcements.map((announcement) => (
+                      // <Link
+                      //   key={announcement._id}
+                      //   to={`/notice/${announcement._id}`}
+                      //   className="hover:text-primary"
+                      // >
+                      <p className="px-20">{announcement?.notice}</p>
+                      // </Link>
+                    ))}
                   </div>
                 )}
               </Ticker>

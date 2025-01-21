@@ -7,7 +7,7 @@ const FAQService = require("./faq.service.js");
 class FAQController {
   //
   createFAQ = withTransaction(async (req, res, next, session) => {
-    console.log(req.body);
+
     const payload = {
       title: req?.body?.title,
       details: req?.body?.details
@@ -24,11 +24,11 @@ class FAQController {
   })
 
   getAllFAQWithPagination = catchError(async (req, res, next) => {
-    let payload={
-			page: req.query.page,
-			limit: req.query.limit,
-			order: req.query.order,
-		}
+    let payload = {
+      page: req.query.page,
+      limit: req.query.limit,
+      order: req.query.order,
+    }
     const faqResult = await FAQService.getAllFAQWithPagination(payload);
     const resDoc = responseHandler(200, 'FAQs get successfully', faqResult);
     res.status(resDoc.statusCode).json(resDoc);

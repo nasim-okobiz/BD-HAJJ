@@ -4,7 +4,6 @@ import { UserOutlined, PhoneOutlined, InfoCircleOutlined } from '@ant-design/ico
 import { API_BASE_URL } from "../../Components/config";
 
 const ViewBookingDetails = ({ visible, onClose, booking }) => {
-    console.log(booking)
   return (
     <Modal
       title="Booking Details"

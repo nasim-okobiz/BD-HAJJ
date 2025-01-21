@@ -28,7 +28,6 @@ const ContactUsComponent = () => {
       message.error("Failed to fetch contactUss.");
     }
   };
-console.log(contactUss)
 
 
   const handleDelete = async (id) => {

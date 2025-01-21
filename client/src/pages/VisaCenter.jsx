@@ -13,7 +13,6 @@ const VisaCenter = () => {
     const fetchPackages = async () => {
       try {
         const response = await api.get("/package?priority=3");
-        console.log("These are products", response.data);
         if (response.data.statusCode === 200) {
           setPackagesData(response.data.data);
         }

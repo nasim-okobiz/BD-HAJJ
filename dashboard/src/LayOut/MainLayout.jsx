@@ -60,6 +60,11 @@ import { MdJoinInner } from "react-icons/md";
 import { LuPackagePlus } from "react-icons/lu";
 import { MdOutlineCardMembership } from "react-icons/md";
 import NoticeComponent from "../Pages/notice/Notice.jsx";
+import TourPackagesComponent from "../Pages/Tour/AllPackage.jsx";
+import MembershipParameterComponent from "../Pages/membership_Info/MembershipInfo.jsx";
+import MembershipInfoComponent from "../Pages/membership_Parameter/MembershipParameter.jsx";
+import { HiOutlineClipboardDocument } from "react-icons/hi2";
+import { MdOutlineRememberMe } from "react-icons/md";
 
 
 const { Search } = Input;
@@ -162,6 +167,9 @@ const MainLayout = () => {
     case "20":
       content = <VisaPackagesComponent />;
       break;
+    case "26":
+      content = <TourPackagesComponent />;
+      break;
     case "21":
       content = <VideoComponent />;
       break;
@@ -176,8 +184,14 @@ const MainLayout = () => {
       content = <TermsAndConditionsComponent />;
       break;
     case "25":
-        content = <NoticeComponent />;
-        break;
+      content = <NoticeComponent />;
+      break;
+    case "27":
+      content = <MembershipInfoComponent />;
+      break;
+    case "28":
+      content = <MembershipParameterComponent />;
+      break;
 
     default:
       content = (
@@ -207,6 +221,7 @@ const MainLayout = () => {
       getItem("Umrah Package", "18"),
       getItem("Hajj Package", "19"),
       getItem("Visa Package", "20"),
+      getItem("Tour Package", "26"),
     ]),
     getItem(" Booking", "13", <FaUserFriends />),
     // getItem(" User", "14", <MdContacts />),
@@ -221,6 +236,8 @@ const MainLayout = () => {
       getItem("Terms & Conditions", "24"),
     ]),
     getItem(" Notice", "25", <AiOutlineNotification />),
+    getItem(" Membership Document", "28", <MdOutlineRememberMe />),
+    getItem(" Membership Parameter", "27", <HiOutlineClipboardDocument />),
 
   ];
 

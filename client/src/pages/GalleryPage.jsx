@@ -19,7 +19,6 @@ const GalleryPage = () => {
   const [isLoading, setIsLoading] = useState(true); 
   const location = useLocation();
   const { id } = useParams();
-  console.log(id);
   
   const getImageGallerys = async () => {
     try {
@@ -34,7 +33,6 @@ const GalleryPage = () => {
   useEffect(() => {
     getImageGallerys();
   }, [id]);
-  console.log("imageGallerys", imageGallerys);
 
   return (
     <div className="images-gallery-section font-merriweather relative ">

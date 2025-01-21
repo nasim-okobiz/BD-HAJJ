@@ -11,7 +11,6 @@ const SingeBlogPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
   const { id } = useParams();
-  console.log(id);
 
   const getBlogs = async () => {
     try {
@@ -26,7 +25,6 @@ const SingeBlogPage = () => {
   useEffect(() => {
     getBlogs();
   }, [id]);
-  console.log("single blogs", blogs);
 
   return (
     <>

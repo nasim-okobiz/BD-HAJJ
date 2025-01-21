@@ -17,6 +17,8 @@ module.exports = {
     PaymentSchema: require('./booking/payment.js').PaymentSchema,
     JoinUsSchema: require('./joinUs/joinUs.js').JoinUsSchema,
     NoticeSchema: require('./notice/notice.jsx').NoticeSchema,
+    MembershipInfoSchema: require('./membershipInfo/membershipInfo.jsx').MembershipInfoSchema,
+    MembershipParameterSchema: require('./membershipParameter/membershipParameter.jsx').MembershipParameterSchema,
   };
   
 

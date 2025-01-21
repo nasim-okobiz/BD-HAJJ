@@ -27,7 +27,7 @@ class PersonService extends BaseService {
     if (!name || !phone || !postOffice || !division || !district || !upazila || !union) throw new Error("Please fill up all required fields.");
 
     let images;
-    console.log(files.length)
+
     if (files.length) {
       if (Array.isArray(files) && files.length > 0 && isMainThread) {
         // Map over the files and prepare them for upload
@@ -41,7 +41,7 @@ class PersonService extends BaseService {
           mimetype,
         }));
 
-        console.log("imgFile", imgFile);
+
 
         // Handle the upload of each file
         for (let file of imgFile) {
@@ -83,7 +83,7 @@ class PersonService extends BaseService {
 
   async updatePerson(id, payloadFiles, payload) {
     const { files } = payloadFiles;
-    console.log("files", files)
+
     // nidFront, nidBack, passportFront, passportBack, passportPhoto must be required in file upload
     const requiredFiles = {
       nidFront: false,
@@ -110,7 +110,7 @@ class PersonService extends BaseService {
       division, district,
       upazila, union, presentAddress, permanentAddress,
       postCode } = payload;
-    console.log(payload);
+
 
     if (!name || !phone || !postOffice || !division || !district || !upazila || !union || !presentAddress
       || !permanentAddress || !postCode) throw new Error("Please fill up all required fields.");
@@ -131,7 +131,7 @@ class PersonService extends BaseService {
           mimetype,
         }));
 
-        console.log("imgFile", imgFile);
+
 
         // Handle the upload of each file
         for (let file of imgFile) {
@@ -176,7 +176,7 @@ class PersonService extends BaseService {
     if (!status) throw new NotFoundError("Status is required");
     status = (status === "true");
     const person = await this.#repository.updateStatus(id, { status: status });
-    console.log("person", person);
+
     if (!person) throw new NotFoundError("Person not found");
     return person;
   }

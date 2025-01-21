@@ -23,9 +23,9 @@ export const sendSMS = async (smsOptions) => {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    console.log('API Response:============================', data);
+
     // Handle the API response as needed
-    // console.log('API Response:', data);
+
     return data;
   } catch (error) {
     // Handle errors

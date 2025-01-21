@@ -6,7 +6,7 @@ const PersonService = require("./person.service.js");
 class PersonController {
   //
   // createPerson = withTransaction(async (req, res, next, session) => {
-  //   console.log(req.body);
+
   //   const payloadFiles = {
   //     files: req.files,
   //   };
@@ -57,7 +57,7 @@ class PersonController {
 
   updatePerson = catchError(async (req, res, next) => {
     const id = req.params.id;
-    console.log("id", id);
+
     const payloadFiles = {
       files: req?.files,
     };

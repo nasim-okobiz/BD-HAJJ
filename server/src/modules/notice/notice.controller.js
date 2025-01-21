@@ -7,7 +7,7 @@ const NoticeService = require("./notice.service.js");
 class NoticeController {
   //
   createNotice = withTransaction(async (req, res, next, session) => {
-    console.log(req.body);
+
     const payload = {
       notice: req?.body?.notice
     };

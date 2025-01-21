@@ -83,7 +83,6 @@ const LoginCard = () => {
           : { phone: login, password };
 
         const response = await api.post('/auth/singin', payload);
-        console.log('Login successful:', response.data.data);
 
         // Dispatch the action to store the credentials
         dispatch(setCredentials({

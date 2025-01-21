@@ -53,7 +53,6 @@ const BookingPackageDetails = () => {
   const validDate = bookingData?.packageRef?.validDate;
   const isValid = validDate ? new Date(validDate) > Date.now() : false;
 
-  console.log(bookingData);
 
   return (
     <>
@@ -177,7 +176,6 @@ const BookingPackageDetails = () => {
                 key={person?._id}
                 className="bg-white shadow-md rounded-lg py-8 flex flex-col items-center text-center"
               >
-                {console.log(person)}
                 {person?.name && person?.phone ? (
                   <div className="flex flex-wrap items-center gap-5">
                     <div className="w-28 h-28 ">
@@ -216,7 +214,6 @@ const BookingPackageDetails = () => {
             ))}
           </div>
           {
-            // console.log(bookingData?.packageRef?.discountPrice)
 
             bookingData?.packageRef?.discountPrice > 0 ? (
               <>

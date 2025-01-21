@@ -14,6 +14,7 @@ const BookingPayment = () => {
   const [bookingData, setBookingData] = useState(null);
   const { id } = useParams();
   const { accessToken } = useSelector((state) => state.auth);
+  const [acceptTnC, setAcceptTnC] = useState(false);
 
   useEffect(() => {
     const fetchBookingDetails = async () => {
@@ -38,6 +39,10 @@ const BookingPayment = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!acceptTnC) {
+      toast.error("Please accept the terms and conditions to proceed.");
+      return;
+    }
     setBtnLoading(true);
 
     let paymentAmount;
@@ -198,6 +203,21 @@ const BookingPayment = () => {
                       onChange={(e) => setPartialPayment(e.target.value)}
                       className="form-control mt-1.5 p-2 border rounded w-full"
                     />
+                  </div>
+                  <div className="flex items-center mt-6">
+                    <input
+                      type="checkbox"
+                      id="terms"
+                      checked={acceptTnC}
+                      onChange={(e) => setAcceptTnC(e.target.checked)}
+                      className="mr-2"
+                      required
+                    />
+                    <label htmlFor="terms" className="text-sm md:text-base">
+                      I agree to the <Link to="/terms-and-conditions">Terms & Conditions</Link>,{" "}
+                      <Link to="/privacy-policy">Privacy Policy</Link>, and{" "}
+                      <Link to="/refund-policy">Refund Policy</Link>.
+                    </label>
                   </div>
 
                   {btnLoading ? (

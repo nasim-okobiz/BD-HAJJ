@@ -48,7 +48,7 @@ class AboutUsService extends BaseService {
     ) {
       throw new Error("All fields are required");
     }
-    console.log("file", files);
+
 
     const requiredFiles = {
       photo: false,
@@ -83,7 +83,7 @@ class AboutUsService extends BaseService {
         })
       );
 
-      console.log("imgFile", imgFile);
+
 
       // Handle the upload of each file
       for (let file of imgFile) {
@@ -165,7 +165,7 @@ class AboutUsService extends BaseService {
           })
         );
 
-        console.log("imgFile", imgFile);
+
 
         // Handle the upload of each file
         for (let file of imgFile) {
@@ -210,7 +210,7 @@ class AboutUsService extends BaseService {
     const aboutUs = await this.#repository.findById(id);
     if (!aboutUs) throw new NotFoundError("AboutUs not found");
     const deletedAboutUs = await this.#repository.deleteById(id);
-    console.log("aboutUs", aboutUs);
+
     if (deletedAboutUs) {
       await removeUploadFile(aboutUs?.photo);
     }

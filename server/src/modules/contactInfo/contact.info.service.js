@@ -11,7 +11,7 @@ class ContactInfoService extends BaseService {
   }
 
   async createContactInfo(payload, session) {
-    console.log("payload: ", payload)
+
     const { agencyName, address,
       email, phone, whatsapp } = payload;
     if (!agencyName || !address || !email || !phone || !whatsapp) throw new Error("Please provide required information");

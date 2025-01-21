@@ -23,9 +23,8 @@ const CreateAndEditPackageType = ({ visible, setVisible, fetchPackageTypes, edit
       form.resetFields();
     }
   }, [editingPackageType, form, visible]);
-
+     
   const handleCreateOrEdit = async (values) => {
-    console.log("Form Values:", values);
 
     try {
       if (editingPackageType) {

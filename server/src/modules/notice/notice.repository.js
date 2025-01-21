@@ -12,8 +12,8 @@ class NoticeRepository extends BaseRepository {
   }
 
   async createNotice(payload, session) {
-    await this.#model.deleteMany({}, { session });
-    console.log("first privacy notice", payload)
+    // await this.#model.deleteMany({}, { session });
+
     const newNotice = await this.#model.create([payload], { session });
 
     return newNotice;

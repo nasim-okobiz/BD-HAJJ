@@ -29,7 +29,6 @@ const CreateAndEditMembership = ({ visible, setVisible, fetchMemberships, member
   }, [editingMembership, form, visible]);
 
   const handleCreateOrEdit = async (values) => {
-    console.log("Form Values:", values);
 
     try {
       const formData = new FormData();

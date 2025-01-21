@@ -21,8 +21,8 @@ const CreateAndEditJoinUs = ({ visible, setVisible, fetchJoinUss, editingJoinUs 
         description: editingJoinUs.description,
         condition: editingJoinUs.condition,
         amount: editingJoinUs.amount,
+        videoUrl: editingJoinUs.videoUrl
       });
-      setFileList(editingJoinUs.photo ? [{ url: API_BASE_URL + editingJoinUs.photo, originFileObj: null }] : []);
     } else {
       form.resetFields();
       setFileList([]);
@@ -30,8 +30,7 @@ const CreateAndEditJoinUs = ({ visible, setVisible, fetchJoinUss, editingJoinUs 
   }, [editingJoinUs, form, visible]);
 
   const handleCreateOrEdit = async (values) => {
-    console.log("Form Values:", values);
-// return
+    // return
     try {
       const formData = new FormData();
 
@@ -134,7 +133,7 @@ const CreateAndEditJoinUs = ({ visible, setVisible, fetchJoinUss, editingJoinUs 
           label="Amount"
           rules={[{ required: true, message: "Please input the joinUs Amount!" }]}
         >
-          <Input type="Number"/>
+          <Input type="Number" />
         </Form.Item>
         <div>
           <Text strong>Condition:</Text>
@@ -143,7 +142,7 @@ const CreateAndEditJoinUs = ({ visible, setVisible, fetchJoinUss, editingJoinUs 
 
 
 
-        <Form.Item name="photo" label="Upload Photo">
+        {/* <Form.Item name="photo" label="Upload Photo">
           <Upload
             listType="picture"
             fileList={fileList}
@@ -152,6 +151,13 @@ const CreateAndEditJoinUs = ({ visible, setVisible, fetchJoinUss, editingJoinUs 
           >
             <Button icon={<UploadOutlined />}>Upload</Button>
           </Upload>
+        </Form.Item> */}
+        <Form.Item
+          name="videoUrl"
+          label="Video URL"
+          rules={[{ required: true, message: "Please input the joinUs Video!" }]}
+        >
+          <Input />
         </Form.Item>
       </Form>
     </Modal>

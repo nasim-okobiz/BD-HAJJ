@@ -7,7 +7,6 @@ import axiosInstance from "../../Components/Axios";
 import JoditEditor from 'jodit-react';
 
 const TramsAndCondition = ({ visible, setVisible, fetchTermsAndConditionss, editingTermsAndConditions }) => {
-  console.log("editingTermsAndConditions", editingTermsAndConditions)
   const [form] = Form.useForm();
   const editor = useRef(null);
   const [content, setContent] = React.useState("");
@@ -22,7 +21,6 @@ const TramsAndCondition = ({ visible, setVisible, fetchTermsAndConditionss, edit
   }, [editingTermsAndConditions, form, visible]);
 
   const handleCreateOrEdit = async (values) => {
-    console.log("Form Values:", values);
 
     try {
       if (editingTermsAndConditions) {

@@ -67,17 +67,11 @@ const JoinUssComponent = () => {
       key: "amount",
     },
     {
-      title: "Photos",
-      dataIndex: "photo",
-      key: "photo",
-      render: (photo) => (
-        <img
-          src={`${API_BASE_URL}${photo}`}
-          alt="joinUs"
-          style={{ width: "100px", marginRight: "10px" }}
-        />
-      ),
+      title: "Video",
+      dataIndex: "videoUrl",
+      key: "videoUrl"
     },
+    
     {
       title: "Action",
       key: "action",

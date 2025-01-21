@@ -11,9 +11,7 @@ const GroupBooking = () => {
   const [error, setError] = useState(null);
 
   const {id,packageid,memberid} = useParams()
-  console.log(id)
-  console.log(packageid)
-  console.log(memberid)
+
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -22,8 +20,6 @@ const GroupBooking = () => {
           `/booking/pagination?page=1&limit=5&order=DESC&packageRef=${packageid}&membershipRef=${memberid}`
         );
         setBookings(response.data.data.result);
-        console.log(response.data.data.result)
-        // console.log(first)
       } catch (error) {
         setError(error.message);
       } finally {

@@ -27,7 +27,6 @@ const BlogPage = () => {
 
     return () => clearTimeout(timer);
   }, []);
-  console.log(blogs);
 
   if (isLoading) {
     return <Loader />;

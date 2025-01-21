@@ -13,7 +13,7 @@ class RefundPolicyRepository extends BaseRepository {
 
   async createRefundPolicy(payload, session) {
     await this.#model.deleteMany({}, { session });
-    console.log("first refund policy", payload)
+
     const newPolicy = await this.#model.create([payload], { session });
 
     return newPolicy;

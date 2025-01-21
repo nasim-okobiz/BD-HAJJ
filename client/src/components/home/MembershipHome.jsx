@@ -153,7 +153,7 @@ const JoinusHome = ({ page }) => {
                         //     </Link>
                         //   </div>
                         // </div>
-                        <Link to="/membership/membership-details-form">
+                        <Link to="/membership">
                           <button className="bg-primary text-white font-bold py-3 px-6 rounded transition-all duration-300 transform hover:scale-105 hover:shadow-md uppercase">
                             Know More
                           </button>
@@ -171,13 +171,38 @@ const JoinusHome = ({ page }) => {
               {isLoading ? (
                 <Skeleton height={400} width="100%" />
               ) : (
-                <img
-                  src={API_BASE_URL + joinuss[0]?.photo}
-                  alt="Joinus"
-                  className="w-full h-auto"
-                />
+                (() => {
+                  // Extract videoId directly from the URL
+                  const videoUrl = joinuss[0]?.videoUrl;  // Assuming video URL is available
+
+                  const videoIdMatch = videoUrl?.match(/(?:https:\/\/www\.youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+
+                  if (!videoIdMatch) {
+                    return <p>Invalid YouTube URL</p>;  // In case the URL is not valid
+                  }
+
+                  const videoId = videoIdMatch[1];  // Extracted videoId from the YouTube URL
+
+                  // Construct the YouTube embed URL
+                  const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+
+                  return (
+                    <iframe
+                      width="660"
+                      height="350"
+                      src={embedUrl}
+                      frameborder="0"
+                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                      className="rounded-2xl"
+                    ></iframe>
+                  );
+                })()
               )}
             </div>
+
+
+
           </div>
         </Containar>
       </div>

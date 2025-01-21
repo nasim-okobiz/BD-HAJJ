@@ -29,7 +29,7 @@ class MembershipController {
   })
 
   getFindMembershipMemberId = catchError(async (req, res, next) => {
-     const memberId = req.params.memberId;
+    const memberId = req.params.memberId;
     const membershipResult = await MembershipService.getFindMembershipMemberId(memberId);
     const resDoc = responseHandler(200, "Get Find Memberships by MemberId", membershipResult);
     res.status(resDoc.statusCode).json(resDoc);
@@ -58,7 +58,7 @@ class MembershipController {
 
   updateMembership = catchError(async (req, res, next) => {
     const id = req.params.id;
-    console.log("id", id);
+
     const payloadFiles = {
       files: req?.files,
     };
@@ -105,7 +105,7 @@ class MembershipController {
 
   //  payment methods =================================================================
   createMembership = withTransaction(async (req, res, next, session) => {
-    console.log(req.body);
+
     const payloadFiles = {
       files: req.files,
     };
@@ -165,13 +165,13 @@ class MembershipController {
     const { amount, tran_id, currency, status } = req.body;
     const payload = { amount, tran_id, currency, status };
     const token = await MembershipService.addAmountSuccess(payload, session);
-    console.log("token added successfully", token);
-    
+
+
     const encodedToken = encodeURIComponent(JSON.stringify(token));
     res.redirect(`${config.clientBaseURL}/membership/success?data=${encodedToken}`);
   })
   addAmountFail = withTransaction(async (req, res, next, session) => {
-    console.log('req.body --', req.body);
+
     const { amount, tran_id, currency, status } = req.body;
     const payload = { amount, tran_id, currency, status };
     const amountResult = await MembershipService.deleteMembership(payload, session);
@@ -179,7 +179,7 @@ class MembershipController {
 
   })
   addAmountCancel = withTransaction(async (req, res, next, session) => {
-    console.log('req.body --', req.body);
+
     const { amount, tran_id, currency, status } = req.body;
     const payload = { amount, tran_id, currency, status };
     const amountResult = await MembershipService.deleteMembership(payload, session);

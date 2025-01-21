@@ -28,7 +28,7 @@ const BookingList = () => {
     fetchBookings();
   }, [user?.id]);
 
-  console.log("bookings", bookings);
+
 
   // const validDate = bookingData?.packageRef?.validDate;
   // const isValid = validDate ? new Date(validDate) > Date.now() : false;
@@ -40,7 +40,6 @@ const BookingList = () => {
     <div className="py-5 md:py-28">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {bookings.map((booking) => {
-          console.log(booking?.packageRef?.validDate);
           const validDate = booking?.packageRef?.validDate;
           const isValid = validDate ? new Date(validDate) > Date.now() : false;
           return (

@@ -20,7 +20,7 @@ export const abandonedCartTaskManager = async ({
     });
 
     if (customerCart.length === 0) {
-      console.log('customerCart.length === 0');
+
       return;
     }
 
@@ -107,7 +107,7 @@ export const abandonedCartTaskManager = async ({
       }
     );
   } catch (error) {
-    console.log(error);
+
   }
 
 };

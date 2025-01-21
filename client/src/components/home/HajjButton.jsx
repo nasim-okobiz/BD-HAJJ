@@ -4,7 +4,6 @@ import btnshapedown from "../../assets/add/masjidshape.png";
 import { Link } from "react-router-dom";
 
 const HajjButton = ({align}) => {
-  console.log("first", align);
   return (
     <div className={`justify-center flex`}   >
       <div className="relative group cursor-pointer ">

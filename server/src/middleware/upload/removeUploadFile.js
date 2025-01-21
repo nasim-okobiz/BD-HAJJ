@@ -8,6 +8,6 @@ exports.removeUploadFile = async (fileUrl) => {
   try {
     await fs.unlink(removeFile);
   } catch (err) {
-    console.log(err);
+
   }
 };

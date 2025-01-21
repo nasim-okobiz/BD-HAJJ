@@ -60,7 +60,7 @@ class MembershipService extends BaseService {
     return membershipData;
   }
 
-  async getFindMembershipMemberId(memberId){
+  async getFindMembershipMemberId(memberId) {
     const merbership = await this.#repository.getFindMembershipMemberId(memberId);
     if (!merbership) throw new NotFoundError('Membership data not found');
     return merbership;
@@ -78,7 +78,7 @@ class MembershipService extends BaseService {
       phone, occupation, postOffice,
       division, district, upazila, union,
       personCategory } = payload;
-    console.log(payload)
+
     if (!name || !eamil || !phone || !occupation || !postOffice || !division
       || !district || !upazila || !union || !personCategory) throw new Error("Please fill up all required fields.");
     if (phone?.length !== 11) throw new Error("Phone number should be 11 digits");
@@ -88,16 +88,16 @@ class MembershipService extends BaseService {
       // Map over the files and prepare them for upload
       const imgFile = files.map(({ buffer, originalname, fieldname, mimetype }) => ({
         buffer,
-        originalname: 
+        originalname:
           mimetype === "application/pdf"
             ? convertFileNameWithPdfExt(originalname)
             : convertFileNameWithWebpExt(originalname),
         fieldname,
         mimetype,
       }));
-    
-      console.log("imgFile", imgFile);
-    
+
+
+
       // Handle the upload of each file
       for (let file of imgFile) {
         try {
@@ -107,7 +107,7 @@ class MembershipService extends BaseService {
           throw new Error('File upload failed');
         }
       }
-    
+
       // After upload, convert imgFile array to object format
       images = convertImgArrayToObject(imgFile);
     } else {
@@ -130,7 +130,7 @@ class MembershipService extends BaseService {
     if (!status) throw new NotFoundError("Status is required");
     status = (status === "true");
     const membership = await this.#repository.updateStatus(id, { status: status });
-    console.log("membership", membership);
+
     if (!membership) throw new NotFoundError("Membership not found");
     return membership;
   }
@@ -158,7 +158,7 @@ class MembershipService extends BaseService {
       phone, occupation, postOffice,
       division, district, upazila, union,
       personCategory } = payload;
-    console.log(payload)
+
     if (!name || !eamil || !phone || !occupation || !postOffice || !division
       || !district || !upazila || !union || !personCategory) throw new Error("Please fill up all required fields.");
     if (phone?.length !== 11) throw new Error("Phone number should be 11 digits");
@@ -171,16 +171,16 @@ class MembershipService extends BaseService {
       // Map over the files and prepare them for upload
       const imgFile = files.map(({ buffer, originalname, fieldname, mimetype }) => ({
         buffer,
-        originalname: 
+        originalname:
           mimetype === "application/pdf"
             ? convertFileNameWithPdfExt(originalname)
             : convertFileNameWithWebpExt(originalname),
         fieldname,
         mimetype,
       }));
-    
-      console.log("imgFile", imgFile);
-    
+
+
+
       // Handle the upload of each file
       for (let file of imgFile) {
         try {
@@ -190,7 +190,7 @@ class MembershipService extends BaseService {
           throw new Error('File upload failed');
         }
       }
-    
+
       // After upload, convert imgFile array to object format
       images = convertImgArrayToObject(imgFile);
     } else {
@@ -229,7 +229,7 @@ class MembershipService extends BaseService {
       phone, occupation, postOffice,
       division, district, upazila, union,
       personCategory } = payload;
-    console.log(payload)
+
     if (!name || !eamil || !phone || !occupation || !postOffice || !division
       || !district || !upazila || !union || !personCategory) throw new Error("Please fill up all required fields.");
     if (phone?.length !== 11) throw new Error("Phone number should be 11 digits");
@@ -242,16 +242,16 @@ class MembershipService extends BaseService {
       // Map over the files and prepare them for upload
       const imgFile = files.map(({ buffer, originalname, fieldname, mimetype }) => ({
         buffer,
-        originalname: 
+        originalname:
           mimetype === "application/pdf"
             ? convertFileNameWithPdfExt(originalname)
             : convertFileNameWithWebpExt(originalname),
         fieldname,
         mimetype,
       }));
-    
-      console.log("imgFile", imgFile);
-    
+
+
+
       // Handle the upload of each file
       for (let file of imgFile) {
         try {
@@ -261,7 +261,7 @@ class MembershipService extends BaseService {
           throw new Error('File upload failed');
         }
       }
-    
+
       // After upload, convert imgFile array to object format
       images = convertImgArrayToObject(imgFile);
     } else {
@@ -279,7 +279,7 @@ class MembershipService extends BaseService {
 
     // return joinUsData;
     if (membershipData.length && joinUsData) {
-      // console.log('tran_id', idString);
+
       const data = {
         total_amount: joinUsData?.amount,
         currency: 'BDT',
@@ -310,7 +310,7 @@ class MembershipService extends BaseService {
         ship_postcode: 1000,
         ship_country: 'Bangladesh',
       };
-      console.log(data)
+
       // SSLCommerz payment initialization
       const sslcz = new SslCommerzPayment(store_id, store_passwd, is_live);
 
@@ -329,7 +329,7 @@ class MembershipService extends BaseService {
   async addAmountSuccess(payload, session) {
 
     const membershipData = await this.#repository.membershipExists(payload, session)
-    console.log("first member: ", membershipData)
+
     const user_info_encrypted = {
       id: membershipData?._id || null,
       name: membershipData?.name || null,

@@ -17,47 +17,10 @@ class JoinUsService extends BaseService {
     this.#repository = repository;
   }
 
-  async createJoinUs(payloadFiles, payload) {
-    console.log("payload: ", payload)
-    const { files } = payloadFiles;
-    if (!files) throw new Error("Photo is required");
-    let images;
-    if (Array.isArray(files) && files.length > 0 && isMainThread) {
-      // Map over the files and prepare them for upload
-      const imgFile = files.map(({ buffer, originalname, fieldname, mimetype }) => ({
-        buffer,
-        originalname: 
-          mimetype === "application/pdf"
-            ? convertFileNameWithPdfExt(originalname)
-            : convertFileNameWithWebpExt(originalname),
-        fieldname,
-        mimetype,
-      }));
-    
-      console.log("imgFile", imgFile);
-    
-      // Handle the upload of each file
-      for (let file of imgFile) {
-        try {
-          await uploadWorker(file);  // Assuming uploadWorker can handle one file at a time
-        } catch (error) {
-          console.error('Error uploading file:', error);
-          throw new Error('File upload failed');
-        }
-      }
-    
-      // After upload, convert imgFile array to object format
-      images = convertImgArrayToObject(imgFile);
-    } else {
-      throw new Error("Invalid or empty files array");
-    }
-
-    for (const key in images) {
-      payload[key] = images[key];
-    }
+  async createJoinUs( payload) {
     const { title, description,
-      condition, amount, } = payload;
-    if (!title || !description || !condition || !amount) throw new Error("Please provide required information");
+      condition, amount,videoUrl } = payload;
+    if (!title || !description || !condition || !amount || !videoUrl) throw new Error("Please provide required information");
     const joinUsData = await this.#repository.createJoinUs(payload);
     return joinUsData;
   }
@@ -66,58 +29,12 @@ class JoinUsService extends BaseService {
     return await this.#repository.findAll();
   }
 
-  async updateJoinUs(id, payloadFiles, payload) {
-    const { files } = payloadFiles;
-    console.log(files)
-
-    if (files.length) {
-      let images;
-    console.log(files)
-
-    if (Array.isArray(files) && files.length > 0 && isMainThread) {
-      // Map over the files and prepare them for upload
-      const imgFile = files.map(({ buffer, originalname, fieldname, mimetype }) => ({
-        buffer,
-        originalname: 
-          mimetype === "application/pdf"
-            ? convertFileNameWithPdfExt(originalname)
-            : convertFileNameWithWebpExt(originalname),
-        fieldname,
-        mimetype,
-      }));
-    
-      console.log("imgFile", imgFile);
-    
-      // Handle the upload of each file
-      for (let file of imgFile) {
-        try {
-          await uploadWorker(file);  // Assuming uploadWorker can handle one file at a time
-        } catch (error) {
-          console.error('Error uploading file:', error);
-          throw new Error('File upload failed');
-        }
-      }
-    
-      // After upload, convert imgFile array to object format
-      images = convertImgArrayToObject(imgFile);
-    } else {
-      throw new Error("Invalid or empty files array");
-    }
-
-      for (const key in images) {
-        payload[key] = images[key];
-      }
-    }
-
+  async updateJoinUs(id, payload) {
     const { title, description,
-      condition, amount, } = payload;
-    if (!title || !description || !condition || !amount) throw new Error("Please provide required information");
+      condition, amount, videoUrl } = payload;
+    if (!title || !description || !condition || !amount || !videoUrl) throw new Error("Please provide required information");
     const joinUsData = await this.#repository.updateJoinUs(id, payload);
     if (!joinUsData) throw new NotFoundError("JoinUs data not found");
-    // if fild get and update than remove priv file photo 
-    if (files.length && joinUsData?.photo) {
-      await removeUploadFile(joinUsData?.photo)
-    }
     return joinUsData;
 
   }

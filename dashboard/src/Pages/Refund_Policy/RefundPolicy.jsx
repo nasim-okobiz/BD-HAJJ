@@ -29,7 +29,7 @@ const RefundPolicyComponent = () => {
       message.error( error?.response?.data?.message);
     }
   };
-console.log(refundPolicys)
+
 
 
   const handleDelete = async (id) => {

@@ -85,7 +85,6 @@ const RegistrationCard = () => {
       try {
         // Make the API call
         const response = await api.post("/auth/singup", registrationData);
-        console.log(response);
 
         if (
           response.data.statusCode === 200 &&
@@ -114,9 +113,6 @@ const RegistrationCard = () => {
           );
         }
       } catch (error) {
-        console.log(error);
-
-        // Handle API error
         const errorMessage =
           error.response?.data?.message ||
           "Something went wrong. Please try again.";

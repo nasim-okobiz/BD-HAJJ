@@ -6,9 +6,6 @@ import axiosInstance from "../../Components/Axios";
 import moment from "moment";
 const PaymentList = ({ membershipId, visible, onClose }) => {
     const [payments, setPayments] = useState([]);
-    console.log("membershipId-----", membershipId)
-    console.log("membershipId-----",     membershipId?.userRef?._id
-)
 
     useEffect(() => {
         if (membershipId && visible) {
@@ -25,7 +22,7 @@ const PaymentList = ({ membershipId, visible, onClose }) => {
             message.error("Failed to fetch payments.");
         }
     };
-    console.log("payments", payments)
+
     const columns = [
 
         {

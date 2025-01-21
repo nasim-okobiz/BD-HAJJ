@@ -27,7 +27,6 @@ const CreateAndEditImageGallery = ({ visible, setVisible, fetchImageGallerys,  e
   }, [editingImageGallery, form, visible]);
 
   const handleCreateOrEdit = async (values) => {
-    console.log("Form Values:", values);
 
     try {
       const formData = new FormData();

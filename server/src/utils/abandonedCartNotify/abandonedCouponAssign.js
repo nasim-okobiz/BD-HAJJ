@@ -29,6 +29,6 @@ export const abandonedCouponAssign = async ({ data }) => {
     }
   }
   catch (err) {
-    console.log(err);
+
   }
 };

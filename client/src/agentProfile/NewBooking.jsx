@@ -10,13 +10,12 @@ const NewBooking = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const {id} = useParams()
-console.log(id)
+
   useEffect(() => {
     const fetchBookings = async () => {
       try {
         const response = await api.get(`/booking/pagination?page=1&limit=5&order=ASC&membershipRef=${id}`);
         setBookings(response.data.data.result);
-        console.log(response.data.data.result)
       } catch (error) {
         setError(error.message);
       } finally {
@@ -26,8 +25,6 @@ console.log(id)
 
     fetchBookings();
   }, []);
-
-  console.log(bookings)
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;

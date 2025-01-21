@@ -22,7 +22,6 @@ const CreateAndEditFaq = ({ visible, setVisible, fetchRefundPolicys,  editingRef
   }, [editingRefundPolicy, form, visible]);
 
   const handleCreateOrEdit = async (values) => {
-    console.log("Form Values:", values);
 
     try {
       if (editingRefundPolicy) {

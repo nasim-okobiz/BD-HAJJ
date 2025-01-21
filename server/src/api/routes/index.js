@@ -17,8 +17,10 @@ const JoinUsRoute = require("./join.us.route.js");
 const PaymentRoute = require("./payment.route.js");
 const PolicyRoute = require("./policy.route.js");
 const NoticeRoute = require("./notice.route.js");
+const MembershipParameterRoute = require("./membership.parameter.route.js");
 
 const { Router } = require("express");
+const MembershipInfoRoute = require("./membershipInfo.route.js");
 
 const rootRouter = Router();
 
@@ -41,6 +43,8 @@ rootRouter.use('/join-us', JoinUsRoute);
 rootRouter.use('/payment', PaymentRoute);
 rootRouter.use('/policy', PolicyRoute);
 rootRouter.use('/notice', NoticeRoute);
+rootRouter.use('/membershipinfo', MembershipInfoRoute);
+rootRouter.use('/membership-parameter', MembershipParameterRoute);
 
 module.exports = rootRouter;
 

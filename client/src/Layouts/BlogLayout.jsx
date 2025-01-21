@@ -32,7 +32,6 @@ const BlogLayout = () => {
     getblogTypes();
   }, []);
 
-  console.log(blogTypes);
 
   // Get the current category from the pathname
   const currentCategoryId = pathname.split("/").pop();
@@ -86,8 +85,6 @@ const BlogLayout = () => {
 
     return breadcrumbItems;
   };
-
-  console.log(blogTypes);
 
   return (
     <section className="all-blog-section relative font-merriweather bg-gray-50 pb-0 sm:pb-32">

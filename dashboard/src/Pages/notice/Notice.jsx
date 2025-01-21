@@ -29,7 +29,6 @@ const NoticeComponent = () => {
       message.error( error?.response?.data?.message);
     }
   };
-console.log(notices)
 
 
   const handleDelete = async (id) => {

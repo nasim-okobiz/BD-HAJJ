@@ -76,10 +76,10 @@ const HomeMember = () => {
               <h2 className="text-[24px] lg:text-[36px] text-center uppercase">
                 Our Members
               </h2>
-              <p className="text-[16px] lg:text-[20px] text-center mt-3">
+              <p className="text-[16px] lg:text-[20px] text-center mt-1">
                 Approvals &amp; Certification Of BD Umrah Hajj Kafela
               </p>
-              <div className="relative w-full flex justify-center mt-2">
+              <div className="relative w-full flex justify-center pb-3">
                 <img
                   src={headingLine}
                   alt="Heading Line"
@@ -104,8 +104,8 @@ const HomeMember = () => {
           </div> */}
 
             {/* Membership Section with Skeleton Loader */}
-            <div className="memberships lg:p-5 rounded-md">
-              <section className="section__container relative">
+            <div className="memberships lg:p-5 rounded-md bg-slate-300">
+              <section className="section__container relative ">
                 <Swiper
                   modules={[Navigation, Pagination, Autoplay]}
                   spaceBetween={26}
@@ -148,7 +148,7 @@ const HomeMember = () => {
                   ) : (
                     memberships?.map((membership, index) => (
                       <SwiperSlide key={index}>
-                        <div className="section__card h-[400px] lg:max-w-[300px] uppercase">
+                        <div className="section__card h-[400px] lg:max-w-[300px] uppercase bg-black ">
                           <div className="absolute left-4 top-4 text-white text-[28px]">
                             <RiDoubleQuotesL />
                           </div>
@@ -159,7 +159,7 @@ const HomeMember = () => {
                               `${membership?.agentType} member`
                             )}
                           </p>
-                          <div className="flex justify-between items-center">
+                          <div className="flex justify-between items-center ">
                             {/* Photo Section */}
                             <div>
                               {loading ? (
@@ -266,7 +266,7 @@ const HomeMember = () => {
                                 <Skeleton width="60%" />
                               ) : (
                                 <>
-                                  <strong>Hotline:</strong>
+                                  <strong>Hotline:</strong><br/>
                                   <span className="text-gray-400">
                                     +880 1605959999
                                   </span>

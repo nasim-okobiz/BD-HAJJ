@@ -48,7 +48,6 @@ const CreateAndEditPackage = ({ visible, setVisible, fetchPackages, packageTypes
   }, [editingPackage, form, visible]);
 
   const handleCreateOrEdit = async (values) => {
-    console.log("Form Values:", values);
 
     try {
       const formData = new FormData();

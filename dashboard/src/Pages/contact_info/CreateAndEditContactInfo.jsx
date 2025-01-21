@@ -35,7 +35,6 @@ const CreateAndEditContactInfo = ({ visible, setVisible, fetchContactInfos, edit
   }, [visible, editingContactInfo, form]);
 
   const handleCreateOrEdit = async (values) => {
-    console.log("Form Values:", values);
 
     try {
       if (editingContactInfo) {

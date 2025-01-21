@@ -21,7 +21,6 @@ const PaymentList = ({ bookingId, visible, onClose }) => {
       message.error("Failed to fetch payments.");
     }
   };
-  console.log("payments", payments)
   const columns = [
 
     {

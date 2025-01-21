@@ -7,12 +7,12 @@ const VideoGalleryService = require("./video.gallery.service.js");
 class VideoGalleryController {
   //
   createVideoGallery = withTransaction(async (req, res, next, session) => {
-    console.log(req.body);
+
     const payload = {
       video: req.body.video,
     };
-    const videoGalleryResult = await VideoGalleryService.createVideoGallery(payload,session);
-    const resDoc = responseHandler(201,"VideoGallery Created successfully",videoGalleryResult);
+    const videoGalleryResult = await VideoGalleryService.createVideoGallery(payload, session);
+    const resDoc = responseHandler(201, "VideoGallery Created successfully", videoGalleryResult);
     res.status(resDoc.statusCode).json(resDoc);
   });
 
@@ -35,7 +35,7 @@ class VideoGalleryController {
 
   updateVideoGallery = catchError(async (req, res, next) => {
     const id = req.params.id;
-    console.log("id", id);
+
     const payload = {
       video: req?.body?.video
     };

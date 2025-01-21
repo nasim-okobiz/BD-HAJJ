@@ -68,7 +68,6 @@ const MembershipForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    console.log("Form Data:", formData); // Log form data for debugging
 
     const formDataToSend = new FormData();
     // Append form data
@@ -98,8 +97,6 @@ const MembershipForm = () => {
           "Authorization": `${accessToken}`,
         },
       });
-      console.log("response ----:", response);
-      console.log("Success:", response?.data?.data?.url);
 
       window.location.replace(response?.data?.data?.url)
       toast.success('Membership Successful', {

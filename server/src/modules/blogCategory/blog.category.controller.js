@@ -6,7 +6,7 @@ const BlogCategoryService = require("./blog.category.service.js");
 class BlogCategoryController {
   //
   createBlogCategory = withTransaction(async (req, res, next, session) => {
-    console.log(req.body);
+
     const payload = {
       name: req?.body?.name,
     };
@@ -29,11 +29,11 @@ class BlogCategoryController {
   })
 
   getAllBlogCategoryWithPagination = catchError(async (req, res, next) => {
-    let payload={
-			page: req.query.page,
-			limit: req.query.limit,
-			order: req.query.order,
-		}
+    let payload = {
+      page: req.query.page,
+      limit: req.query.limit,
+      order: req.query.order,
+    }
     const blogCategory = await BlogCategoryService.getAllBlogCategoryWithPagination(payload);
     const resDoc = responseHandler(200, 'BlogCategorys get successfully', blogCategory);
     res.status(resDoc.statusCode).json(resDoc);
@@ -42,7 +42,7 @@ class BlogCategoryController {
   updateBlogCategory = catchError(async (req, res, next) => {
     const id = req.params.id;
     const payload = {
-      name:  req?.body?.name,
+      name: req?.body?.name,
     };
     const blogCategoryResult = await BlogCategoryService.updateBlogCategory(id, payload);
     const resDoc = responseHandler(201, "BlogCategory Update successfully");

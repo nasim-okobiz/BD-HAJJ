@@ -7,17 +7,15 @@ const JoinUsService = require("./join.us.service.js");
 class JoinUsController {
   //
   createJoinUs = withTransaction(async (req, res, next, session) => {
-    console.log(req.body);
-    const payloadFiles = {
-      files: req.files,
-    };
+
     const payload = {
       title: req?.body?.title,
       description: req?.body?.description,
       condition: req?.body?.condition,
       amount: req?.body?.amount,
+      videoUrl: req?.body?.videoUrl
     };
-    const joinUsResult = await JoinUsService.createJoinUs(payloadFiles,payload, session);
+    const joinUsResult = await JoinUsService.createJoinUs(payload, session);
     const resDoc = responseHandler(201, "JoinUs Created successfully", joinUsResult);
     res.status(resDoc.statusCode).json(resDoc);
   });
@@ -29,20 +27,18 @@ class JoinUsController {
   })
 
   updateJoinUs = catchError(async (req, res, next) => {
-    console.log(req.body);
+
     // id 
     const id = req.params.id;
-    console.log("id", id);
-    const payloadFiles = {
-      files: req.files,
-    };
+
     const payload = {
       title: req?.body?.title,
       description: req?.body?.description,
       condition: req?.body?.condition,
       amount: req?.body?.amount,
+      videoUrl: req?.body?.videoUrl,
     };
-    const joinUsResult = await JoinUsService.updateJoinUs(id,payloadFiles, payload);
+    const joinUsResult = await JoinUsService.updateJoinUs(id, payload);
     const resDoc = responseHandler(201, "JoinUs Update successfully");
     res.status(resDoc.statusCode).json(resDoc);
   });

@@ -7,7 +7,7 @@ const AboutUsService = require("./about.us.service.js");
 class AboutUsController {
   //
   createAboutUs = withTransaction(async (req, res, next, session) => {
-    console.log(req.body);
+
     const payloadFiles = {
       files: req.files,
     };

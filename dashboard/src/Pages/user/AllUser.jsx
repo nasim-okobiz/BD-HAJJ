@@ -4,10 +4,10 @@ import axiosInstance from "../../Components/Axios";
 import { API_BASE_URL } from "../../Components/config";
 import { FaAmazonPay } from "react-icons/fa6";
 import { MdOutlineViewInAr } from "react-icons/md";
-import { AiOutlineDelete } from "react-icons/ai";
 import { MdOutlinePayments } from "react-icons/md";
 import PaymentForm from "./PaymentForm";
 import PaymentList from "./PaymentList";
+import { AiOutlineDelete } from "react-icons/ai";
 const UsersComponent = () => {
   const [users, setUsers] = useState([]);
   const [showPaymentForm, setShowPaymentForm] = useState(false);
@@ -25,14 +25,14 @@ const UsersComponent = () => {
     try {
       const response = await axiosInstance.get("/auth/user");
       const userData = response?.data?.data?.result;
-      console.log("userData", userData)
-      if (Array.isArray(userData)) {
-        setUsers(userData);
-      } else {
-        setUsers([]);
-        console.error("Unexpected data format:", userData);
-        message.error("Failed to fetch users - invalid data format.");
-      }
+      setUsers(response?.data?.data);
+      // if (Array.isArray(userData)) {
+      //   setUsers(userData);
+      // } else {
+      //   setUsers([]);
+      //   console.error("Unexpected data format:", userData);
+      //   message.error("Failed to fetch users - invalid data format.");
+      // }
     } catch (error) {
       message.error("Failed to fetch users.");
     }
@@ -40,28 +40,15 @@ const UsersComponent = () => {
 
 
 
-  const showViewModal = (booking) => {
-    setViewingBooking(booking);
+  const handleDelete = async (id) => {
+    try {
+      await axiosInstance.delete(`/auth/user/${id}`);
+      message.success("User deleted successfully.");
+      fetchUsers();
+    } catch (error) {
+      message.error("Failed to delete package.");
+    }
   };
-
-  const openPaymentForm = (singlebooking) => {
-    setSingleBooking(singlebooking);
-    setShowPaymentForm(true);
-  };
-  const closePaymentForm = () => {
-    setShowPaymentForm(false);
-    setSingleBooking(null);
-  };
-
-  const openPaymentList = (booking) => {
-    setSelectedBooking(booking);
-    setPaymentListVisible(true);
-  };
-  const closePaymentList = () => {
-    setPaymentListVisible(false);
-    setSelectedBooking(null);
-  };
-
 
 
 
@@ -132,18 +119,26 @@ const UsersComponent = () => {
     //     )
     //   ),
     // },
-    // {
-    //   title: "Action",
-    //   key: "action",
-    //   render: (text, record) => (
-    //     <div>
-    //       <Button icon={<FaAmazonPay style={{ fontSize: '22px' }} />} type="link" onClick={() => openPaymentForm(record)}>
-    //       </Button>
-    //       <Button icon={<MdOutlinePayments style={{ fontSize: '22px' }} />} type="link" onClick={() => openPaymentList(record)}>
-    //       </Button>
-    //     </div>
-    //   ),
-    // },
+    {
+      title: "Action",
+      key: "action",
+      render: (text, record) => (
+        <div>
+          {/* <Button icon={<FaAmazonPay style={{ fontSize: '22px' }} />} type="link" onClick={() => openPaymentForm(record)}>
+          </Button> */}
+
+          <Popconfirm
+            title="Are you sure delete this package?"
+            onConfirm={() => handleDelete(record?._id)}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Button icon={<AiOutlineDelete style={{ fontSize: '22px', color: 'red' }} />} type="link" >
+            </Button>
+          </Popconfirm>
+        </div>
+      ),
+    },
   ];
 
   return (
@@ -152,18 +147,7 @@ const UsersComponent = () => {
         <h1 className="text-2xl font-bold">All Users</h1>
       </div>
 
-      <Table columns={columns} dataSource={users || []} rowKey="_id" scroll={{ x: 800 }}/>
-      {/* <PaymentForm
-        visible={showPaymentForm}
-        onClose={closePaymentForm}
-        singleBooking={singleBooking}
-        fetchUsers={fetchUsers}
-      />
-      <PaymentList
-        bookingId={selectedBooking?._id}
-        visible={paymentListVisible}
-        onClose={closePaymentList}
-      /> */}
+      <Table columns={columns} dataSource={users || []} rowKey="_id" scroll={{ x: 800 }} />
     </div>
   );
 };

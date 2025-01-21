@@ -34,7 +34,6 @@ const PackageDetails = () => {
   const handleAgreement = () => {
     setIsAgreed(!isAgreed);
   };
-  console.log(packages);
   const termsAndConditions = packages?.termsAndConditions || "";
 
   // Split the text into a truncated part and a full part

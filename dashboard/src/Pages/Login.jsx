@@ -22,8 +22,6 @@ const Login = () => {
   }, [navigate]);
 
   const onFinish = async (values) => {
-    console.log("values", values);
-
     // Determine if contactInfo is an email or a phone number
     const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.contactInfo);
 
@@ -31,7 +29,6 @@ const Login = () => {
     const data = isEmail
       ? { email: values.contactInfo, password: values.password }
       : { phone: values.contactInfo, password: values.password };
-    console.log("data", data);
 
     // setLoading(true);
     try {
@@ -45,8 +42,6 @@ const Login = () => {
       localStorage.setItem("user", JSON.stringify(response.data));
       loginCookies(response?.data?.data?.accessToken)
       dispatch(activeUser(response?.data?.data));
-      console.log(response);
-      console.log(response?.data?.data);
 
       setTimeout(() => {
         if (response?.data?.data?.user?.role === "admin") {

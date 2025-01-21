@@ -8,6 +8,10 @@ const bannerschema = new Schema({
     status:{
         type: Boolean,
         default:true
+    },
+    packageRef:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'package'
     }
 
 }, { timestamps: true });

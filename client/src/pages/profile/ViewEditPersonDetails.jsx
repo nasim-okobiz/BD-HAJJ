@@ -31,9 +31,6 @@ const ViewEditPersonDetails = () => {
       try {
         const response = await api.get(`/person/${id}`);
         setPersonData(response.data.data);
-        console.log(response.data.data)
-        console.log(response.data.data.passportFront)
-        // Set previews for existing images
 
         setPreview((prev) => ({
           ...prev,
@@ -43,7 +40,6 @@ const ViewEditPersonDetails = () => {
           nidBack: response?.data?.data?.nidBack ? API_BASE_URL + response?.data?.data?.nidBack : prev.aadhaarBack, // Corrected to nidBack
           passportPhoto: response.data.data.passportPhoto ? API_BASE_URL + response.data.data.passportPhoto : prev.personFace,
         }));
-        console.log("first", preview)
       } catch (err) {
         setError(err.message);
       } finally {
@@ -68,14 +64,10 @@ const ViewEditPersonDetails = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(formRef.current);
-
-    // You might want to validate formData here to ensure all required fields are present
-    console.log(formData); // For debugging, you might want to log the content of formData
     setButtonLoading(true);
     try {
       // Update this line to change 'email' to 'eamil'
       const response = await api.put(`/person/${id}`, formData);
-      console.log("Success:", response.data.data);
       navigate(-1); // Navigate back after successful update
     } catch (error) {
       toast.error(error.response.data.message)

@@ -77,10 +77,10 @@ const UmrahPackage = () => {
                 {/* Heading Section */}
                 <div className="flex flex-col items-center lg:text-xl">
                   {/* Heading and Text */}
-                  <div className="uppercase flex items-center space-x-2">
-                    <p className="text-center tracking-wider">umrah /</p>
+                  <div className="uppercase flex items-center space-x-2  border-2 border-primary   py-1 lg:py-2 px-4 lg:px-4 rounded  ">
+                    <p className="text-center tracking-wider">ওমরাহ /</p>
                     <h3 className="text-center tracking-wider">
-                      {packageHead?.name}
+                     umrah package
                     </h3>
                   </div>
 
@@ -95,7 +95,7 @@ const UmrahPackage = () => {
                 </div>
 
                 {/* Button Section */}
-                <Link to="/packages">
+                <Link to={`/packages/category/${packageHead?._id}`}>
                   <button className="bg-primary text-white font-bold py-1 lg:py-2 px-4 lg:px-4 rounded transition-all duration-300 transform hover:scale-105 hover:shadow-md uppercase lg:text-sm">
                     View All Package
                   </button>
@@ -156,7 +156,7 @@ const UmrahPackage = () => {
               <div
                 className={` ${
                   packagesData?.length > 0 && "bg-slate-200"
-                }  lg:p-5 rounded-md`}
+                }  lg:p-5 rounded-md `}
               >
                 <Swiper
                   spaceBetween={20}
@@ -187,7 +187,7 @@ const UmrahPackage = () => {
                           <div className="h-[160px] md:h-[100px] w-full overflow-hidden">
                             <img
                               onClick={() => navigate(`/package/${pkg._id}`)}
-                              className="h-full w-full object-cover group-hover:scale-105 transition-all ease-linear duration-300"
+                              className="h-full w-full  group-hover:scale-105 transition-all ease-linear duration-300"
                               src={API_BASE_URL + pkg.photo}
                               alt={pkg.name}
                             />

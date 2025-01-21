@@ -16,8 +16,6 @@ function Header() {
   const fetchData = async () => {
     try {
       const response = await api.get("/notice");
-      console.log("API Response:", response);
-      console.log("API Response:", response.data.data[0]);
       setAnnouncements(response?.data?.data[0]?.notice);
     } catch (error) {
       console.error("Error fetching announcements:", error);
@@ -30,7 +28,6 @@ function Header() {
     fetchData();
   }, []);
 
-  console.log("Announcements:", announcements);
 
   return (
     <section className="bg-primary py-1 flex items-center justify-between font-merriweather">

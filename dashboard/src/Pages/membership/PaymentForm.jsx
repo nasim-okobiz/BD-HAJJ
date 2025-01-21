@@ -7,7 +7,6 @@ import axiosInstance from "../../Components/Axios";
 
 const PaymentForm = ({ visible, onClose, singleMembership, fetchUsers }) => {
   const [amount, setAmount] = useState("");
-  console.log("singleMembership", singleMembership);
   
   const handlePayment = async () => {
     // Prevent payment if the amount is greater than totalDue

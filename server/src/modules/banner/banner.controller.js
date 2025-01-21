@@ -7,14 +7,14 @@ const BannerService = require("./banner.service.js");
 class BannerController {
   //
   createBanner = withTransaction(async (req, res, next, session) => {
-    console.log(req.body);
+
     const payloadFiles = {
       files: req.files,
     };
-    const bannerResult = await BannerService.createBanner(
-      payloadFiles,
-      session
-    );
+    const payload = {
+      packageRef: req.body.packageRef,
+    };
+    const bannerResult = await BannerService.createBanner(payloadFiles, payload, session);
     const resDoc = responseHandler(
       201,
       "Banner Created successfully",
@@ -31,11 +31,14 @@ class BannerController {
 
   updateBanner = catchError(async (req, res, next) => {
     const id = req.params.id;
-    console.log("id", id);
+
     const payloadFiles = {
       files: req?.files,
     };
-    const bannerResult = await BannerService.updateBanner(id, payloadFiles);
+    const payload = {
+      packageRef: req.body.packageRef,
+    };
+    const bannerResult = await BannerService.updateBanner(id, payload, payloadFiles);
     const resDoc = responseHandler(201, "Banner Update successfully");
     res.status(resDoc.statusCode).json(resDoc);
   });

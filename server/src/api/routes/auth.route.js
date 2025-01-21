@@ -16,6 +16,7 @@ AuthRouter
   .put('/', upload.any(), jwtAuth('admin', 'user', 'agent'), controller.updateUser)
   .get('/user', jwtAuth('admin'), controller.getAllUserWithPagination)
   .get('/user/:id', jwtAuth('admin'), controller.getSingleUser)
+  .delete('/user/:id', jwtAuth('admin'), controller.deleteUser)
   .get('/role/:id', jwtAuth('admin'), controller.getSingleUser)
 
 

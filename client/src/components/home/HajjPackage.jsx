@@ -68,7 +68,7 @@ const HajjPackage = ({ page }) => {
             )}
             <div className="absolute inset-0 bg-white/80" />
             <Containar>
-              <div className="relative z-10">
+              <div className="relative z-10 ">
                 {/* <div className="text-gray-700 pb-10 sm:pb-5">
                   <h3 className="uppercase text-center tracking-wider text-[24px] lg:text-[30px] sm:py-2">
                     {packageHead ? (
@@ -96,8 +96,8 @@ const HajjPackage = ({ page }) => {
                   {/* Heading Section */}
                   <div className="flex flex-col items-center lg:text-xl">
                     {/* Heading and Text */}
-                    <div className="uppercase flex items-center space-x-2">
-                      <p className="text-center tracking-wider">hajj / হজ্জ  package /</p>
+                    <div className="uppercase flex items-center space-x-2    border-2 border-primary   py-1 lg:py-2 px-4 lg:px-4 rounded  ">
+                      <p className="text-center tracking-wider"> হজ্জ / hajj package  </p>
                     </div>
 
                     {/* Underline Image */}
@@ -111,13 +111,14 @@ const HajjPackage = ({ page }) => {
                   </div>
 
                   {/* Button Section */}
-                  <Link to="/packages">
+                  {/* <Link to="/packages"> */}
+                  <Link to={`/packages/category/${packageHead?._id}`}>
                     <button className="bg-primary text-white font-bold py-1 lg:py-2 px-4 lg:px-4 rounded transition-all duration-300 transform hover:scale-105 hover:shadow-md uppercase lg:text-sm">
                       View All Package
                     </button>
                   </Link>
                 </div>
-                <div className="mx-auto grid grid-cols-1 lg:grid-cols-4 gap-4 items-center">
+                <div className="mx-auto grid grid-cols-1 lg:grid-cols-4 gap-4 items-center ">
                   {/* Left Section */}
                   <div className="text-gray-700 space-y-6">
                     {earlyBirdPackage ? (
@@ -166,7 +167,7 @@ const HajjPackage = ({ page }) => {
                   </div>
 
                   {/* Right Section */}
-                  <div className="md:col-span-3 lg:border-l-2 p-5 h-auto">
+                  <div className="md:col-span-3 lg:border-l-2 p-5 h-auto  bg-slate-200 rounded-lg">
                     <Swiper
                       spaceBetween={20}
                       slidesPerView={1}
@@ -186,63 +187,73 @@ const HajjPackage = ({ page }) => {
                       className={`${packagesData?.length > 4 && "shadow-md"}`}
                     >
                       {packagesData.length > 0 ? (
-                        packagesData.map((pkg) => (
-                          <SwiperSlide key={pkg._id}>
-                            <div className="overflow-hidden group cursor-pointer p-4 h-full shadow-xl rounded-lg relative z-20">
-                              <div className="h-[160px] md:h-[100px] w-full overflow-hidden">
-                                <img
-                                  onClick={() =>
-                                    navigate(`/package/${pkg._id}`)
-                                  }
-                                  className="h-full w-full object-cover group-hover:scale-105 transition-all ease-linear duration-300"
-                                  src={API_BASE_URL + pkg.photo}
-                                  alt={pkg.name}
-                                />
-                              </div>
-                              <div className="flex flex-col justify-between">
-                                <div className="mt-3">
-                                  <h3
-                                    onClick={() =>
-                                      navigate(`/package/${pkg._id}`)
-                                    }
-                                    className="text-[10px] sm:text-[16px] font-semibold leading-7 mb-2"
-                                  >
-                                    {pkg.name}
-                                  </h3>
-                                  <h4 className="text-[14px] sm:text-[14px] font-semibold flex items-center gap-2">
-                                    TK {pkg?.mrpPrice?.toLocaleString()}
-                                    {pkg.price > pkg.mrpPrice && (
-                                      <span className="line-through font-normal text-sm">
-                                        TK {pkg?.price?.toLocaleString()}
-                                      </span>
-                                    )}
-                                  </h4>
-                                  <div className="flex flex-col gap-1 mt-2">
-                                    <p className="text-[13px] sm:text-[12px]">
-                                      {pkg.roomType.replace(/<[^>]*>?/gm, "")}
-                                    </p>
-                                    <p className="text-[13px] sm:text-[12px]">
-                                      {pkg.hotalDistance
-                                        .join(", ")
-                                        .slice(0, 50)
-                                        .replace(/\s\S*$/, "") + " . . ."}
-                                    </p>
-                                  </div>
+                         packagesData.map((pkg) => {
+                          const validDate = pkg?.validDate;
+                          const isValid = validDate ? new Date(validDate) > Date.now() : false;
+
+                          return (
+                            <SwiperSlide key={pkg._id}>
+                              <div className="overflow-hidden bg-white group cursor-pointer p-4 h-full shadow-xl rounded-lg relative z-20">
+                                <div className="h-[160px] md:h-[100px] w-full overflow-hidden">
+                                  <img
+                                    onClick={() => navigate(`/package/${pkg._id}`)}
+                                    className="h-full w-full group-hover:scale-105 transition-all ease-linear duration-300"
+                                    src={API_BASE_URL + pkg.photo}
+                                    alt={pkg.name}
+                                  />
                                 </div>
-                                {pkg?.discountPrice > 0 ? (
-                                  <Link
+                                <div className="flex flex-col justify-between">
+                                  <div className="mt-3 pb-5">
+                                    <h3
+                                      onClick={() => navigate(`/package/${pkg._id}`)}
+                                      className="text-[10px] sm:text-[16px] font-semibold leading-7 mb-2"
+                                    >
+                                      {pkg.name}
+                                    </h3>
+                                    <h4 className="text-[14px] sm:text-[14px] font-semibold flex items-center gap-2">
+                                      TK {pkg?.mrpPrice?.toLocaleString()}
+                                      {pkg.price > pkg.mrpPrice && (
+                                        <span className="line-through font-normal text-sm">
+                                          TK {pkg?.price?.toLocaleString()}
+                                        </span>
+                                      )}
+                                    </h4>
+                                    <div className="flex flex-col gap-1 mt-2">
+                                      <p className="text-[13px] sm:text-[12px]">
+                                        {pkg.roomType.replace(/<[^>]*>?/gm, "")}
+                                      </p>
+                                      <p className="text-[13px] sm:text-[12px]">
+                                        {pkg.hotalDistance
+                                          .join(", ")
+                                          .slice(0, 50)
+                                          .replace(/\s\S*$/, "") + " . . ."}
+                                      </p>
+                                    </div>
+                                  </div>
+                                  {isValid ? (<Link
                                     to={`/package/${pkg._id}`}
                                     className="w-full block bg-semisecondary hover:text-semisecondary border border-semisecondary py-2 px-4 rounded text-white hover:bg-white font-bold transition-all ease-linear duration-200 text-center mt-5"
                                   >
                                     Place Order
-                                  </Link>
-                                ) : (
-                                  <Skeleton height={40} />
-                                )}
+                                  </Link>) :
+
+                                    (<div className="flex items-center gap-2 text-gray-700">
+
+                                      <button
+                                        // to={`/package/${pkg._id}`}
+                                        disabled={true}
+                                        className=" w-full block text-center b  border border-red-600 text-red-600 py-2 px-4 rounded  font-bold transition-all ease-linear duration-200"
+                                      >
+                                        Package Expired
+                                      </button>
+
+                                    </div>)
+                                  }
+                                </div>
                               </div>
-                            </div>
-                          </SwiperSlide>
-                        ))
+                            </SwiperSlide>
+                          )
+                        })
                       ) : (
                         <Skeleton count={3} height={200} />
                       )}

@@ -20,6 +20,7 @@ const Home = () => {
       <Banner />
       <UmrahPackage />
       <HajjPackage />
+      <VisaPackage />
       <TourPackage />
       <AboutHome />
       <HomeMember />

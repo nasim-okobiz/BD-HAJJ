@@ -29,7 +29,6 @@ const PrivacyPolicyComponent = () => {
       message.error( error?.response?.data?.message);
     }
   };
-console.log(privacyPolicys)
 
 
   const handleDelete = async (id) => {

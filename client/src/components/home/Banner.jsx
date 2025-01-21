@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import api from "../axios/Axios";
 import { API_BASE_URL } from "../axios/config";
 import btnshapeup from "../../assets/add/masjid.png";
@@ -15,7 +15,7 @@ const Banner = () => {
   const [banners, setBanners] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
-
+  const navigate = useNavigate();
   const getBanners = async () => {
     try {
       const response = await api.get(`/banner`);
@@ -30,6 +30,11 @@ const Banner = () => {
   useEffect(() => {
     getBanners();
   }, []);
+
+  const handelBannerPackage = (id) => {
+    // id to redirect Url
+    navigate(`/package/${id}`);
+  };
 
   return (
     <div>
@@ -74,36 +79,15 @@ const Banner = () => {
           {banners?.map((slide, index) => (
             <SwiperSlide key={index}>
               <div className="relative w-full">
-                <Link to={"/packages"}>
-                  {/* <div className="absolute ml-20 top-2/3 left-2/4 hidden md:block transform -translate-x-3/4 text-white px-6 py-2 rounded-full z-10">
-                    <div className="relative group cursor-pointer ">
-                      <img
-                        className="w-[38px] sm:w-[45px] absolute group-hover:left-[70%] left-[10%] transition-all ease-in-out duration-300 -top-[80%]"
-                        src={btnshapeup}
-                      />
-                      <img
-                        className="w-[180px] sm:w-[230px] "
-                        src={btnshapedown}
-                      />
-                      <div className="absolute left-1/2 top-[60%] -translate-x-1/2 -translate-y-1/2 text-white text-[16px] sm:text-xl font-semibold">
-                        <Link to={"/packages"} className="button block">
-                          Know More
-                        </Link>
-                      </div>
-                    </div>
-                  </div> */}
-
-                  {/* Updated button */}
-                  <div className="absolute top-2/3 left-1/2 hidden md:block transform -translate-x-1/2 text-white px-6 py-2 rounded-full z-10">
-                    <Link to="/packages">
-                      <button className="bg-primary text-white font-bold py-2 px-6 rounded transition-all duration-300 transform hover:scale-105 hover:shadow-md uppercase">
-                        Book Now
-                      </button>
-                    </Link>
-                  </div>
-                </Link>
+                {/* Updated button */}
+                <div className="absolute top-2/3 left-1/2 hidden md:block transform -translate-x-1/2 text-white px-6 py-2 rounded-full z-10">
+                  {/* <Link to=`/package`> */}
+                  <button onClick={() => handelBannerPackage(slide?.packageRef?._id)} className="bg-primary text-white font-bold py-2 px-6 rounded transition-all duration-300 transform hover:scale-105 hover:shadow-md uppercase">
+                    Book Now
+                  </button>
+                </div>
                 <img
-                  className="xl:h-[50vh] w-full object-cover"
+                  className="xl:h-[50vh] w-full "
                   src={API_BASE_URL + slide?.photo}
                   alt={`Banner ${index}`}
                 />

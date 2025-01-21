@@ -22,6 +22,7 @@ const BookConfirm = () => {
   const packageId = location.pathname.split("/").pop();
   const navigate = useNavigate();
   const role = useSelector((store)=> store?.auth?.user?.role)
+
   // if no role than naviagte login page will be displayed in the navigation 
   if (!role) {
     navigate('/login');

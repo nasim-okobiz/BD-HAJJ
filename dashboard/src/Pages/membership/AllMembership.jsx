@@ -11,6 +11,7 @@ import { FaAmazonPay } from "react-icons/fa6";
 
 import { MdOutlinePayments } from "react-icons/md";
 import PaymentList from "./PaymentList";
+import { AiOutlineDelete } from "react-icons/ai";
 const MembershipsComponent = () => {
   const [memberships, setMemberships] = useState([]);
   const [membershipCategories, setMembershipCategories] = useState([]);
@@ -117,6 +118,7 @@ const MembershipsComponent = () => {
     setIsImageModalVisible(false);
     setZoomImageSrc("");
   };
+
 
 
   const columns = [
@@ -238,6 +240,15 @@ const MembershipsComponent = () => {
           </Button>
           <Button icon={<MdOutlinePayments style={{ fontSize: '22px' }} />} type="link" onClick={() => openPaymentList(record)}>
           </Button>
+           <Popconfirm
+                      title="Are you sure delete this package?"
+                      onConfirm={() => handleDelete(record?._id)}
+                      okText="Yes"
+                      cancelText="No"
+                    >
+                      <Button icon={<AiOutlineDelete style={{ fontSize: '22px', color: 'red' }} />} type="link" >
+                      </Button>
+                    </Popconfirm>
         </div>
       ),
     },

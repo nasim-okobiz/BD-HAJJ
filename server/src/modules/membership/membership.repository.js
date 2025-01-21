@@ -17,14 +17,14 @@ class MembershipRepository extends BaseRepository {
   }
   async membershipExists(payload, session) {
     const { tran_id } = payload;
-    console.log("tran_id", tran_id);
+
 
     // Convert `tran_id` to a Mongoose ObjectId
     const objectId = new mongoose.Types.ObjectId(tran_id);
 
     // Find the membership and populate the `userRef`
     const membership = await this.#model.findById(objectId).populate('userRef').session(session);
-    console.log('membership', membership);
+
 
     // Update the user's role to 'agent'
     if (membership?.userRef?._id) {
@@ -34,7 +34,7 @@ class MembershipRepository extends BaseRepository {
         { role: 'agent', isAgent: true },
         { new: true, session } // Return updated document and include session
       );
-      console.log('Updated user:', user);
+
 
       return user;
     }
@@ -43,7 +43,7 @@ class MembershipRepository extends BaseRepository {
   }
 
   async getFindMembership(payload) {
-    console.log(payload)
+
     const { memberId, phone, agentType } = payload;
     const query = {};
     if (phone) {
@@ -61,14 +61,14 @@ class MembershipRepository extends BaseRepository {
       const memberships = await this.#model.find(query)
         .sort({ createdAt: -1 })
         .populate('userRef', '-password'); // Exclude the 'password' field from 'userRef'
-  
+
       return memberships;
     } catch (error) {
       console.error('Error fetching memberships:', error);
       throw error;
     }
   }
-  
+
 
   async findMembershipByReferCode(refer_code) {
     return this.#model.findOne({ referCode: refer_code });
@@ -77,7 +77,7 @@ class MembershipRepository extends BaseRepository {
 
   async createMembership(payload, session) {
     const { userRef } = payload;
-    console.log(userRef);
+
     const newMembership = await this.#model.create([payload], { session });
 
     if (newMembership) {
@@ -94,28 +94,28 @@ class MembershipRepository extends BaseRepository {
 
   }
 
- async getFindMembershipMemberId(memberId){
-  return this.#model.findOne({ referCode: memberId });
- }
+  async getFindMembershipMemberId(memberId) {
+    return this.#model.findOne({ referCode: memberId });
+  }
   async updateMembership(id, payload) {
     const updatedMembership = await this.#model.findByIdAndUpdate(id, payload);
     return updatedMembership;
   }
   async getCategoryWiseMembership(id) {
-    return this.#model.find({ membershipCategoryRef: id }).populate('membershipCategoryRef').sort({ createdAt: -1 }); ;
+    return this.#model.find({ membershipCategoryRef: id }).populate('membershipCategoryRef').sort({ createdAt: -1 });;
   }
 
   async getAllMembershipWithPagination(payload) {
     try {
-      const {memberId , phone } = payload;
+      const { memberId, phone } = payload;
       const memberships = await pagination(payload, async (limit, offset, sortOrder) => {
 
         const query = {};
         if (phone) {
-            query.phone = { $regex: `.*${phone}.*`, $options: 'i' };
+          query.phone = { $regex: `.*${phone}.*`, $options: 'i' };
         }
         if (memberId) {
-            query.referCode = memberId;
+          query.referCode = memberId;
         }
         const memberships = await this.#model.find(query)
           .sort({ createdAt: sortOrder, })
@@ -143,7 +143,7 @@ class MembershipRepository extends BaseRepository {
 
   async deleteMembership(payload, session) {
     const { tran_id } = payload;
-    console.log("tran_id", tran_id);
+
 
     // Convert `tran_id` to a Mongoose ObjectId
     const objectId = new mongoose.Types.ObjectId(tran_id);
@@ -152,8 +152,14 @@ class MembershipRepository extends BaseRepository {
 
     // Use `findOneAndDelete` to find and delete the membership
     const membership = await this.#model.findOneAndDelete({ _id: objectId }, { session });
-    console.log(membership);
 
+
+    return membership;
+  }
+
+  async deleteMembershipByUserId(userId, session) {
+    const objectId = new mongoose.Types.ObjectId(userId);
+    const membership = await this.#model.findOneAndDelete({ userRef: objectId }, { session });
     return membership;
   }
 

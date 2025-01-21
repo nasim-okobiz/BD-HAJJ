@@ -21,9 +21,9 @@ class AuthRepository extends BaseRepository {
   async getAuthByPhone(phone) {
     return await this.model.findOne({ phone }).exec();
   }
-  async setUserOTP(id, OTP){
-    console.log("Id", id)
-    const user = await this.model.findByIdAndUpdate(id, {otp: OTP, otpTime: moment.tz("Asia/Dhaka").toDate() }, { new: true });
+  async setUserOTP(id, OTP) {
+
+    const user = await this.model.findByIdAndUpdate(id, { otp: OTP, otpTime: moment.tz("Asia/Dhaka").toDate() }, { new: true });
     return user;
   }
   async updateUserPassword(userId, password) {
@@ -58,11 +58,8 @@ class AuthRepository extends BaseRepository {
 
   async getAllUserWithPagination(payload) {
     try {
-      const users = await pagination(payload, async (limit, offset, sortOrder) => {
-        const users = await this.model.find({}).sort({ createdAt: sortOrder }).skip(offset).limit(limit);
-        const totalUsers = await this.model.countDocuments();
-        return { doc: users, totalDoc: totalUsers };
-      });
+      const users = await this.model.find({})
+        .sort({ createdAt: -1 });
       return users;
     } catch (error) {
       console.error("Error getting users with pagination:", error);

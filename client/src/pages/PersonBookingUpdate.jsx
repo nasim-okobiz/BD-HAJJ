@@ -40,15 +40,9 @@ const PersonBookingUpdate = () => {
     setButtonLoading(true);
     try {
       const response = await api.put(`person/${id}`, formData);
-      console.log("Success:", response.data.data); // Handle the response as needed
       navigate(-1)
     } catch (error) {
       toast.error(error.response.data.message)
-      // console.log( error.response.data.message)
-      // console.error(
-      //   "Error:",
-      //   error.response ? error.response.data.message : error.message
-      // );
     } finally {
       setButtonLoading(false); // Set button loading back to false after request completes
     }

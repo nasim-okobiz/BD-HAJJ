@@ -6,7 +6,7 @@ const ImageGalleryService = require("./image.gallery.service.js");
 class ImageGalleryController {
   //
   createImageGallery = withTransaction(async (req, res, next, session) => {
-    console.log(req.body);
+
     const payloadFiles = {
       files: req.files,
     };
@@ -33,11 +33,11 @@ class ImageGalleryController {
   })
 
   getAllImageGalleryWithPagination = catchError(async (req, res, next) => {
-    let payload={
-			page: req.query.page,
-			limit: req.query.limit,
-			order: req.query.order,
-		}
+    let payload = {
+      page: req.query.page,
+      limit: req.query.limit,
+      order: req.query.order,
+    }
     const imageGallery = await ImageGalleryService.getAllImageGalleryWithPagination(payload);
     const resDoc = responseHandler(200, 'ImageGallerys get successfully', imageGallery);
     res.status(resDoc.statusCode).json(resDoc);
@@ -46,7 +46,7 @@ class ImageGalleryController {
 
   updateImageGallery = catchError(async (req, res, next) => {
     const id = req.params.id;
-    console.log("id", id);
+
     const payloadFiles = {
       files: req?.files,
     };

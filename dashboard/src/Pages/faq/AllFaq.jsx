@@ -29,7 +29,7 @@ const FAQComponent = () => {
       message.error( error?.response?.data?.message);
     }
   };
-console.log(faqs)
+
 
 
   const handleDelete = async (id) => {

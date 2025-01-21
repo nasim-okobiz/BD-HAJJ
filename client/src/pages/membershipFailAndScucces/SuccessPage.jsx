@@ -26,7 +26,6 @@ const SuccessPage = ({ message }) => {
             user: parsedData.user
         }));
     }
-    console.log("Received data:", parsedData);
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-green-100">

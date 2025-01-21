@@ -31,7 +31,6 @@ const CreateAndEditAboutUs = ({ visible, setVisible, fetchAboutUss, editingAbout
   }, [editingAboutUs, form, visible]);
 
   const handleCreateOrEdit = async (values) => {
-    console.log("Form Values:", values);
 
     try {
       const formData = new FormData();

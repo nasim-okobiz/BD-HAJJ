@@ -7,7 +7,7 @@ const ContactInfoService = require("./contact.info.service.js");
 class ContactInfoController {
   //
   createContactInfo = withTransaction(async (req, res, next, session) => {
-    console.log(req.body);
+
     const payload = {
       agencyName: req?.body?.agencyName,
       address: req?.body?.address,

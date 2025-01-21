@@ -19,7 +19,7 @@ const uploadSingleFile = async (file) => {
       .webp({ quality: 20 })
       .toFile(`${config.uploadFolder}${originalname}`);
   } catch (err) {
-    console.log(err);
+
   }
 };
 

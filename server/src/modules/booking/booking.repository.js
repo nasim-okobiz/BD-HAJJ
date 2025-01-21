@@ -23,64 +23,26 @@ class BookingRepository extends BaseRepository {
     return this.#model.find({ bookingCategoryRef: id }).populate('bookingCategoryRef').sort({ createdAt: -1 });;
   }
 
-  // async getAllBookingWithPagination(payload) {
-  //   try {
-  //     const { packageRef, membershipRef } = payload
-  //     console.log("packageRef, membershipRef", packageRef, membershipRef);
-  //     const bookings = await pagination(payload, async (limit, offset, sortOrder) => {
-  //       const query = {};
-  //       if (packageRef && membershipRef) {
-
-  //         query['packageRef.packageRef'] = packageRef;
-  //           query.membershipRef = membershipRef; 
-  //       }else if(membershipRef){
-  //         query.membershipRef = membershipRef;
-  //       }
-
-  //       const bookings = await this.#model.find(query)
-  //         .sort({ createdAt: sortOrder, })
-  //         .skip(offset)
-  //         .limit(limit)
-  //         .populate('personRef')
-  //         .populate('userRef')
-  //         .populate('packageRef')
-  //         .populate('membershipRef')
-
-
-  //       // Count total documents
-  //       const totalBooking = await this.#model.countDocuments();
-
-  //       return { doc: bookings, totalDoc: totalBooking };
-  //     });
-
-  //     return bookings;
-  //   } catch (error) {
-  //     console.error("Error getting bookings with pagination:", error);
-  //     throw error;
-  //   }
-  // }
-
-
   async getAllBookingWithPagination(payload) {
     try {
       const { packageRef, membershipRef } = payload;
-      console.log("packageRef, membershipRef", packageRef, membershipRef);
-  
+
+
       // Start building the aggregation pipeline
       const matchStage = {};
-  
+
       // Add match conditions based on the provided payload
       if (membershipRef) {
         matchStage.membershipRef = new mongoose.Types.ObjectId(membershipRef); // Match the membershipRef
       }
-  
+
       const aggregationPipeline = [
         {
           $match: matchStage // Initial match for membershipRef
         },
         {
           $lookup: {
-            from: 'packages', 
+            from: 'packages',
             localField: 'packageRef',
             foreignField: '_id',
             as: 'packageRef'
@@ -88,13 +50,13 @@ class BookingRepository extends BaseRepository {
         },
         {
           $unwind: {
-            path: '$packageRef', 
-            preserveNullAndEmptyArrays: true 
+            path: '$packageRef',
+            preserveNullAndEmptyArrays: true
           }
         },
         ...(packageRef ? [{
           $match: {
-            'packageRef.packageRef': new mongoose.Types.ObjectId(packageRef) 
+            'packageRef.packageRef': new mongoose.Types.ObjectId(packageRef)
           }
         }] : []),
         {
@@ -134,15 +96,15 @@ class BookingRepository extends BaseRepository {
           }
         }
       ];
-  
+
       // Execute the aggregation pipeline
       const bookings = await pagination(payload, async (limit, offset, sortOrder) => {
-      const bookingsTotal = await this.#model.aggregate(aggregationPipeline);
-  
-      // Count total documents matching the initial match stage without pagination
-      const totalBooking = await this.#model.countDocuments(matchStage);
-  
-      return { doc: bookingsTotal, totalDoc: totalBooking };
+        const bookingsTotal = await this.#model.aggregate(aggregationPipeline);
+
+        // Count total documents matching the initial match stage without pagination
+        const totalBooking = await this.#model.countDocuments(matchStage);
+
+        return { doc: bookingsTotal, totalDoc: totalBooking };
       })
       return bookings;
     } catch (error) {
@@ -150,16 +112,16 @@ class BookingRepository extends BaseRepository {
       throw error;
     }
   }
-  
-  
-  
-  
+
+
+
+
   async bookingPayment(id, amount, session) {
-    console.log("id, amount", id, amount);
+
     amount = Number(amount)
     // Find the booking document using the session
     const booking = await this.#model.findById(id).session(session);
-    console.log("booking", booking)
+
     if (!booking) {
       throw new Error('Booking not found');
     }
@@ -169,11 +131,11 @@ class BookingRepository extends BaseRepository {
 
     // Check if total pay matches total price
     if (totalPay >= booking.totalPrice) {
-      console.log("booking.membershipRefb", booking.membershipRef);
+
 
       const membershipResult = await MemberShipSchema.findById(booking.membershipRef).session(session);
-      console.log(membershipResult);
-      console.log(membershipResult?.agentType);
+
+
 
       let commissionPercent;
       if (membershipResult?.agentType === 'silver') {
@@ -187,7 +149,7 @@ class BookingRepository extends BaseRepository {
       }
 
       const commissionAmount = (booking.totalPrice * commissionPercent) / 100;
-      console.log('commissionAmount', commissionAmount);
+
 
       // Update booking with commission amount
       await BookingSchema.findByIdAndUpdate(id, { agentCommissions: commissionAmount }, { new: true, session });
@@ -205,24 +167,24 @@ class BookingRepository extends BaseRepository {
     }
 
     // Save payment details in PaymentSchema
-   const bookingPayment = await PaymentSchema.create([{ userRef: booking.userRef, bookingRef: booking._id, amount, paymentMethod: "online" }], { session });
-   const populatedPayment = await PaymentSchema.findById(bookingPayment[0]._id)
-   .session(session) 
-   .populate('userRef')
-   .populate('bookingRef'); 
+    const bookingPayment = await PaymentSchema.create([{ userRef: booking.userRef, bookingRef: booking._id, amount, paymentMethod: "online" }], { session });
+    const populatedPayment = await PaymentSchema.findById(bookingPayment[0]._id)
+      .session(session)
+      .populate('userRef')
+      .populate('bookingRef');
 
-   
-    console.log(totalDue, totalPay);
+
+
 
     await this.#model.findByIdAndUpdate(id, { totalDue, totalPay }, { new: true, session });
     return populatedPayment;
   }
-  async bankPaymentBooking(bookingRef, amount,accountNumber, bankName, session) {
-    console.log("id, amount", bookingRef, amount);
+  async bankPaymentBooking(bookingRef, amount, accountNumber, bankName, session) {
+
     amount = Number(amount)
     // Find the booking document using the session
     const booking = await this.#model.findById(bookingRef).session(session);
-    console.log("booking", booking)
+
     if (!booking) {
       throw new Error('Booking not found');
     }
@@ -232,11 +194,11 @@ class BookingRepository extends BaseRepository {
 
     // Check if total pay matches total price
     if (totalPay >= booking.totalPrice) {
-      console.log("booking.membershipRefb", booking.membershipRef);
+
 
       const membershipResult = await MemberShipSchema.findById(booking.membershipRef).session(session);
-      console.log(membershipResult);
-      console.log(membershipResult?.agentType);
+
+
 
       let commissionPercent;
       if (membershipResult?.agentType === 'silver') {
@@ -250,7 +212,7 @@ class BookingRepository extends BaseRepository {
       }
 
       const commissionAmount = (booking.totalPrice * commissionPercent) / 100;
-      console.log('commissionAmount', commissionAmount);
+
 
       // Update booking with commission amount
       await BookingSchema.findByIdAndUpdate(bookingRef, { agentCommissions: commissionAmount }, { new: true, session });
@@ -268,16 +230,22 @@ class BookingRepository extends BaseRepository {
     }
 
     // Save payment details in PaymentSchema
-    const bookingPayment =  await PaymentSchema.create([{ userRef: booking.userRef, bookingRef: booking._id, amount, paymentMethod: "bank", accountNumber, bankName }], { session });
+    const bookingPayment = await PaymentSchema.create([{ userRef: booking.userRef, bookingRef: booking._id, amount, paymentMethod: "bank", accountNumber, bankName }], { session });
     const populatedPayment = await PaymentSchema.findById(bookingPayment[0]._id)
-    .session(session) 
-    .populate('userRef')
-    .populate('bookingRef'); 
+      .session(session)
+      .populate('userRef')
+      .populate('bookingRef');
 
-    console.log(totalDue, totalPay, populatedPayment);
+
 
     await this.#model.findByIdAndUpdate(bookingRef, { totalDue, totalPay }, { new: true, session });
-    return  populatedPayment;
+    return populatedPayment;
+  }
+
+  async findLastOneBooking() {
+    const booking = await this.#model.findOne().sort({ createdAt: -1 }).exec();
+    return booking;
+
   }
 
 }

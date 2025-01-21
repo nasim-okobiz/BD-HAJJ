@@ -9,26 +9,26 @@ class PaymentRepository extends BaseRepository {
     this.#model = model;
   }
 
-async  createPayment(payload, session){
-  console.log("payload", payload);
-  const newPayment = await this.#model.create([payload], { session });
-  return newPayment;
-}
-async getAllPayment(bookingRef){
-  console.log("bookingRef", bookingRef);
-  if(bookingRef){
-    return await this.#model.find({ bookingRef }).populate("bookingRef").populate({
-      path: 'userRef',
-      select: '-password' // Exclude the 'password' field
-    }).sort({ createdAt: -1 }); ;
-  }else{
-    // populote userRef , bookingRef
-    return await this.#model.find().populate("bookingRef").populate({
-      path: 'userRef',
-      select: '-password' // Exclude the 'password' field
-    }).sort({ createdAt: -1 }); ;
+  async createPayment(payload, session) {
+
+    const newPayment = await this.#model.create([payload], { session });
+    return newPayment;
   }
-}
+  async getAllPayment(bookingRef) {
+
+    if (bookingRef) {
+      return await this.#model.find({ bookingRef }).populate("bookingRef").populate({
+        path: 'userRef',
+        select: '-password' // Exclude the 'password' field
+      }).sort({ createdAt: -1 });;
+    } else {
+      // populote userRef , bookingRef
+      return await this.#model.find().populate("bookingRef").populate({
+        path: 'userRef',
+        select: '-password' // Exclude the 'password' field
+      }).sort({ createdAt: -1 });;
+    }
+  }
 
   async getAllPaymentWithPagination(payload) {
     try {
@@ -59,19 +59,19 @@ async getAllPayment(bookingRef){
     }
   }
 
-  async getUserIdByPayment(payload, session){
-    const {userIdPayRef} = payload;
+  async getUserIdByPayment(payload, session) {
+    const { userIdPayRef } = payload;
     // if userIdPayRef than this wise find other wise this has any userIdPayRef all get 
-    if(userIdPayRef){
+    if (userIdPayRef) {
       return await this.#model.find({ userIdPayRef }).populate({
         path: 'userRef',
         select: '-password' // Exclude the 'password' field
-      }).sort({ createdAt: -1 }); ;
-    }else{
+      }).sort({ createdAt: -1 });;
+    } else {
       return await this.#model.find().populate({
         path: 'userRef',
         select: '-password' // Exclude the 'password' field
-      }).sort({ createdAt: -1 }); ;
+      }).sort({ createdAt: -1 });;
     }
   }
 }

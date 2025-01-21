@@ -6,7 +6,7 @@ const ContactUsService = require("./contact.us.service.js");
 class ContactUsController {
   //
   createContactUs = withTransaction(async (req, res, next, session) => {
-    console.log(req.body);
+
     const payload = {
       name: req?.body?.name,
       phone: req?.body?.phone,

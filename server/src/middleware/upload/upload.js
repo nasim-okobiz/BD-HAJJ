@@ -8,7 +8,7 @@ module.exports.upload = multer({
     fileSize: 102400000,
   },
   fileFilter: (req, file, cb) => {
-    console.log(file);
+
     if (
       file.mimetype === 'image/png' ||
       file.mimetype === 'image/webp' ||

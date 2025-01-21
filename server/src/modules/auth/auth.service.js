@@ -15,13 +15,16 @@ const authRepository = require('./auth.repository.js');
 const isArrayElementExist = require('../../utils/isArrayElementExist.js');
 const OTPGenerate = require('../../utils/OTPGenerate.js');
 const Email = require('../../utils/Email.js');
+const membershipRepository = require('../membership/membership.repository.js');
 
 
 class AuthService extends BaseService {
     #repository;
-    constructor(repository, serviceName) {
-        super(repository, serviceName);
+    #membershipRepository;
+    constructor(repository, membershipRepository, serviceName) {
+        super(repository, membershipRepository, serviceName);
         this.#repository = repository;
+        this.#membershipRepository = membershipRepository;
     }
 
     async authUserSingUp(payload, session) {
@@ -49,7 +52,7 @@ class AuthService extends BaseService {
 
     async authUserSingIn(payload) {
         const { email, phone, password } = payload;
-        console.log(payload);
+
 
 
         const auth = await this.#repository.getAuthByEmailOrPhone(email, phone);
@@ -75,31 +78,31 @@ class AuthService extends BaseService {
 
     async authForgetPassword(payload, session) {
         const { email } = payload;
-        if (!email ) {
+        if (!email) {
             throw new Error('email is required');
         }
-        console.log(email)
+
         const auth = await this.#repository.getAuthByEmail(email);
         if (!auth) throw new NotFoundError('No user found');
-       const OTP = await OTPGenerate()
+        const OTP = await OTPGenerate()
 
-       const stockAlertEmail = new Email({ email: auth?.email, name: auth?.name},OTP );
+        const stockAlertEmail = new Email({ email: auth?.email, name: auth?.name }, OTP);
         await stockAlertEmail.sendForgetPasswordOTP();
         await this.#repository.setUserOTP(auth?._id, OTP);
         return true;
     }
 
-    async authForgetPasswordVarification( payload, session) {
-        const { email,otp, password } = payload;
-        if (!email ||!otp ||!password) {
+    async authForgetPasswordVarification(payload, session) {
+        const { email, otp, password } = payload;
+        if (!email || !otp || !password) {
             throw new Error('email, OTP and password are required');
         }
         const auth = await this.#repository.getAuthByEmail(email);
         if (!auth) throw new NotFoundError('No user found');
         // auth.otpTime 5min 
         if (auth.otpTime < Date.now() - 5 * 60 * 1000) throw new Error('OTP expired');
-        console.log(otp, auth?.otp)
-        if (otp!= auth?.otp) throw new Error('Invalid OTP');
+
+        if (otp != auth?.otp) throw new Error('Invalid OTP');
         const newPassword = await bcrypt.hash(String(password), 10);
         await this.#repository.updateUserPassword(auth?._id, newPassword);
         return true;
@@ -107,7 +110,7 @@ class AuthService extends BaseService {
 
     async getUserById(userId, session) {
         // 
-        console.log('userId', userId);
+
         const user = await this.#repository.getUserById(userId, session);
         if (!user) throw new NotFoundError('User not found');
         return user;
@@ -125,8 +128,8 @@ class AuthService extends BaseService {
     }
 
     async updateUser(userId, payloadFiles, payload, session) {
-        console.log(userId);
-        const {  dles } = payloadFiles;
+
+        const { dles } = payloadFiles;
         const user = await this.#repository.getUserById(userId, session);
         if (!user) throw new NotFoundError('User not found');
         if (files.length) {
@@ -160,9 +163,16 @@ class AuthService extends BaseService {
 
     }
 
+    async deleteUser(id, session) {
+        const user = await this.#repository.deleteById(id, session);
+        const membership = await this.#membershipRepository.deleteMembershipByUserId(id, session);
+        if (!user) throw new NotFoundError('User not found');
+        return user;
+    }
+
 
 
 }
 
-module.exports = new AuthService(authRepository, 'auth');
+module.exports = new AuthService(authRepository, membershipRepository, 'auth');
 

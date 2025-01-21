@@ -97,17 +97,14 @@ const BookingsComponent = () => {
       message.error("Failed to fetch payments.");
     }
   };
-  console.log("payments", payments)
 
 
   const downloadPDF = async (booking) => {
     try {
       // Generate PDF blob
       await fetchPayments(booking?._id);
-      console.log("booking --------", booking, payments);
 
       const blob = await pdf(<BookingPDFDocument booking={booking} payments={payments} />).toBlob();
-      console.log("blob", blob);
       const url = URL.createObjectURL(blob);
 
       // Create a temporary link and trigger download

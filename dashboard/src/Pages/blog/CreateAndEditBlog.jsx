@@ -29,7 +29,6 @@ const CreateAndEditBlog = ({ visible, setVisible, fetchBlogs, blogCategories, ed
   }, [editingBlog, form, visible]);
 
   const handleCreateOrEdit = async (values) => {
-    console.log("Form Values:", values);
 
     try {
       const formData = new FormData();

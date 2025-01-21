@@ -11,9 +11,9 @@ class ContactUsService extends BaseService {
   }
 
   async createContactUs(payload) {
-    console.log("payload: ", payload)
+
     const { name, phone, email, subject, massage } = payload;
-    if (phone?.length!== 11) throw new Error("Phone number should be 11 digits");
+    if (phone?.length !== 11) throw new Error("Phone number should be 11 digits");
     if (!name || !phone || !subject || !massage) throw new Error("Please provide required information");
     const contactUsData = await this.#repository.createContactUs(payload);
     return contactUsData;
@@ -25,7 +25,7 @@ class ContactUsService extends BaseService {
 
   async updateContactUs(id, payload) {
     const { name, phone, email, subject, massage } = payload;
-    if (phone?.length!== 11) throw new Error("Phone number should be 11 digits");
+    if (phone?.length !== 11) throw new Error("Phone number should be 11 digits");
     if (!name || !phone || !subject || !massage) throw new Error("Please provide required information");
     const contactUsData = await this.#repository.updateContactUs(id, payload);
     if (!contactUsData) throw new NotFoundError("ContactUs data not found");

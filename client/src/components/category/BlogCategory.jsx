@@ -9,7 +9,7 @@ const BlogCategory = () => {
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
   const { id } = useParams();
-  console.log(id);
+
 
   const getBlogs = async () => {
     try {
@@ -24,7 +24,7 @@ const BlogCategory = () => {
   useEffect(() => {
     getBlogs();
   }, [id]);
-  console.log("blogs", blogs);
+
 
   return (
     <div className="col-span-3 grid md:grid-cols-2 lg:grid-cols-3 gap-5">

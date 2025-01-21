@@ -69,7 +69,6 @@ const FAQPage = () => {
   const [isLoading, setIsLoading] = useState(true); 
   const location = useLocation();
   const { id } = useParams();
-  console.log(id);
   
   const getFAQs = async () => {
     try {
@@ -84,7 +83,6 @@ const FAQPage = () => {
   useEffect(() => {
     getFAQs();
   }, [id]);
-  console.log("faqs", faqs);
 
   return (
     <section className="faq-section relative bg-gray-50 font-merriweather">

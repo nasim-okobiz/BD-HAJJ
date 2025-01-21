@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
 // },
 
 const BookingPDFDocument = ({ booking, payments }) => {
-    console.log("booking", booking);
     const isPaid = booking?.totalDue <= 0;
     return (
         <Document>
