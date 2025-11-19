@@ -22,7 +22,7 @@ const BookConfirm = () => {
   const packageId = location.pathname.split("/").pop();
   const navigate = useNavigate();
   const role = useSelector((store)=> store?.auth?.user?.role)
-
+console.log(packageData)
   // if no role than naviagte login page will be displayed in the navigation 
   if (!role) {
     navigate('/login');
@@ -161,8 +161,9 @@ const BookConfirm = () => {
             <p className="text-lg md:text-xl font-semibold">
               Package Price:{" "}
               <span className="text-semisecondary text-xl md:text-2xl">
-                Tk. {packageData?.price}/-
+                Tk. {packageData?.discountPrice}/-
               </span>
+                <del className="text-red-600 text-lg mx-2 ">Tk. {packageData?.price}/-</del>
             </p>
           </div>
 
